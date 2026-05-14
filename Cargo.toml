@@ -8,6 +8,10 @@ license = "GPL-3.0"
 repository = "https://github.com/<GH_OWNER>/ubertool"
 rust-version = "1.81"
 
+[lib]
+name = "ubertool"
+path = "src/lib.rs"
+
 [[bin]]
 name = "ubertool"
 path = "src/main.rs"
