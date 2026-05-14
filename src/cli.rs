@@ -1,0 +1,66 @@
+//! Top-level CLI definition. Subcommands (nouns) are added in `Noun`.
+
+use clap::{Parser, Subcommand};
+
+use crate::core::output::OutputMode;
+
+#[derive(Parser, Debug)]
+#[command(
+    name = "ubertool",
+    about = "Developer-focused data-transform utilities — agent-friendly.",
+    long_about = "ubertool — agent-friendly developer utilities.\n\
+                  \n\
+                  Output:\n  \
+                  --json   structured JSON on stdout (nothing else lands there)\n  \
+                  --quiet  bare values, pipe-friendly\n  \
+                  default  human-readable key: value lines\n\
+                  \n\
+                  Exit codes:\n  \
+                  0  success\n  \
+                  1  general failure\n  \
+                  2  usage error\n  \
+                  3  input validation error\n  \
+                  4  i/o error\n  \
+                  5  cryptographic / integrity failure\n  \
+                  6  feature not built in this binary\n",
+    version,
+    propagate_version = true,
+)]
+pub struct Cli {
+    /// Output as JSON to stdout. Human messages still go to stderr.
+    #[arg(long, global = true)]
+    pub json: bool,
+
+    /// Bare values only (pipe-friendly).
+    #[arg(long, short = 'q', global = true)]
+    pub quiet: bool,
+
+    /// Verbose progress to stderr.
+    #[arg(long, short = 'v', global = true)]
+    pub verbose: bool,
+
+    #[command(subcommand)]
+    pub noun: Noun,
+}
+
+impl Cli {
+    pub fn output_mode(&self) -> OutputMode {
+        if self.json {
+            OutputMode::Json
+        } else if self.quiet {
+            OutputMode::Quiet
+        } else {
+            OutputMode::Text
+        }
+    }
+}
+
+#[derive(Subcommand, Debug)]
+pub enum Noun {
+    // Nouns are added in Task 11 onwards. A placeholder is needed because
+    // clap requires at least one variant on a non-empty enum; we use a
+    // hidden noop so cargo check passes until base64 lands.
+    #[command(hide = true)]
+    #[command(name = "__noop")]
+    Noop,
+}
