@@ -57,10 +57,6 @@ impl Cli {
 
 #[derive(Subcommand, Debug)]
 pub enum Noun {
-    // Nouns are added in Task 11 onwards. A placeholder is needed because
-    // clap requires at least one variant on a non-empty enum; we use a
-    // hidden noop so cargo check passes until base64 lands.
-    #[command(hide = true)]
-    #[command(name = "__noop")]
-    Noop,
+    /// Base64 encoding and decoding.
+    Base64(crate::commands::base64::Base64Args),
 }

@@ -6,7 +6,7 @@ use std::process::ExitCode as ProcExitCode;
 
 use clap::Parser;
 
-use crate::core::error::{CliError, ErrorCode};
+use crate::core::error::CliError;
 use crate::core::output::Out;
 
 pub fn run() -> ProcExitCode {
@@ -14,11 +14,7 @@ pub fn run() -> ProcExitCode {
     let out = Out::new(parsed.output_mode(), core::tty::is_stdout_tty());
 
     let result: Result<(), CliError> = match parsed.noun {
-        cli::Noun::Noop => Err(CliError::new(
-            ErrorCode::UsageError,
-            "no command specified",
-        )
-        .with_hint("run `ubertool --help` to see available commands")),
+        cli::Noun::Base64(a) => commands::base64::dispatch(a, &out),
     };
 
     match result {
