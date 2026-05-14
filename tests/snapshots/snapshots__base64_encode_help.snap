@@ -1,0 +1,35 @@
+---
+source: tests/snapshots.rs
+expression: s
+---
+Encode input as base64 (standard alphabet, with padding).
+
+Examples: ubertool base64 encode "hello" echo -n hello | ubertool base64 encode ubertool base64 encode "hello" --json
+
+Usage: ubertool base64 encode [OPTIONS] [INPUT]
+
+Arguments:
+  [INPUT]
+          Literal input to encode (omit to read from --in or stdin)
+
+Options:
+      --in <IN_PATH>
+          Read input from file
+
+      --json
+          Output as JSON to stdout. Human messages still go to stderr
+
+      --out <OUT_PATH>
+          Write encoded output to file. If absent, output goes to stdout
+
+  -q, --quiet
+          Bare values only (pipe-friendly)
+
+  -v, --verbose
+          Verbose progress to stderr
+
+  -h, --help
+          Print help (see a summary with '-h')
+
+  -V, --version
+          Print version

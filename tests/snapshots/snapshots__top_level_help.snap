@@ -1,0 +1,42 @@
+---
+source: tests/snapshots.rs
+expression: s
+---
+ubertool — agent-friendly developer utilities.
+
+Output:
+  --json   structured JSON on stdout (nothing else lands there)
+  --quiet  bare values, pipe-friendly
+  default  human-readable key: value lines
+
+Exit codes:
+  0  success
+  1  general failure
+  2  usage error
+  3  input validation error
+  4  i/o error
+  5  cryptographic / integrity failure
+  6  feature not built in this binary
+
+
+Usage: ubertool [OPTIONS] <COMMAND>
+
+Commands:
+  base64  Base64 encoding and decoding
+  help    Print this message or the help of the given subcommand(s)
+
+Options:
+      --json
+          Output as JSON to stdout. Human messages still go to stderr
+
+  -q, --quiet
+          Bare values only (pipe-friendly)
+
+  -v, --verbose
+          Verbose progress to stderr
+
+  -h, --help
+          Print help (see a summary with '-h')
+
+  -V, --version
+          Print version

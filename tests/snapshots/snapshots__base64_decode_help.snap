@@ -1,0 +1,37 @@
+---
+source: tests/snapshots.rs
+expression: s
+---
+Decode base64 input (standard alphabet, with padding).
+
+Examples: ubertool base64 decode aGVsbG8= ubertool base64 decode aGVsbG8= --json
+
+Exit codes specific to this command: 3   invalid base64 (input could not be decoded)
+
+Usage: ubertool base64 decode [OPTIONS] [INPUT]
+
+Arguments:
+  [INPUT]
+          Literal base64 input to decode (omit to read from --in or stdin)
+
+Options:
+      --in <IN_PATH>
+          Read base64 input from file
+
+      --json
+          Output as JSON to stdout. Human messages still go to stderr
+
+      --out <OUT_PATH>
+          Write decoded bytes to file. If absent and bytes are valid UTF-8, emits as text; otherwise refuses to write binary to a TTY
+
+  -q, --quiet
+          Bare values only (pipe-friendly)
+
+  -v, --verbose
+          Verbose progress to stderr
+
+  -h, --help
+          Print help (see a summary with '-h')
+
+  -V, --version
+          Print version
