@@ -1,0 +1,61 @@
+opencliVersion: 1.0.0-alpha.7
+
+info:
+  title: ubertool
+  summary: Developer-focused data-transform utilities, agent-friendly
+  version: 0.1.0-alpha.0
+  binary: ubertool
+
+commands:
+  ubertool {command} [flags]:
+    group: true
+
+  ubertool base64 {command} [flags]:
+    group: true
+    summary: Base64 encoding and decoding
+
+  ubertool base64 encode [input] [flags]:
+    summary: Encode input as base64 (standard alphabet, with padding)
+    arguments:
+      - name: input
+        summary: Literal input to encode (omit to read from --in or stdin)
+        required: false
+        type: string
+    flags:
+      - name: in
+        summary: Read input from file
+        type: string
+      - name: out
+        summary: Write encoded output to file
+        type: string
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool base64 decode [input] [flags]:
+    summary: Decode base64 input (standard alphabet, with padding)
+    arguments:
+      - name: input
+        summary: Literal base64 to decode (omit to read from --in or stdin)
+        required: false
+        type: string
+    flags:
+      - name: in
+        summary: Read base64 input from file
+        type: string
+      - name: out
+        summary: Write decoded bytes to file
+        type: string
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
