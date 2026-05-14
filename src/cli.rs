@@ -24,7 +24,7 @@ use crate::core::output::OutputMode;
                   5  cryptographic / integrity failure\n  \
                   6  feature not built in this binary\n",
     version,
-    propagate_version = true,
+    propagate_version = true
 )]
 pub struct Cli {
     /// Output as JSON to stdout. Human messages still go to stderr.

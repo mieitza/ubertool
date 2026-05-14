@@ -20,9 +20,8 @@ impl Input {
 
     pub fn as_str(&self) -> Result<&str, CliError> {
         match self {
-            Input::Bytes(b) => std::str::from_utf8(b).map_err(|_| {
-                CliError::new(ErrorCode::UsageError, "input is not valid UTF-8")
-            }),
+            Input::Bytes(b) => std::str::from_utf8(b)
+                .map_err(|_| CliError::new(ErrorCode::UsageError, "input is not valid UTF-8")),
         }
     }
 
@@ -65,9 +64,7 @@ pub fn resolve_input_with_reader<R: Read>(
     }
     if stdin_is_tty {
         return Err(CliError::new(ErrorCode::UsageError, "no input provided")
-            .with_hint(
-                "pass a positional argument, use --in <path>, or pipe data via stdin",
-            ));
+            .with_hint("pass a positional argument, use --in <path>, or pipe data via stdin"));
     }
     let mut buf = Vec::new();
     stdin.read_to_end(&mut buf).map_err(CliError::from)?;
@@ -90,8 +87,7 @@ mod tests {
         let tmp = tempfile::NamedTempFile::new().unwrap();
         std::fs::write(tmp.path(), b"file-bytes").unwrap();
         let mut empty: &[u8] = b"";
-        let r =
-            resolve_input_with_reader(None, Some(tmp.path()), false, &mut empty).unwrap();
+        let r = resolve_input_with_reader(None, Some(tmp.path()), false, &mut empty).unwrap();
         assert_eq!(r.as_bytes(), b"file-bytes");
     }
 

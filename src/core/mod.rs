@@ -1,5 +1,5 @@
-pub mod exit;
 pub mod error;
-pub mod tty;
+pub mod exit;
 pub mod input;
 pub mod output;
+pub mod tty;

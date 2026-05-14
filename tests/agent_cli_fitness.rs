@@ -24,11 +24,7 @@ fn json_flag_documented_on_every_data_command() {
             .stdout
             .clone();
         let s = String::from_utf8(stdout).unwrap();
-        assert!(
-            s.contains("--json"),
-            "help for {:?} is missing --json",
-            cmd
-        );
+        assert!(s.contains("--json"), "help for {:?} is missing --json", cmd);
     }
 }
 

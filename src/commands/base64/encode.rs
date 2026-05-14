@@ -14,7 +14,11 @@ struct EncodeOutput<'a> {
 }
 
 pub fn run(args: EncodeArgs, out: &Out) -> Result<(), CliError> {
-    let input = resolve_input(args.input.as_deref(), args.in_path.as_deref(), is_stdin_tty())?;
+    let input = resolve_input(
+        args.input.as_deref(),
+        args.in_path.as_deref(),
+        is_stdin_tty(),
+    )?;
     let encoded = STANDARD.encode(input.as_bytes());
 
     if let Some(path) = &args.out_path {

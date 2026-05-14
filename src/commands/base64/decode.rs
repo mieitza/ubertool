@@ -14,7 +14,11 @@ struct DecodeOutput<'a> {
 }
 
 pub fn run(args: DecodeArgs, out: &Out) -> Result<(), CliError> {
-    let input = resolve_input(args.input.as_deref(), args.in_path.as_deref(), is_stdin_tty())?;
+    let input = resolve_input(
+        args.input.as_deref(),
+        args.in_path.as_deref(),
+        is_stdin_tty(),
+    )?;
     let trimmed = input.as_str()?.trim();
     let bytes = STANDARD.decode(trimmed).map_err(|e| {
         let echo: String = trimmed.chars().take(64).collect();

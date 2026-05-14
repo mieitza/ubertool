@@ -24,7 +24,10 @@ pub struct Out {
 
 impl Out {
     pub fn new(mode: OutputMode, stdout_is_tty: bool) -> Self {
-        Self { mode, stdout_is_tty }
+        Self {
+            mode,
+            stdout_is_tty,
+        }
     }
 
     pub fn emit_value<T: Serialize>(&self, value: &T) -> Result<(), CliError> {
@@ -32,11 +35,7 @@ impl Out {
         self.emit_value_to(value, &mut stdout)
     }
 
-    fn emit_value_to<T: Serialize, W: Write>(
-        &self,
-        value: &T,
-        w: &mut W,
-    ) -> Result<(), CliError> {
+    fn emit_value_to<T: Serialize, W: Write>(&self, value: &T, w: &mut W) -> Result<(), CliError> {
         match self.mode {
             OutputMode::Json => {
                 let s = serde_json::to_string(value).map_err(|e| {
@@ -54,11 +53,7 @@ impl Out {
         Ok(())
     }
 
-    fn emit_text_repr<W: Write>(
-        &self,
-        v: &serde_json::Value,
-        w: &mut W,
-    ) -> Result<(), CliError> {
+    fn emit_text_repr<W: Write>(&self, v: &serde_json::Value, w: &mut W) -> Result<(), CliError> {
         match v {
             serde_json::Value::Object(map) if map.len() == 1 => {
                 // Single-field objects: emit just the value (Text and Quiet identical).
@@ -87,11 +82,7 @@ impl Out {
         }
     }
 
-    fn emit_scalar<W: Write>(
-        &self,
-        v: &serde_json::Value,
-        w: &mut W,
-    ) -> Result<(), CliError> {
+    fn emit_scalar<W: Write>(&self, v: &serde_json::Value, w: &mut W) -> Result<(), CliError> {
         match v {
             serde_json::Value::String(s) => writeln!(w, "{s}"),
             serde_json::Value::Null => writeln!(w),
@@ -154,8 +145,13 @@ mod tests {
     fn text_mode_single_field_emits_bare_value() {
         let out = Out::new(OutputMode::Text, false);
         let mut buf: Vec<u8> = Vec::new();
-        out.emit_value_to(&Single { encoded: "aGVsbG8=".into() }, &mut buf)
-            .unwrap();
+        out.emit_value_to(
+            &Single {
+                encoded: "aGVsbG8=".into(),
+            },
+            &mut buf,
+        )
+        .unwrap();
         assert_eq!(String::from_utf8(buf).unwrap(), "aGVsbG8=\n");
     }
 
@@ -163,20 +159,30 @@ mod tests {
     fn json_mode_emits_compact_json_with_newline() {
         let out = Out::new(OutputMode::Json, false);
         let mut buf: Vec<u8> = Vec::new();
-        out.emit_value_to(&Single { encoded: "aGVsbG8=".into() }, &mut buf)
-            .unwrap();
+        out.emit_value_to(
+            &Single {
+                encoded: "aGVsbG8=".into(),
+            },
+            &mut buf,
+        )
+        .unwrap();
         let s = String::from_utf8(buf).unwrap();
         assert_eq!(s, "{\"encoded\":\"aGVsbG8=\"}\n");
-        let _: serde_json::Value =
-            serde_json::from_str(s.trim()).expect("must be valid JSON");
+        let _: serde_json::Value = serde_json::from_str(s.trim()).expect("must be valid JSON");
     }
 
     #[test]
     fn text_mode_multi_field_emits_key_value_lines() {
         let out = Out::new(OutputMode::Text, false);
         let mut buf: Vec<u8> = Vec::new();
-        out.emit_value_to(&Multi { a: "x".into(), b: 42 }, &mut buf)
-            .unwrap();
+        out.emit_value_to(
+            &Multi {
+                a: "x".into(),
+                b: 42,
+            },
+            &mut buf,
+        )
+        .unwrap();
         let s = String::from_utf8(buf).unwrap();
         assert!(s.contains("a: x\n"));
         assert!(s.contains("b: 42\n"));
@@ -186,8 +192,14 @@ mod tests {
     fn quiet_mode_multi_field_emits_bare_values() {
         let out = Out::new(OutputMode::Quiet, false);
         let mut buf: Vec<u8> = Vec::new();
-        out.emit_value_to(&Multi { a: "x".into(), b: 42 }, &mut buf)
-            .unwrap();
+        out.emit_value_to(
+            &Multi {
+                a: "x".into(),
+                b: 42,
+            },
+            &mut buf,
+        )
+        .unwrap();
         let s = String::from_utf8(buf).unwrap();
         assert_eq!(s, "x\n42\n");
     }
