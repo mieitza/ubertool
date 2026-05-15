@@ -121,3 +121,21 @@ fn stderr_text_envelope_format() {
         .failure()
         .stderr(predicate::str::contains("error: invalid_base64:"));
 }
+
+/// In `--json` mode, errors STILL emit a human message to stderr (per
+/// design-spec §7). stderr must not be silent — agents and humans both
+/// want a glanceable failure description.
+#[test]
+fn json_mode_error_path_writes_to_stderr_too() {
+    let output = ubertool()
+        .args(["base64", "decode", "!!!", "--json"])
+        .assert()
+        .failure()
+        .get_output()
+        .clone();
+    let stderr = String::from_utf8(output.stderr).unwrap();
+    assert!(
+        stderr.contains("error: invalid_base64"),
+        "stderr must contain the human error envelope even in --json mode, got: {stderr:?}"
+    );
+}
