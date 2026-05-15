@@ -208,7 +208,7 @@ mod tests {
             ErrorCode::Internal,
         ];
         for code in cases {
-            let v = serde_json::to_value(&code).unwrap();
+            let v = serde_json::to_value(code).unwrap();
             let serde_str = v.as_str().expect("variants serialize to strings");
             assert_eq!(
                 code.as_str(),
