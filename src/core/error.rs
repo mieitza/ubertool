@@ -19,6 +19,7 @@ pub enum ErrorCode {
     InvalidPhone,
     InvalidJwt,
     InvalidBase64,
+    InvalidBcrypt,
     FileNotFound,
     PermissionDenied,
     IoError,
@@ -36,7 +37,7 @@ impl ErrorCode {
         match self {
             UsageError | BinaryToTtyRefused => ExitCode::Usage,
             InvalidJson | InvalidYaml | InvalidToml | InvalidXml | InvalidRegex | InvalidIban
-            | InvalidPhone | InvalidJwt | InvalidBase64 => ExitCode::Invalid,
+            | InvalidPhone | InvalidJwt | InvalidBase64 | InvalidBcrypt => ExitCode::Invalid,
             FileNotFound | PermissionDenied | IoError => ExitCode::Io,
             SignatureMismatch | DecryptFailed | PdfSignatureInvalid => ExitCode::Crypto,
             AlgoNotSupported => ExitCode::Unsupported,
@@ -57,6 +58,7 @@ impl ErrorCode {
             InvalidPhone => "invalid_phone",
             InvalidJwt => "invalid_jwt",
             InvalidBase64 => "invalid_base64",
+            InvalidBcrypt => "invalid_bcrypt",
             FileNotFound => "file_not_found",
             PermissionDenied => "permission_denied",
             IoError => "io_error",
@@ -197,6 +199,7 @@ mod tests {
             ErrorCode::InvalidPhone,
             ErrorCode::InvalidJwt,
             ErrorCode::InvalidBase64,
+            ErrorCode::InvalidBcrypt,
             ErrorCode::FileNotFound,
             ErrorCode::PermissionDenied,
             ErrorCode::IoError,
