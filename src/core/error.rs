@@ -180,4 +180,42 @@ mod tests {
         let cli_err: CliError = io_err.into();
         assert_eq!(cli_err.code, ErrorCode::FileNotFound);
     }
+
+    #[test]
+    fn error_code_as_str_matches_serde_serialization() {
+        // Guard against the as_str() ↔ #[serde(rename_all = "snake_case")] drift.
+        // Every variant we test here must produce identical strings via both paths.
+        // When you add a new ErrorCode variant, add it to this list.
+        let cases = [
+            ErrorCode::UsageError,
+            ErrorCode::InvalidJson,
+            ErrorCode::InvalidYaml,
+            ErrorCode::InvalidToml,
+            ErrorCode::InvalidXml,
+            ErrorCode::InvalidRegex,
+            ErrorCode::InvalidIban,
+            ErrorCode::InvalidPhone,
+            ErrorCode::InvalidJwt,
+            ErrorCode::InvalidBase64,
+            ErrorCode::FileNotFound,
+            ErrorCode::PermissionDenied,
+            ErrorCode::IoError,
+            ErrorCode::BinaryToTtyRefused,
+            ErrorCode::SignatureMismatch,
+            ErrorCode::DecryptFailed,
+            ErrorCode::PdfSignatureInvalid,
+            ErrorCode::AlgoNotSupported,
+            ErrorCode::Internal,
+        ];
+        for code in cases {
+            let v = serde_json::to_value(&code).unwrap();
+            let serde_str = v.as_str().expect("variants serialize to strings");
+            assert_eq!(
+                code.as_str(),
+                serde_str,
+                "as_str() drifted from serde for {:?}",
+                code
+            );
+        }
+    }
 }
