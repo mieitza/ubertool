@@ -61,4 +61,6 @@ pub enum Noun {
     Base64(crate::commands::base64::Base64Args),
     /// Cryptographic hash functions (md5, sha1, sha224, sha256, sha384, sha512, sha3-256, sha3-512).
     Hash(crate::commands::hash::HashArgs),
+    /// Keyed-hash MAC (md5/sha1/sha224/sha256/sha384/sha512/sha3-256/sha3-512).
+    Hmac(crate::commands::hmac::HmacArgs),
 }
