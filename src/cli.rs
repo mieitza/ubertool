@@ -80,8 +80,12 @@ pub enum Noun {
     Token(crate::commands::token::TokenArgs),
     /// ULID generation.
     Ulid(crate::commands::ulid::UlidArgs),
+    /// TOML conversion: to-json / to-yaml.
+    Toml(crate::commands::toml::TomlArgs),
     /// URL percent-encoding and decoding.
     Url(crate::commands::url::UrlArgs),
     /// UUID generation (v4, v7).
     Uuid(crate::commands::uuid::UuidArgs),
+    /// YAML conversion: to-json / to-toml.
+    Yaml(crate::commands::yaml::YamlArgs),
 }

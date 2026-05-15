@@ -8,6 +8,8 @@ pub mod json;
 pub mod jwt;
 pub mod password;
 pub mod token;
+pub mod toml;
 pub mod ulid;
 pub mod url;
 pub mod uuid;
+pub mod yaml;

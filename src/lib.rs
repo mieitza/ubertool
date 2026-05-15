@@ -24,9 +24,11 @@ pub fn run() -> ProcExitCode {
         cli::Noun::Jwt(a) => commands::jwt::dispatch(a, &out),
         cli::Noun::Password(a) => commands::password::dispatch(a, &out),
         cli::Noun::Token(a) => commands::token::dispatch(a, &out),
+        cli::Noun::Toml(a) => commands::toml::dispatch(a, &out),
         cli::Noun::Ulid(a) => commands::ulid::dispatch(a, &out),
         cli::Noun::Url(a) => commands::url::dispatch(a, &out),
         cli::Noun::Uuid(a) => commands::uuid::dispatch(a, &out),
+        cli::Noun::Yaml(a) => commands::yaml::dispatch(a, &out),
     };
 
     match result {
