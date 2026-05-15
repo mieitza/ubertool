@@ -61,3 +61,920 @@ commands:
         summary: Output bare value only (pipe-friendly)
         type: boolean
         default: false
+
+  ubertool basic-auth {command} [flags]:
+    group: true
+    summary: HTTP Basic auth header encoding/decoding
+
+  ubertool basic-auth encode [flags]:
+    summary: Encode a user/pass pair as an HTTP Basic Authorization header value
+    flags:
+      - name: user
+        summary: Username
+        type: string
+        required: true
+      - name: pass
+        summary: Password
+        type: string
+        required: true
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool basic-auth decode [input] [flags]:
+    summary: Decode an HTTP Basic Authorization header value into user/pass
+    arguments:
+      - name: input
+        summary: Header value to decode (with or without the leading "Basic ")
+        required: false
+        type: string
+    flags:
+      - name: in
+        summary: Read input from file
+        type: string
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool bcrypt {command} [flags]:
+    group: true
+    summary: Bcrypt password hashing and verification
+
+  ubertool bcrypt hash [input] [flags]:
+    summary: Hash a password using bcrypt
+    arguments:
+      - name: input
+        summary: Password to hash (omit to read from --in or stdin)
+        required: false
+        type: string
+    flags:
+      - name: in
+        summary: Read password from file
+        type: string
+      - name: cost
+        summary: Bcrypt cost factor (4-31)
+        type: integer
+        default: "12"
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool bcrypt verify [input] [flags]:
+    summary: Verify a password against a bcrypt hash
+    arguments:
+      - name: input
+        summary: Password to check (omit to read from --in or stdin)
+        required: false
+        type: string
+    flags:
+      - name: in
+        summary: Read password from file
+        type: string
+      - name: hash
+        summary: Bcrypt hash to verify against (required)
+        type: string
+        required: true
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool hash {command} [flags]:
+    group: true
+    summary: Cryptographic hash functions (md5, sha1, sha224, sha256, sha384, sha512, sha3-256, sha3-512)
+
+  ubertool hash md5 [input] [flags]:
+    summary: Compute MD5 hash (legacy / not collision-resistant)
+    arguments:
+      - name: input
+        summary: Literal input to hash (omit to read from --in or stdin)
+        required: false
+        type: string
+    flags:
+      - name: in
+        summary: Read input from file
+        type: string
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool hash sha1 [input] [flags]:
+    summary: Compute SHA-1 hash (legacy / not collision-resistant)
+    arguments:
+      - name: input
+        summary: Literal input to hash (omit to read from --in or stdin)
+        required: false
+        type: string
+    flags:
+      - name: in
+        summary: Read input from file
+        type: string
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool hash sha224 [input] [flags]:
+    summary: Compute SHA-224 hash
+    arguments:
+      - name: input
+        summary: Literal input to hash (omit to read from --in or stdin)
+        required: false
+        type: string
+    flags:
+      - name: in
+        summary: Read input from file
+        type: string
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool hash sha256 [input] [flags]:
+    summary: Compute SHA-256 hash
+    arguments:
+      - name: input
+        summary: Literal input to hash (omit to read from --in or stdin)
+        required: false
+        type: string
+    flags:
+      - name: in
+        summary: Read input from file
+        type: string
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool hash sha384 [input] [flags]:
+    summary: Compute SHA-384 hash
+    arguments:
+      - name: input
+        summary: Literal input to hash (omit to read from --in or stdin)
+        required: false
+        type: string
+    flags:
+      - name: in
+        summary: Read input from file
+        type: string
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool hash sha512 [input] [flags]:
+    summary: Compute SHA-512 hash
+    arguments:
+      - name: input
+        summary: Literal input to hash (omit to read from --in or stdin)
+        required: false
+        type: string
+    flags:
+      - name: in
+        summary: Read input from file
+        type: string
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool hash sha3-256 [input] [flags]:
+    summary: Compute SHA3-256 hash (Keccak)
+    arguments:
+      - name: input
+        summary: Literal input to hash (omit to read from --in or stdin)
+        required: false
+        type: string
+    flags:
+      - name: in
+        summary: Read input from file
+        type: string
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool hash sha3-512 [input] [flags]:
+    summary: Compute SHA3-512 hash (Keccak)
+    arguments:
+      - name: input
+        summary: Literal input to hash (omit to read from --in or stdin)
+        required: false
+        type: string
+    flags:
+      - name: in
+        summary: Read input from file
+        type: string
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool hmac {command} [flags]:
+    group: true
+    summary: Keyed-hash MAC (md5/sha1/sha224/sha256/sha384/sha512/sha3-256/sha3-512)
+
+  ubertool hmac md5 [input] [flags]:
+    summary: Compute HMAC-MD5 (legacy / not collision-resistant)
+    arguments:
+      - name: input
+        summary: Literal input to MAC (omit to read from --in or stdin)
+        required: false
+        type: string
+    flags:
+      - name: in
+        summary: Read input from file
+        type: string
+      - name: key
+        summary: HMAC secret key (required)
+        type: string
+        required: true
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool hmac sha1 [input] [flags]:
+    summary: Compute HMAC-SHA1 (legacy)
+    arguments:
+      - name: input
+        summary: Literal input to MAC (omit to read from --in or stdin)
+        required: false
+        type: string
+    flags:
+      - name: in
+        summary: Read input from file
+        type: string
+      - name: key
+        summary: HMAC secret key (required)
+        type: string
+        required: true
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool hmac sha224 [input] [flags]:
+    summary: Compute HMAC-SHA224
+    arguments:
+      - name: input
+        summary: Literal input to MAC (omit to read from --in or stdin)
+        required: false
+        type: string
+    flags:
+      - name: in
+        summary: Read input from file
+        type: string
+      - name: key
+        summary: HMAC secret key (required)
+        type: string
+        required: true
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool hmac sha256 [input] [flags]:
+    summary: Compute HMAC-SHA256
+    arguments:
+      - name: input
+        summary: Literal input to MAC (omit to read from --in or stdin)
+        required: false
+        type: string
+    flags:
+      - name: in
+        summary: Read input from file
+        type: string
+      - name: key
+        summary: HMAC secret key (required)
+        type: string
+        required: true
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool hmac sha384 [input] [flags]:
+    summary: Compute HMAC-SHA384
+    arguments:
+      - name: input
+        summary: Literal input to MAC (omit to read from --in or stdin)
+        required: false
+        type: string
+    flags:
+      - name: in
+        summary: Read input from file
+        type: string
+      - name: key
+        summary: HMAC secret key (required)
+        type: string
+        required: true
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool hmac sha512 [input] [flags]:
+    summary: Compute HMAC-SHA512
+    arguments:
+      - name: input
+        summary: Literal input to MAC (omit to read from --in or stdin)
+        required: false
+        type: string
+    flags:
+      - name: in
+        summary: Read input from file
+        type: string
+      - name: key
+        summary: HMAC secret key (required)
+        type: string
+        required: true
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool hmac sha3-256 [input] [flags]:
+    summary: Compute HMAC-SHA3-256
+    arguments:
+      - name: input
+        summary: Literal input to MAC (omit to read from --in or stdin)
+        required: false
+        type: string
+    flags:
+      - name: in
+        summary: Read input from file
+        type: string
+      - name: key
+        summary: HMAC secret key (required)
+        type: string
+        required: true
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool hmac sha3-512 [input] [flags]:
+    summary: Compute HMAC-SHA3-512
+    arguments:
+      - name: input
+        summary: Literal input to MAC (omit to read from --in or stdin)
+        required: false
+        type: string
+    flags:
+      - name: in
+        summary: Read input from file
+        type: string
+      - name: key
+        summary: HMAC secret key (required)
+        type: string
+        required: true
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool html {command} [flags]:
+    group: true
+    summary: HTML entity encoding and decoding
+
+  ubertool html encode [input] [flags]:
+    summary: Encode HTML-special characters into entities
+    arguments:
+      - name: input
+        summary: Literal input to encode (omit to read from --in or stdin)
+        required: false
+        type: string
+    flags:
+      - name: in
+        summary: Read input from file
+        type: string
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool html decode [input] [flags]:
+    summary: Decode HTML entities back to characters
+    arguments:
+      - name: input
+        summary: Literal input to decode (omit to read from --in or stdin)
+        required: false
+        type: string
+    flags:
+      - name: in
+        summary: Read input from file
+        type: string
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool json {command} [flags]:
+    group: true
+    summary: "JSON conversion: to-yaml / to-toml / minify / prettify"
+
+  ubertool json minify [input] [flags]:
+    summary: Minify JSON (strip whitespace)
+    arguments:
+      - name: input
+        summary: Literal JSON to minify (omit to read from --in or stdin)
+        required: false
+        type: string
+    flags:
+      - name: in
+        summary: Read input from file
+        type: string
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool json prettify [input] [flags]:
+    summary: Prettify JSON with indentation
+    arguments:
+      - name: input
+        summary: Literal JSON to prettify (omit to read from --in or stdin)
+        required: false
+        type: string
+    flags:
+      - name: in
+        summary: Read input from file
+        type: string
+      - name: indent
+        summary: Indent width in spaces
+        type: integer
+        default: "2"
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool json to-toml [input] [flags]:
+    summary: Convert JSON to TOML
+    arguments:
+      - name: input
+        summary: Literal JSON to convert (omit to read from --in or stdin)
+        required: false
+        type: string
+    flags:
+      - name: in
+        summary: Read input from file
+        type: string
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool json to-yaml [input] [flags]:
+    summary: Convert JSON to YAML
+    arguments:
+      - name: input
+        summary: Literal JSON to convert (omit to read from --in or stdin)
+        required: false
+        type: string
+    flags:
+      - name: in
+        summary: Read input from file
+        type: string
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool jwt {command} [flags]:
+    group: true
+    summary: JSON Web Token decode and verify (HS* only)
+
+  ubertool jwt decode [input] [flags]:
+    summary: Decode a JWT without verifying its signature
+    arguments:
+      - name: input
+        summary: JWT to decode (omit to read from --in or stdin)
+        required: false
+        type: string
+    flags:
+      - name: in
+        summary: Read input from file
+        type: string
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool jwt verify [input] [flags]:
+    summary: Verify a JWT signature (HS256/HS384/HS512 only)
+    arguments:
+      - name: input
+        summary: JWT to verify (omit to read from --in or stdin)
+        required: false
+        type: string
+    flags:
+      - name: in
+        summary: Read input from file
+        type: string
+      - name: secret
+        summary: Shared HMAC secret (required)
+        type: string
+        required: true
+      - name: algo
+        summary: Signing algorithm
+        type: string
+        default: hs256
+        choices:
+          - value: hs256
+          - value: hs384
+          - value: hs512
+      - name: validate-exp
+        summary: Validate exp claim against the current time
+        type: boolean
+        default: false
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool password {command} [flags]:
+    group: true
+    summary: Password strength scoring (zxcvbn)
+
+  ubertool password score [input] [flags]:
+    summary: Score a password's strength (zxcvbn)
+    arguments:
+      - name: input
+        summary: Password (omit to read from --in or stdin)
+        required: false
+        type: string
+    flags:
+      - name: in
+        summary: Read input from file
+        type: string
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool token {command} [flags]:
+    group: true
+    summary: Random token generation (hex / base64 / alphanumeric)
+
+  ubertool token new [flags]:
+    summary: Generate a random token from a CSPRNG
+    flags:
+      - name: length
+        summary: Length in bytes of entropy (for hex/base64) or character count (for alphanumeric)
+        type: integer
+        default: "32"
+      - name: format
+        summary: Output format
+        type: string
+        default: hex
+        choices:
+          - value: hex
+          - value: base64
+          - value: alphanumeric
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool toml {command} [flags]:
+    group: true
+    summary: "TOML conversion: to-json / to-yaml"
+
+  ubertool toml to-json [input] [flags]:
+    summary: Convert TOML to JSON
+    arguments:
+      - name: input
+        summary: Literal TOML to convert (omit to read from --in or stdin)
+        required: false
+        type: string
+    flags:
+      - name: in
+        summary: Read input from file
+        type: string
+      - name: pretty
+        summary: Emit indented JSON instead of compact
+        type: boolean
+        default: false
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool toml to-yaml [input] [flags]:
+    summary: Convert TOML to YAML
+    arguments:
+      - name: input
+        summary: Literal TOML to convert (omit to read from --in or stdin)
+        required: false
+        type: string
+    flags:
+      - name: in
+        summary: Read input from file
+        type: string
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool ulid {command} [flags]:
+    group: true
+    summary: ULID generation
+
+  ubertool ulid new [flags]:
+    summary: Generate a new ULID (lexically-sortable 128-bit identifier)
+    flags:
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool url {command} [flags]:
+    group: true
+    summary: URL percent-encoding and decoding
+
+  ubertool url decode [input] [flags]:
+    summary: Decode a percent-encoded string
+    arguments:
+      - name: input
+        summary: Literal input to decode (omit to read from --in or stdin)
+        required: false
+        type: string
+    flags:
+      - name: in
+        summary: Read input from file
+        type: string
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool url encode [input] [flags]:
+    summary: Percent-encode a string for use in URLs
+    arguments:
+      - name: input
+        summary: Literal input to encode (omit to read from --in or stdin)
+        required: false
+        type: string
+    flags:
+      - name: in
+        summary: Read input from file
+        type: string
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool uuid {command} [flags]:
+    group: true
+    summary: UUID generation (v4, v7)
+
+  ubertool uuid new [flags]:
+    summary: Generate a new UUID (default version 4)
+    flags:
+      - name: version
+        summary: UUID version (4 = random, 7 = time-ordered)
+        type: string
+        default: "4"
+        choices:
+          - value: "4"
+          - value: "7"
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool yaml {command} [flags]:
+    group: true
+    summary: "YAML conversion: to-json / to-toml"
+
+  ubertool yaml to-json [input] [flags]:
+    summary: Convert YAML to JSON
+    arguments:
+      - name: input
+        summary: Literal YAML to convert (omit to read from --in or stdin)
+        required: false
+        type: string
+    flags:
+      - name: in
+        summary: Read input from file
+        type: string
+      - name: pretty
+        summary: Emit indented JSON instead of compact
+        type: boolean
+        default: false
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool yaml to-toml [input] [flags]:
+    summary: Convert YAML to TOML
+    arguments:
+      - name: input
+        summary: Literal YAML to convert (omit to read from --in or stdin)
+        required: false
+        type: string
+    flags:
+      - name: in
+        summary: Read input from file
+        type: string
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
