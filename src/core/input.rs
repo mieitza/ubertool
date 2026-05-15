@@ -59,6 +59,12 @@ pub fn resolve_input_with_reader<R: Read>(
         return Ok(Input::Bytes(p.as_bytes().to_vec()));
     }
     if let Some(path) = in_path {
+        // "--in -" is the conventional stdin alias.
+        if path == std::path::Path::new("-") {
+            let mut buf = Vec::new();
+            stdin.read_to_end(&mut buf).map_err(CliError::from)?;
+            return Ok(Input::Bytes(buf));
+        }
         let bytes = std::fs::read(path).map_err(CliError::from)?;
         return Ok(Input::Bytes(bytes));
     }
@@ -117,5 +123,18 @@ mod tests {
         let err = resolve_input_with_reader(None, None, true, &mut stdin).unwrap_err();
         assert_eq!(err.code, ErrorCode::UsageError);
         assert!(err.hint.is_some());
+    }
+
+    #[test]
+    fn in_path_dash_reads_stdin_explicitly() {
+        let mut stdin: &[u8] = b"from-dash";
+        let r = resolve_input_with_reader(
+            None,
+            Some(std::path::Path::new("-")),
+            true, // stdin claims to be a TTY — should be overridden by explicit --in -
+            &mut stdin,
+        )
+        .unwrap();
+        assert_eq!(r.as_bytes(), b"from-dash");
     }
 }
