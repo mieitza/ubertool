@@ -59,4 +59,6 @@ impl Cli {
 pub enum Noun {
     /// Base64 encoding and decoding.
     Base64(crate::commands::base64::Base64Args),
+    /// Cryptographic hash functions (md5, sha1, sha224, sha256, sha384, sha512, sha3-256, sha3-512).
+    Hash(crate::commands::hash::HashArgs),
 }
