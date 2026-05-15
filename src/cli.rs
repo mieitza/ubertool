@@ -72,6 +72,8 @@ pub enum Noun {
     Hmac(crate::commands::hmac::HmacArgs),
     /// JSON Web Token decode and verify (HS* only).
     Jwt(crate::commands::jwt::JwtArgs),
+    /// Password strength scoring (zxcvbn).
+    Password(crate::commands::password::PasswordArgs),
     /// Random token generation (hex / base64 / alphanumeric).
     Token(crate::commands::token::TokenArgs),
     /// ULID generation.
