@@ -70,6 +70,8 @@ pub enum Noun {
     Html(crate::commands::html::HtmlArgs),
     /// Keyed-hash MAC (md5/sha1/sha224/sha256/sha384/sha512/sha3-256/sha3-512).
     Hmac(crate::commands::hmac::HmacArgs),
+    /// JSON conversion: to-yaml / to-toml / minify / prettify.
+    Json(crate::commands::json::JsonArgs),
     /// JSON Web Token decode and verify (HS* only).
     Jwt(crate::commands::jwt::JwtArgs),
     /// Password strength scoring (zxcvbn).
