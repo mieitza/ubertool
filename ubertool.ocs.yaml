@@ -33,6 +33,7 @@ commands:
         type: boolean
         default: false
       - name: quiet
+        aliases: [q]
         summary: Output bare value only (pipe-friendly)
         type: boolean
         default: false
@@ -56,6 +57,7 @@ commands:
         type: boolean
         default: false
       - name: quiet
+        aliases: [q]
         summary: Output bare value only (pipe-friendly)
         type: boolean
         default: false
