@@ -19,7 +19,9 @@ pub struct TokenArgs {
 #[derive(Debug, Subcommand)]
 pub enum Verb {
     /// Generate a random token.
-    #[command(long_about = "Generate a random token from a CSPRNG.\n\nFor hex and base64, --length is the number of bytes of entropy. For alphanumeric, --length is the number of output characters.\n\nExamples:\n  ubertool token new                              # 32 bytes → 64 hex chars\n  ubertool token new --length 16 --format hex     # 32 hex chars\n  ubertool token new --format base64\n  ubertool token new --format alphanumeric --length 24 --json")]
+    #[command(
+        long_about = "Generate a random token from a CSPRNG.\n\nFor hex and base64, --length is the number of bytes of entropy. For alphanumeric, --length is the number of output characters.\n\nExamples:\n  ubertool token new                              # 32 bytes → 64 hex chars\n  ubertool token new --length 16 --format hex     # 32 hex chars\n  ubertool token new --format base64\n  ubertool token new --format alphanumeric --length 24 --json"
+    )]
     New(NewArgs),
 }
 
@@ -45,8 +47,7 @@ struct TokenOutput {
     token: String,
 }
 
-const ALPHANUMERIC: &[u8] =
-    b"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+const ALPHANUMERIC: &[u8] = b"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
 pub fn dispatch(args: TokenArgs, out: &Out) -> Result<(), CliError> {
     match args.verb {

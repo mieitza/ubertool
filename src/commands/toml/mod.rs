@@ -19,10 +19,16 @@ pub struct TomlArgs {
 #[derive(Debug, Subcommand)]
 pub enum Verb {
     /// Convert TOML to JSON.
-    #[command(name = "to-json", long_about = "Convert TOML to JSON.\n\nExamples:\n  ubertool toml to-json 'k = \"v\"'\n  ubertool toml to-json --in ./Cargo.toml --pretty\n\nExit codes specific to this command:\n  3   invalid TOML (invalid_toml)")]
+    #[command(
+        name = "to-json",
+        long_about = "Convert TOML to JSON.\n\nExamples:\n  ubertool toml to-json 'k = \"v\"'\n  ubertool toml to-json --in ./Cargo.toml --pretty\n\nExit codes specific to this command:\n  3   invalid TOML (invalid_toml)"
+    )]
     ToJson(ToJsonArgs),
     /// Convert TOML to YAML.
-    #[command(name = "to-yaml", long_about = "Convert TOML to YAML.\n\nExamples:\n  ubertool toml to-yaml 'k = \"v\"'")]
+    #[command(
+        name = "to-yaml",
+        long_about = "Convert TOML to YAML.\n\nExamples:\n  ubertool toml to-yaml 'k = \"v\"'"
+    )]
     ToYaml(RunArgs),
 }
 

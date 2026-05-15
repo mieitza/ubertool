@@ -24,6 +24,11 @@ pub fn run(args: ToJsonArgs, out: &Out) -> Result<(), CliError> {
     } else {
         serde_json::to_string(&v)
     }
-    .map_err(|e| CliError::new(ErrorCode::Internal, format!("json serialization failed: {e}")))?;
+    .map_err(|e| {
+        CliError::new(
+            ErrorCode::Internal,
+            format!("json serialization failed: {e}"),
+        )
+    })?;
     out.emit_value(&Out0 { json })
 }

@@ -17,10 +17,14 @@ pub struct JwtArgs {
 #[derive(Debug, Subcommand)]
 pub enum Verb {
     /// Decode a JWT without verifying its signature.
-    #[command(long_about = "Decode a JWT without verifying its signature — useful for inspection.\n\nExamples:\n  ubertool jwt decode \"eyJhbGc...\"\n  ubertool jwt decode \"eyJhbGc...\" --json\n\nExit codes specific to this command:\n  3   malformed JWT (invalid_jwt)")]
+    #[command(
+        long_about = "Decode a JWT without verifying its signature — useful for inspection.\n\nExamples:\n  ubertool jwt decode \"eyJhbGc...\"\n  ubertool jwt decode \"eyJhbGc...\" --json\n\nExit codes specific to this command:\n  3   malformed JWT (invalid_jwt)"
+    )]
     Decode(decode::DecodeArgs),
     /// Verify a JWT signature (HS256/HS384/HS512 only in this build).
-    #[command(long_about = "Verify a JWT signature against a shared secret. HS256, HS384, HS512 only.\n\nExamples:\n  ubertool jwt verify \"eyJhbGc...\" --secret \"my-secret\"\n  ubertool jwt verify \"eyJhbGc...\" --secret \"my-secret\" --algo hs512 --json\n\nExit codes specific to this command:\n  3   malformed JWT (invalid_jwt)\n  5   signature mismatch / wrong secret (signature_mismatch)\n  6   asymmetric algorithm not supported in this build (algo_not_supported)")]
+    #[command(
+        long_about = "Verify a JWT signature against a shared secret. HS256, HS384, HS512 only.\n\nExamples:\n  ubertool jwt verify \"eyJhbGc...\" --secret \"my-secret\"\n  ubertool jwt verify \"eyJhbGc...\" --secret \"my-secret\" --algo hs512 --json\n\nExit codes specific to this command:\n  3   malformed JWT (invalid_jwt)\n  5   signature mismatch / wrong secret (signature_mismatch)\n  6   asymmetric algorithm not supported in this build (algo_not_supported)"
+    )]
     Verify(verify::VerifyArgs),
 }
 

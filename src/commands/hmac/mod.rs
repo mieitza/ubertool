@@ -21,13 +21,19 @@ pub struct HmacArgs {
 
 #[derive(Debug, Subcommand)]
 pub enum HmacVerb {
-    #[command(name = "md5", long_about = "Compute HMAC-MD5 (legacy / not collision-resistant).\n\nExamples:\n  ubertool hmac md5 \"msg\" --key \"secret\"")]
+    #[command(
+        name = "md5",
+        long_about = "Compute HMAC-MD5 (legacy / not collision-resistant).\n\nExamples:\n  ubertool hmac md5 \"msg\" --key \"secret\""
+    )]
     Md5(HmacRunArgs),
     #[command(name = "sha1", long_about = "Compute HMAC-SHA1 (legacy).")]
     Sha1(HmacRunArgs),
     #[command(name = "sha224", long_about = "Compute HMAC-SHA224.")]
     Sha224(HmacRunArgs),
-    #[command(name = "sha256", long_about = "Compute HMAC-SHA256.\n\nExamples:\n  ubertool hmac sha256 \"msg\" --key \"secret\"\n  ubertool hmac sha256 --in ./file --key \"secret\" --json")]
+    #[command(
+        name = "sha256",
+        long_about = "Compute HMAC-SHA256.\n\nExamples:\n  ubertool hmac sha256 \"msg\" --key \"secret\"\n  ubertool hmac sha256 --in ./file --key \"secret\" --json"
+    )]
     Sha256(HmacRunArgs),
     #[command(name = "sha384", long_about = "Compute HMAC-SHA384.")]
     Sha384(HmacRunArgs),
@@ -118,8 +124,12 @@ mod tests {
     #[test]
     fn hmac_sha256_rfc_vector() {
         // HMAC-SHA256("key", "The quick brown fox jumps over the lazy dog")
-        let r =
-            compute(Algo::Sha256, b"key", b"The quick brown fox jumps over the lazy dog").unwrap();
+        let r = compute(
+            Algo::Sha256,
+            b"key",
+            b"The quick brown fox jumps over the lazy dog",
+        )
+        .unwrap();
         assert_eq!(
             r,
             "f7bc83f430538424b13298e6aa6fb143ef4d59a14946175997479dbc2d1a3cd8"
@@ -128,8 +138,12 @@ mod tests {
 
     #[test]
     fn hmac_sha1_rfc_vector() {
-        let r =
-            compute(Algo::Sha1, b"key", b"The quick brown fox jumps over the lazy dog").unwrap();
+        let r = compute(
+            Algo::Sha1,
+            b"key",
+            b"The quick brown fox jumps over the lazy dog",
+        )
+        .unwrap();
         assert_eq!(r, "de7c9b85b8b78aa6bc8a7a36f70a90701c9db4d9");
     }
 }

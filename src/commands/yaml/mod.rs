@@ -19,10 +19,16 @@ pub struct YamlArgs {
 #[derive(Debug, Subcommand)]
 pub enum Verb {
     /// Convert YAML to JSON.
-    #[command(name = "to-json", long_about = "Convert YAML to JSON.\n\nExamples:\n  ubertool yaml to-json 'name: alice'\n  ubertool yaml to-json --in ./config.yaml --pretty\n\nExit codes specific to this command:\n  3   invalid YAML (invalid_yaml)")]
+    #[command(
+        name = "to-json",
+        long_about = "Convert YAML to JSON.\n\nExamples:\n  ubertool yaml to-json 'name: alice'\n  ubertool yaml to-json --in ./config.yaml --pretty\n\nExit codes specific to this command:\n  3   invalid YAML (invalid_yaml)"
+    )]
     ToJson(ToJsonArgs),
     /// Convert YAML to TOML.
-    #[command(name = "to-toml", long_about = "Convert YAML to TOML via JSON value interchange.\n\nExamples:\n  ubertool yaml to-toml 'k: v'\n\nExit codes specific to this command:\n  3   invalid YAML, or value type not representable in TOML")]
+    #[command(
+        name = "to-toml",
+        long_about = "Convert YAML to TOML via JSON value interchange.\n\nExamples:\n  ubertool yaml to-toml 'k: v'\n\nExit codes specific to this command:\n  3   invalid YAML, or value type not representable in TOML"
+    )]
     ToToml(RunArgs),
 }
 

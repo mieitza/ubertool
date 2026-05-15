@@ -17,10 +17,14 @@ pub struct HtmlArgs {
 #[derive(Debug, Subcommand)]
 pub enum Verb {
     /// Encode HTML-special characters into entities.
-    #[command(long_about = "Encode HTML-special characters into entities (<, >, &, \", ').\n\nExamples:\n  ubertool html encode \"<b>hi</b>\"\n  ubertool html encode \"<b>hi</b>\" --json")]
+    #[command(
+        long_about = "Encode HTML-special characters into entities (<, >, &, \", ').\n\nExamples:\n  ubertool html encode \"<b>hi</b>\"\n  ubertool html encode \"<b>hi</b>\" --json"
+    )]
     Encode(encode::EncodeArgs),
     /// Decode HTML entities back to characters.
-    #[command(long_about = "Decode HTML entities back to characters. Unknown entities pass through unchanged.\n\nExamples:\n  ubertool html decode \"&lt;b&gt;hi&lt;/b&gt;\"\n  ubertool html decode \"&amp;\" --json")]
+    #[command(
+        long_about = "Decode HTML entities back to characters. Unknown entities pass through unchanged.\n\nExamples:\n  ubertool html decode \"&lt;b&gt;hi&lt;/b&gt;\"\n  ubertool html decode \"&amp;\" --json"
+    )]
     Decode(decode::DecodeArgs),
 }
 

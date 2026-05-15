@@ -38,7 +38,9 @@ impl ErrorCode {
         match self {
             UsageError | BinaryToTtyRefused => ExitCode::Usage,
             InvalidJson | InvalidYaml | InvalidToml | InvalidXml | InvalidRegex | InvalidIban
-            | InvalidPhone | InvalidJwt | InvalidBase64 | InvalidBcrypt | InvalidUtf8 => ExitCode::Invalid,
+            | InvalidPhone | InvalidJwt | InvalidBase64 | InvalidBcrypt | InvalidUtf8 => {
+                ExitCode::Invalid
+            }
             FileNotFound | PermissionDenied | IoError => ExitCode::Io,
             SignatureMismatch | DecryptFailed | PdfSignatureInvalid => ExitCode::Crypto,
             AlgoNotSupported => ExitCode::Unsupported,

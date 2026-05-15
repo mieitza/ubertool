@@ -31,12 +31,9 @@ pub fn run(args: DecodeArgs, out: &Out) -> Result<(), CliError> {
     )?;
     let s = input.as_str()?;
     let decoded = percent_decode_str(s).decode_utf8().map_err(|_| {
-        CliError::new(
-            ErrorCode::InvalidUtf8,
-            "decoded bytes are not valid UTF-8",
-        )
-        .with_input(serde_json::json!(s))
-        .with_hint("the input contains percent-escapes that produce non-UTF-8 bytes")
+        CliError::new(ErrorCode::InvalidUtf8, "decoded bytes are not valid UTF-8")
+            .with_input(serde_json::json!(s))
+            .with_hint("the input contains percent-escapes that produce non-UTF-8 bytes")
     })?;
     out.emit_value(&DecodeOutput {
         decoded: decoded.into_owned(),

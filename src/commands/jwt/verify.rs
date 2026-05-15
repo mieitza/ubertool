@@ -73,9 +73,7 @@ pub fn run(args: VerifyArgs, out: &Out) -> Result<(), CliError> {
             // Echo the JWT (it's not secret) but NEVER the secret.
             Err(CliError::new(code, msg)
                 .with_input(serde_json::json!({"token": token, "secret": "<redacted>"}))
-                .with_hint(
-                    "if the JWT uses RS*/ES*, this build does not support asymmetric keys",
-                ))
+                .with_hint("if the JWT uses RS*/ES*, this build does not support asymmetric keys"))
         }
     }
 }

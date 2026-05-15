@@ -34,7 +34,9 @@ pub fn run(args: DecodeArgs, out: &Out) -> Result<(), CliError> {
     let mut parts = token.split('.');
     let header_b64 = parts.next().ok_or_else(|| jwt_invalid("missing header"))?;
     let claims_b64 = parts.next().ok_or_else(|| jwt_invalid("missing claims"))?;
-    let _sig = parts.next().ok_or_else(|| jwt_invalid("missing signature"))?;
+    let _sig = parts
+        .next()
+        .ok_or_else(|| jwt_invalid("missing signature"))?;
     if parts.next().is_some() {
         return Err(jwt_invalid("too many segments"));
     }

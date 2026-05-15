@@ -20,13 +20,22 @@ pub struct HashArgs {
 
 #[derive(Debug, Subcommand)]
 pub enum HashVerb {
-    #[command(name = "md5", long_about = "Compute MD5 hash (legacy / not collision-resistant).\n\nExamples:\n  ubertool hash md5 \"hello\"\n  ubertool hash md5 --in ./file.bin\n  echo -n hello | ubertool hash md5")]
+    #[command(
+        name = "md5",
+        long_about = "Compute MD5 hash (legacy / not collision-resistant).\n\nExamples:\n  ubertool hash md5 \"hello\"\n  ubertool hash md5 --in ./file.bin\n  echo -n hello | ubertool hash md5"
+    )]
     Md5(HashRunArgs),
-    #[command(name = "sha1", long_about = "Compute SHA-1 hash (legacy / not collision-resistant).\n\nExamples:\n  ubertool hash sha1 \"hello\"\n  ubertool hash sha1 --in ./file.bin")]
+    #[command(
+        name = "sha1",
+        long_about = "Compute SHA-1 hash (legacy / not collision-resistant).\n\nExamples:\n  ubertool hash sha1 \"hello\"\n  ubertool hash sha1 --in ./file.bin"
+    )]
     Sha1(HashRunArgs),
     #[command(name = "sha224", long_about = "Compute SHA-224 hash.")]
     Sha224(HashRunArgs),
-    #[command(name = "sha256", long_about = "Compute SHA-256 hash.\n\nExamples:\n  ubertool hash sha256 \"hello\"\n  ubertool hash sha256 --in ./file.bin --json")]
+    #[command(
+        name = "sha256",
+        long_about = "Compute SHA-256 hash.\n\nExamples:\n  ubertool hash sha256 \"hello\"\n  ubertool hash sha256 --in ./file.bin --json"
+    )]
     Sha256(HashRunArgs),
     #[command(name = "sha384", long_about = "Compute SHA-384 hash.")]
     Sha384(HashRunArgs),

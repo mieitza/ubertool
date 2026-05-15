@@ -12,7 +12,10 @@ fn password_score_weak() {
         .clone();
     let v: serde_json::Value = serde_json::from_slice(&out).expect("valid JSON");
     let score = v["score"].as_u64().unwrap();
-    assert!(score <= 1, "expected weak score for 'password', got {score}");
+    assert!(
+        score <= 1,
+        "expected weak score for 'password', got {score}"
+    );
 }
 
 #[test]
@@ -20,7 +23,10 @@ fn password_score_strong() {
     let out = Command::cargo_bin("ubertool")
         .unwrap()
         .args([
-            "--json", "password", "score", "Tr0ub4dor&3-correct-horse-battery-staple",
+            "--json",
+            "password",
+            "score",
+            "Tr0ub4dor&3-correct-horse-battery-staple",
         ])
         .assert()
         .success()

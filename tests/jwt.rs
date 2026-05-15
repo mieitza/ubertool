@@ -46,9 +46,7 @@ fn jwt_verify_correct_secret_succeeds() {
 fn jwt_verify_correct_secret_emits_claims_json() {
     let out = Command::cargo_bin("ubertool")
         .unwrap()
-        .args([
-            "--json", "jwt", "verify", HS256_TOKEN, "--secret", "secret",
-        ])
+        .args(["--json", "jwt", "verify", HS256_TOKEN, "--secret", "secret"])
         .assert()
         .success()
         .get_output()
@@ -75,7 +73,12 @@ fn jwt_verify_secret_is_redacted_from_json_error_input() {
     let out = Command::cargo_bin("ubertool")
         .unwrap()
         .args([
-            "--json", "jwt", "verify", HS256_TOKEN, "--secret", "wrong-secret-do-not-leak",
+            "--json",
+            "jwt",
+            "verify",
+            HS256_TOKEN,
+            "--secret",
+            "wrong-secret-do-not-leak",
         ])
         .assert()
         .failure()

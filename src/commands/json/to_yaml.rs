@@ -21,7 +21,10 @@ pub fn run(args: RunArgs, out: &Out) -> Result<(), CliError> {
     )?;
     let v = parse_json(input.as_str()?)?;
     let yaml = serde_yaml::to_string(&v).map_err(|e| {
-        CliError::new(ErrorCode::Internal, format!("yaml serialization failed: {e}"))
+        CliError::new(
+            ErrorCode::Internal,
+            format!("yaml serialization failed: {e}"),
+        )
     })?;
     out.emit_value(&Out0 { yaml })
 }

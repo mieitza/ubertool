@@ -32,9 +32,12 @@ pub fn run(args: DecodeArgs, out: &Out) -> Result<(), CliError> {
     let raw = input.as_str()?.trim();
     let b64 = raw.strip_prefix("Basic ").unwrap_or(raw);
     let decoded = STANDARD.decode(b64).map_err(|e| {
-        CliError::new(ErrorCode::InvalidBase64, format!("base64 decode failed: {e}"))
-            .with_input(serde_json::json!(b64))
-            .with_hint("Basic auth header values are standard base64 of `user:pass`")
+        CliError::new(
+            ErrorCode::InvalidBase64,
+            format!("base64 decode failed: {e}"),
+        )
+        .with_input(serde_json::json!(b64))
+        .with_hint("Basic auth header values are standard base64 of `user:pass`")
     })?;
     let s = String::from_utf8(decoded).map_err(|_| {
         CliError::new(

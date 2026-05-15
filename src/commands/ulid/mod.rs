@@ -16,7 +16,9 @@ pub struct UlidArgs {
 #[derive(Debug, Subcommand)]
 pub enum Verb {
     /// Generate a new ULID (lexically-sortable 128-bit identifier).
-    #[command(long_about = "Generate a new ULID (lexically-sortable, 128-bit, 26-char Crockford base32).\n\nExamples:\n  ubertool ulid new\n  ubertool ulid new --json")]
+    #[command(
+        long_about = "Generate a new ULID (lexically-sortable, 128-bit, 26-char Crockford base32).\n\nExamples:\n  ubertool ulid new\n  ubertool ulid new --json"
+    )]
     New,
 }
 

@@ -27,10 +27,7 @@ pub fn run(args: PrettifyArgs, out: &Out) -> Result<(), CliError> {
         let mut ser = serde_json::Serializer::with_formatter(&mut buf, formatter);
         use serde::Serialize as _;
         v.serialize(&mut ser).map_err(|e| {
-            CliError::new(
-                ErrorCode::Internal,
-                format!("json prettify failed: {e}"),
-            )
+            CliError::new(ErrorCode::Internal, format!("json prettify failed: {e}"))
         })?;
     }
     let pretty = String::from_utf8(buf).map_err(|e| {

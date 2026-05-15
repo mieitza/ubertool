@@ -21,9 +21,7 @@ fn hmac_sha256_known_vector() {
 fn hmac_sha256_json_mode() {
     let out = Command::cargo_bin("ubertool")
         .unwrap()
-        .args([
-            "--json", "hmac", "sha256", "hello", "--key", "secret",
-        ])
+        .args(["--json", "hmac", "sha256", "hello", "--key", "secret"])
         .assert()
         .success()
         .get_output()

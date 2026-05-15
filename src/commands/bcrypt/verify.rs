@@ -40,16 +40,18 @@ pub fn run(args: VerifyArgs, out: &Out) -> Result<(), CliError> {
             "bcrypt verify: password does not match the supplied hash",
         )
         .with_hint("confirm the password is correct")),
-        Err(BcryptError::InvalidHash(msg)) => Err(
-            CliError::new(ErrorCode::InvalidBcrypt, format!("malformed bcrypt hash: {msg}"))
-                .with_input(serde_json::json!(args.hash))
-                .with_hint("bcrypt hashes start with $2a$, $2b$, $2x$, or $2y$ followed by cost and salt"),
-        ),
-        Err(BcryptError::InvalidPrefix(msg)) => Err(
-            CliError::new(ErrorCode::InvalidBcrypt, format!("malformed bcrypt hash: {msg}"))
-                .with_input(serde_json::json!(args.hash))
-                .with_hint("bcrypt hashes start with $2a$, $2b$, $2x$, or $2y$ followed by cost and salt"),
-        ),
+        Err(BcryptError::InvalidHash(msg)) => Err(CliError::new(
+            ErrorCode::InvalidBcrypt,
+            format!("malformed bcrypt hash: {msg}"),
+        )
+        .with_input(serde_json::json!(args.hash))
+        .with_hint("bcrypt hashes start with $2a$, $2b$, $2x$, or $2y$ followed by cost and salt")),
+        Err(BcryptError::InvalidPrefix(msg)) => Err(CliError::new(
+            ErrorCode::InvalidBcrypt,
+            format!("malformed bcrypt hash: {msg}"),
+        )
+        .with_input(serde_json::json!(args.hash))
+        .with_hint("bcrypt hashes start with $2a$, $2b$, $2x$, or $2y$ followed by cost and salt")),
         Err(BcryptError::InvalidCost(msg)) => Err(CliError::new(
             ErrorCode::InvalidBcrypt,
             format!("invalid bcrypt cost: {msg}"),
