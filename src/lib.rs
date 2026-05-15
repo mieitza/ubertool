@@ -17,6 +17,7 @@ pub fn run() -> ProcExitCode {
         cli::Noun::Base64(a) => commands::base64::dispatch(a, &out),
         cli::Noun::Bcrypt(a) => commands::bcrypt::dispatch(a, &out),
         cli::Noun::Hash(a) => commands::hash::dispatch(a, &out),
+        cli::Noun::Html(a) => commands::html::dispatch(a, &out),
         cli::Noun::Hmac(a) => commands::hmac::dispatch(a, &out),
         cli::Noun::Url(a) => commands::url::dispatch(a, &out),
     };
