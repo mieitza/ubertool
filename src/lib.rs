@@ -15,6 +15,7 @@ pub fn run() -> ProcExitCode {
 
     let result: Result<(), CliError> = match parsed.noun {
         cli::Noun::Base64(a) => commands::base64::dispatch(a, &out),
+        cli::Noun::BasicAuth(a) => commands::basic_auth::dispatch(a, &out),
         cli::Noun::Bcrypt(a) => commands::bcrypt::dispatch(a, &out),
         cli::Noun::Hash(a) => commands::hash::dispatch(a, &out),
         cli::Noun::Html(a) => commands::html::dispatch(a, &out),
