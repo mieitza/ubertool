@@ -4,9 +4,12 @@ expression: s
 ---
 Decode base64 input (standard alphabet, with padding).
 
-Examples: ubertool base64 decode aGVsbG8= ubertool base64 decode aGVsbG8= --json
+Examples:
+  ubertool base64 decode aGVsbG8=
+  ubertool base64 decode aGVsbG8= --json
 
-Exit codes specific to this command: 3   invalid base64 (input could not be decoded)
+Exit codes specific to this command:
+  3   invalid base64 (input could not be decoded)
 
 Usage: ubertool base64 decode [OPTIONS] [INPUT]
 

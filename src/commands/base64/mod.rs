@@ -18,21 +18,23 @@ pub struct Base64Args {
 #[derive(Debug, Subcommand)]
 pub enum Verb {
     /// Encode input as base64 (standard alphabet, with padding).
-    ///
-    /// Examples:
-    ///   ubertool base64 encode "hello"
-    ///   echo -n hello | ubertool base64 encode
-    ///   ubertool base64 encode "hello" --json
+    #[command(long_about = "Encode input as base64 (standard alphabet, with padding).\n\
+                            \n\
+                            Examples:\n  \
+                            ubertool base64 encode \"hello\"\n  \
+                            echo -n hello | ubertool base64 encode\n  \
+                            ubertool base64 encode \"hello\" --json")]
     Encode(EncodeArgs),
 
     /// Decode base64 input (standard alphabet, with padding).
-    ///
-    /// Examples:
-    ///   ubertool base64 decode aGVsbG8=
-    ///   ubertool base64 decode aGVsbG8= --json
-    ///
-    /// Exit codes specific to this command:
-    ///   3   invalid base64 (input could not be decoded)
+    #[command(long_about = "Decode base64 input (standard alphabet, with padding).\n\
+                            \n\
+                            Examples:\n  \
+                            ubertool base64 decode aGVsbG8=\n  \
+                            ubertool base64 decode aGVsbG8= --json\n\
+                            \n\
+                            Exit codes specific to this command:\n  \
+                            3   invalid base64 (input could not be decoded)")]
     Decode(DecodeArgs),
 }
 

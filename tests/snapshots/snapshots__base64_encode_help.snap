@@ -4,7 +4,10 @@ expression: s
 ---
 Encode input as base64 (standard alphabet, with padding).
 
-Examples: ubertool base64 encode "hello" echo -n hello | ubertool base64 encode ubertool base64 encode "hello" --json
+Examples:
+  ubertool base64 encode "hello"
+  echo -n hello | ubertool base64 encode
+  ubertool base64 encode "hello" --json
 
 Usage: ubertool base64 encode [OPTIONS] [INPUT]
 
