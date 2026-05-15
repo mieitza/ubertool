@@ -21,6 +21,28 @@ clap = { version = "4", features = ["derive"] }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 base64 = "0.22"
+# M1 hash family
+sha2 = "0.10"
+sha1 = "0.10"
+md-5 = "0.10"
+sha3 = "0.10"
+digest = "0.10"
+hmac = "0.12"
+# M1 password
+bcrypt = "0.15"
+zxcvbn = "2"
+# M1 JWT
+jsonwebtoken = "9"
+# M1 IDs / tokens
+uuid = { version = "1", features = ["v4", "v7"] }
+ulid = "1"
+rand = "0.8"
+# M1 encoding
+percent-encoding = "2"
+html-escape = "0.2"
+# M1 conversion
+serde_yaml = "0.9"
+toml = "0.8"
 
 [dev-dependencies]
 assert_cmd = "2"
