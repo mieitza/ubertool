@@ -139,3 +139,61 @@ fn json_mode_error_path_writes_to_stderr_too() {
         "stderr must contain the human error envelope even in --json mode, got: {stderr:?}"
     );
 }
+
+const M1_NOUNS_AND_VERBS: &[(&str, &[&str])] = &[
+    ("base64", &["encode", "decode"]),
+    (
+        "hash",
+        &[
+            "md5", "sha1", "sha224", "sha256", "sha384", "sha512", "sha3-256", "sha3-512",
+        ],
+    ),
+    (
+        "hmac",
+        &[
+            "md5", "sha1", "sha224", "sha256", "sha384", "sha512", "sha3-256", "sha3-512",
+        ],
+    ),
+    ("bcrypt", &["hash", "verify"]),
+    ("url", &["encode", "decode"]),
+    ("html", &["encode", "decode"]),
+    ("basic-auth", &["encode", "decode"]),
+    ("jwt", &["decode", "verify"]),
+    ("uuid", &["new"]),
+    ("ulid", &["new"]),
+    ("token", &["new"]),
+    ("password", &["score"]),
+    ("json", &["to-yaml", "to-toml", "minify", "prettify"]),
+    ("yaml", &["to-json", "to-toml"]),
+    ("toml", &["to-json", "to-yaml"]),
+];
+
+#[test]
+fn every_m1_noun_and_verb_has_discoverable_help() {
+    for (noun, verbs) in M1_NOUNS_AND_VERBS {
+        // noun-level help
+        Command::cargo_bin("ubertool")
+            .unwrap()
+            .args([noun, "--help"])
+            .assert()
+            .success();
+        for verb in *verbs {
+            Command::cargo_bin("ubertool")
+                .unwrap()
+                .args([noun, verb, "--help"])
+                .assert()
+                .success();
+        }
+    }
+}
+
+#[test]
+fn data_returning_commands_advertise_json() {
+    // The global --json flag is documented at the top level.
+    Command::cargo_bin("ubertool")
+        .unwrap()
+        .args(["--help"])
+        .assert()
+        .success()
+        .stdout(predicate::str::contains("--json"));
+}
