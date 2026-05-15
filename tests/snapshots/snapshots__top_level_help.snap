@@ -1,6 +1,5 @@
 ---
 source: tests/snapshots.rs
-assertion_line: 18
 expression: s
 ---
 ubertool — agent-friendly developer utilities.
@@ -27,6 +26,7 @@ Commands:
   bcrypt  Bcrypt password hashing and verification
   hash    Cryptographic hash functions (md5, sha1, sha224, sha256, sha384, sha512, sha3-256, sha3-512)
   hmac    Keyed-hash MAC (md5/sha1/sha224/sha256/sha384/sha512/sha3-256/sha3-512)
+  url     URL percent-encoding and decoding
   help    Print this message or the help of the given subcommand(s)
 
 Options:
