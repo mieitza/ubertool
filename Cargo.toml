@@ -5,7 +5,7 @@ edition = "2021"
 authors = ["mihai"]
 description = "Developer-focused data-transform CLI; agent-friendly Rust port of it-tools"
 license = "GPL-3.0"
-repository = "https://github.com/<GH_OWNER>/ubertool"
+repository = "https://github.com/mieitza/ubertool"
 rust-version = "1.81"
 
 [lib]
