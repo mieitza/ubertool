@@ -28,6 +28,7 @@ Commands:
   hash        Cryptographic hash functions (md5, sha1, sha224, sha256, sha384, sha512, sha3-256, sha3-512)
   html        HTML entity encoding and decoding
   hmac        Keyed-hash MAC (md5/sha1/sha224/sha256/sha384/sha512/sha3-256/sha3-512)
+  jwt         JSON Web Token decode and verify (HS* only)
   url         URL percent-encoding and decoding
   help        Print this message or the help of the given subcommand(s)
 
