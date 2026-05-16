@@ -38,6 +38,7 @@ pub fn run() -> ProcExitCode {
         cli::Noun::Ipv4(a) => commands::ipv4::dispatch(a, &out),
         cli::Noun::List(a) => commands::list::dispatch(a, &out),
         cli::Noun::Roman(a) => commands::roman::dispatch(a, &out),
+        cli::Noun::Rsa(a) => commands::rsa::dispatch(a, &out),
         cli::Noun::Slugify(a) => commands::slugify::dispatch(a, &out),
         cli::Noun::Sql(a) => commands::sql::dispatch(a, &out),
         cli::Noun::Temperature(a) => commands::temperature::dispatch(a, &out),

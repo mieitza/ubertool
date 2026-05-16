@@ -24,6 +24,7 @@ pub mod math;
 pub mod password;
 pub mod percentage;
 pub mod roman;
+pub mod rsa;
 pub mod safelink;
 pub mod slugify;
 pub mod sql;

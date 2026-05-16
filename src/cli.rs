@@ -107,6 +107,8 @@ pub enum Noun {
     List(crate::commands::list::ListArgs),
     /// Roman numeral conversion (to-num / from-num, range 1-3999).
     Roman(crate::commands::roman::RomanArgs),
+    /// RSA keypair generation (PKCS#8 PEM, 2048/3072/4096 bits).
+    Rsa(crate::commands::rsa::RsaArgs),
     /// URL slug generation.
     Slugify(crate::commands::slugify::SlugifyArgs),
     /// SQL formatter (pretty-print with indentation and keyword casing).
