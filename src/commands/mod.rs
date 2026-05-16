@@ -18,6 +18,7 @@ pub mod url;
 pub mod uuid;
 pub mod roman;
 pub mod slugify;
+pub mod sql;
 pub mod temperature;
 pub mod yaml;
 pub mod xml;

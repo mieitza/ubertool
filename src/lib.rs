@@ -36,6 +36,7 @@ pub fn run() -> ProcExitCode {
         cli::Noun::List(a) => commands::list::dispatch(a, &out),
         cli::Noun::Roman(a) => commands::roman::dispatch(a, &out),
         cli::Noun::Slugify(a) => commands::slugify::dispatch(a, &out),
+        cli::Noun::Sql(a) => commands::sql::dispatch(a, &out),
         cli::Noun::Temperature(a) => commands::temperature::dispatch(a, &out),
     };
 
