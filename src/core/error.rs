@@ -21,6 +21,7 @@ pub enum ErrorCode {
     InvalidBase64,
     InvalidBcrypt,
     InvalidCsv,
+    InvalidIntegerBase,
     InvalidUtf8,
     FileNotFound,
     PermissionDenied,
@@ -39,7 +40,8 @@ impl ErrorCode {
         match self {
             UsageError | BinaryToTtyRefused => ExitCode::Usage,
             InvalidJson | InvalidYaml | InvalidToml | InvalidXml | InvalidRegex | InvalidIban
-            | InvalidPhone | InvalidJwt | InvalidBase64 | InvalidBcrypt | InvalidCsv | InvalidUtf8 => {
+            | InvalidPhone | InvalidJwt | InvalidBase64 | InvalidBcrypt | InvalidCsv
+            | InvalidIntegerBase | InvalidUtf8 => {
                 ExitCode::Invalid
             }
             FileNotFound | PermissionDenied | IoError => ExitCode::Io,
@@ -64,6 +66,7 @@ impl ErrorCode {
             InvalidBase64 => "invalid_base64",
             InvalidBcrypt => "invalid_bcrypt",
             InvalidCsv => "invalid_csv",
+            InvalidIntegerBase => "invalid_integer_base",
             InvalidUtf8 => "invalid_utf8",
             FileNotFound => "file_not_found",
             PermissionDenied => "permission_denied",
@@ -207,6 +210,7 @@ mod tests {
             ErrorCode::InvalidBase64,
             ErrorCode::InvalidBcrypt,
             ErrorCode::InvalidCsv,
+            ErrorCode::InvalidIntegerBase,
             ErrorCode::InvalidUtf8,
             ErrorCode::FileNotFound,
             ErrorCode::PermissionDenied,
