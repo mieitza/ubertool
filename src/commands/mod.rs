@@ -1,4 +1,5 @@
 pub mod base64;
+pub mod eta;
 pub mod math;
 pub mod percentage;
 pub mod basic_auth;

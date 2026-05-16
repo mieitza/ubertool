@@ -127,4 +127,6 @@ pub enum Noun {
     Math(crate::commands::math::MathArgs),
     /// Percentage calculations (of / change / of-total).
     Percentage(crate::commands::percentage::PercentageArgs),
+    /// ETA calculator from progress (done / total / elapsed).
+    Eta(crate::commands::eta::EtaArgs),
 }
