@@ -107,6 +107,8 @@ pub enum Noun {
     Ipv4(crate::commands::ipv4::Ipv4Args),
     /// List separator conversion (comma/newline/space/tab/semicolon/pipe).
     List(crate::commands::list::ListArgs),
+    /// Regular expression utilities (test / generate).
+    Regex(crate::commands::regex::RegexArgs),
     /// Roman numeral conversion (to-num / from-num, range 1-3999).
     Roman(crate::commands::roman::RomanArgs),
     /// RSA keypair generation (PKCS#8 PEM, 2048/3072/4096 bits).

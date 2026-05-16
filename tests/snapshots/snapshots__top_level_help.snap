@@ -1,6 +1,5 @@
 ---
 source: tests/snapshots.rs
-assertion_line: 18
 expression: s
 ---
 ubertool — agent-friendly developer utilities.
@@ -47,6 +46,7 @@ Commands:
   integer-base  Integer base conversion (bases 2-36)
   ipv4          IPv4 utilities (parse, subnet, range-expand, to-ipv6)
   list          List separator conversion (comma/newline/space/tab/semicolon/pipe)
+  regex         Regular expression utilities (test / generate)
   roman         Roman numeral conversion (to-num / from-num, range 1-3999)
   rsa           RSA keypair generation (PKCS#8 PEM, 2048/3072/4096 bits)
   slugify       URL slug generation
@@ -58,6 +58,7 @@ Commands:
   mac           MAC address utilities (generate random, look up vendor OUI)
   ipv6-ula      RFC4193 Unique Local IPv6 prefix generator
   math          Math expression evaluator (evalexpr)
+  pdf           PDF utilities (signature info extraction)
   percentage    Percentage calculations (of / change / of-total)
   eta           ETA calculator from progress (done / total / elapsed)
   date          Date/time format conversion (unix / ISO 8601 / RFC 2822)
