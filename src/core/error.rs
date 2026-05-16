@@ -46,9 +46,7 @@ impl ErrorCode {
             InvalidJson | InvalidYaml | InvalidToml | InvalidXml | InvalidRegex | InvalidIban
             | InvalidPhone | InvalidJwt | InvalidBase64 | InvalidBcrypt | InvalidCsv
             | InvalidIntegerBase | InvalidRoman | InvalidUtf8 | InvalidBinary
-            | InvalidCodepoint | InvalidDockerRun => {
-                ExitCode::Invalid
-            }
+            | InvalidCodepoint | InvalidDockerRun => ExitCode::Invalid,
             FileNotFound | PermissionDenied | IoError => ExitCode::Io,
             SignatureMismatch | DecryptFailed | PdfSignatureInvalid => ExitCode::Crypto,
             AlgoNotSupported => ExitCode::Unsupported,

@@ -19,7 +19,10 @@ pub struct CsvArgs {
 #[derive(Debug, Subcommand)]
 pub enum Verb {
     /// Convert CSV to JSON (header row becomes object keys).
-    #[command(name = "to-json", long_about = "Convert CSV to JSON. The first row is treated as the header — its values become object keys for every subsequent row.\n\nExamples:\n  ubertool csv to-json 'name,age\\nalice,30'\n  ubertool csv to-json --in ./data.csv --delimiter ';'\n\nExit codes specific to this command:\n  2   usage error (e.g., multi-char delimiter)\n  3   malformed CSV (invalid_csv)")]
+    #[command(
+        name = "to-json",
+        long_about = "Convert CSV to JSON. The first row is treated as the header — its values become object keys for every subsequent row.\n\nExamples:\n  ubertool csv to-json 'name,age\\nalice,30'\n  ubertool csv to-json --in ./data.csv --delimiter ';'\n\nExit codes specific to this command:\n  2   usage error (e.g., multi-char delimiter)\n  3   malformed CSV (invalid_csv)"
+    )]
     ToJson(ToJsonArgs),
 }
 
@@ -65,9 +68,7 @@ fn run(args: ToJsonArgs, out: &Out) -> Result<(), CliError> {
         .from_reader(bytes);
     let headers = reader
         .headers()
-        .map_err(|e| {
-            CliError::new(ErrorCode::InvalidCsv, format!("invalid CSV header: {e}"))
-        })?
+        .map_err(|e| CliError::new(ErrorCode::InvalidCsv, format!("invalid CSV header: {e}")))?
         .iter()
         .map(String::from)
         .collect::<Vec<_>>();

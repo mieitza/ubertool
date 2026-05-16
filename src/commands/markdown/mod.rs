@@ -20,7 +20,10 @@ pub struct MarkdownArgs {
 #[derive(Debug, Subcommand)]
 pub enum Verb {
     /// Render Markdown as HTML.
-    #[command(name = "to-html", long_about = "Render Markdown as HTML using CommonMark.\n\nExamples:\n  ubertool markdown to-html '# Hello'\n  cat README.md | ubertool markdown to-html\n  ubertool markdown to-html '**bold**' --json")]
+    #[command(
+        name = "to-html",
+        long_about = "Render Markdown as HTML using CommonMark.\n\nExamples:\n  ubertool markdown to-html '# Hello'\n  cat README.md | ubertool markdown to-html\n  ubertool markdown to-html '**bold**' --json"
+    )]
     ToHtml(RunArgs),
 }
 

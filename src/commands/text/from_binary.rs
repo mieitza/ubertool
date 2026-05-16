@@ -30,8 +30,7 @@ pub fn run(args: RunArgs, out: &Out) -> Result<(), CliError> {
         }
         bytes.push(u8::from_str_radix(token, 2).unwrap());
     }
-    let text = String::from_utf8(bytes).map_err(|_| {
-        CliError::new(ErrorCode::InvalidUtf8, "decoded bytes are not valid UTF-8")
-    })?;
+    let text = String::from_utf8(bytes)
+        .map_err(|_| CliError::new(ErrorCode::InvalidUtf8, "decoded bytes are not valid UTF-8"))?;
     out.emit_value(&Out0 { text })
 }

@@ -64,7 +64,6 @@ fn format_xml(xml: &str) -> Result<String, CliError> {
         ));
     }
     let bytes = writer.into_inner().into_inner();
-    String::from_utf8(bytes).map_err(|e| {
-        CliError::new(ErrorCode::Internal, format!("xml output not UTF-8: {e}"))
-    })
+    String::from_utf8(bytes)
+        .map_err(|e| CliError::new(ErrorCode::Internal, format!("xml output not UTF-8: {e}")))
 }

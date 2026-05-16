@@ -19,7 +19,9 @@ pub fn run(args: RunArgs, out: &Out) -> Result<(), CliError> {
         is_stdin_tty(),
     )?;
     let s = input.as_str()?.trim_end_matches(['\r', '\n']);
-    out.emit_value(&Out0 { obfuscated: obfuscate(s) })
+    out.emit_value(&Out0 {
+        obfuscated: obfuscate(s),
+    })
 }
 
 fn obfuscate(s: &str) -> String {

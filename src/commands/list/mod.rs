@@ -19,7 +19,9 @@ pub struct ListArgs {
 #[derive(Debug, Subcommand)]
 pub enum Verb {
     /// Convert a list between separator styles, optionally trimming/deduping/sorting.
-    #[command(long_about = "Convert a list between separator styles.\n\nSeparators: comma, newline, space, tab, semicolon, pipe.\n\nExamples:\n  ubertool list convert 'a,b,c' --from comma --to newline\n  ubertool list convert ' a , b , a ' --from comma --to comma --trim --dedupe --sort")]
+    #[command(
+        long_about = "Convert a list between separator styles.\n\nSeparators: comma, newline, space, tab, semicolon, pipe.\n\nExamples:\n  ubertool list convert 'a,b,c' --from comma --to newline\n  ubertool list convert ' a , b , a ' --from comma --to comma --trim --dedupe --sort"
+    )]
     Convert(ConvertArgs),
 }
 
@@ -81,7 +83,10 @@ fn run(args: ConvertArgs, out: &Out) -> Result<(), CliError> {
         is_stdin_tty(),
     )?;
     let raw = input.as_str()?;
-    let mut items: Vec<String> = raw.split(args.from.as_str()).map(|s| s.to_string()).collect();
+    let mut items: Vec<String> = raw
+        .split(args.from.as_str())
+        .map(|s| s.to_string())
+        .collect();
     if args.trim {
         items = items.iter().map(|s| s.trim().to_string()).collect();
     }

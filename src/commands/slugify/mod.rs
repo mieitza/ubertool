@@ -19,7 +19,9 @@ pub struct SlugifyArgs {
 #[derive(Debug, Subcommand)]
 pub enum Verb {
     /// Generate a URL-safe slug.
-    #[command(long_about = "Generate a URL-safe slug from text. Unicode is transliterated to ASCII, non-alphanumeric characters become hyphens, runs of hyphens collapse.\n\nExamples:\n  ubertool slugify generate \"Hello, World!\"\n  echo -n \"Café Résumé\" | ubertool slugify generate --json")]
+    #[command(
+        long_about = "Generate a URL-safe slug from text. Unicode is transliterated to ASCII, non-alphanumeric characters become hyphens, runs of hyphens collapse.\n\nExamples:\n  ubertool slugify generate \"Hello, World!\"\n  echo -n \"Café Résumé\" | ubertool slugify generate --json"
+    )]
     Generate(GenerateArgs),
 }
 
@@ -48,5 +50,7 @@ fn run(args: GenerateArgs, out: &Out) -> Result<(), CliError> {
         is_stdin_tty(),
     )?;
     let s = input.as_str()?.trim_end_matches(['\r', '\n']);
-    out.emit_value(&Out0 { slug: slug::slugify(s) })
+    out.emit_value(&Out0 {
+        slug: slug::slugify(s),
+    })
 }

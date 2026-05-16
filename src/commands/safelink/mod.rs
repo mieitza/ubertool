@@ -20,7 +20,9 @@ pub struct SafelinkArgs {
 #[derive(Debug, Subcommand)]
 pub enum Verb {
     /// Unwrap a wrapped URL (Outlook safelink, Google redirect, etc.).
-    #[command(long_about = "Unwrap a wrapped URL. Checks `?url=...`, `?q=...`, `?u=...` query parameters in order. If none match, returns the original URL unchanged.\n\nExamples:\n  ubertool safelink decode 'https://safelinks.protection.outlook.com/?url=https%3A%2F%2Fexample.com'\n  ubertool safelink decode --in ./url.txt --json")]
+    #[command(
+        long_about = "Unwrap a wrapped URL. Checks `?url=...`, `?q=...`, `?u=...` query parameters in order. If none match, returns the original URL unchanged.\n\nExamples:\n  ubertool safelink decode 'https://safelinks.protection.outlook.com/?url=https%3A%2F%2Fexample.com'\n  ubertool safelink decode --in ./url.txt --json"
+    )]
     Decode(RunArgs),
 }
 

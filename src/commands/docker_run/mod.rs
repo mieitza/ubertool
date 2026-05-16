@@ -19,7 +19,10 @@ pub struct DockerRunArgs {
 #[derive(Debug, Subcommand)]
 pub enum Verb {
     /// Convert a `docker run` command to a docker-compose service entry.
-    #[command(name = "to-compose", long_about = "Convert a `docker run` command to a docker-compose service entry.\n\nSupported flags: --name, -p/--publish, -v/--volume, -e/--env, --restart, --network. Other flags are ignored in this build.\n\nExamples:\n  ubertool docker-run to-compose 'docker run --name web -p 8080:80 nginx'\n  ubertool docker-run to-compose --in ./cmd.txt --json\n\nExit codes:\n  3   malformed docker-run command (e.g., missing image)")]
+    #[command(
+        name = "to-compose",
+        long_about = "Convert a `docker run` command to a docker-compose service entry.\n\nSupported flags: --name, -p/--publish, -v/--volume, -e/--env, --restart, --network. Other flags are ignored in this build.\n\nExamples:\n  ubertool docker-run to-compose 'docker run --name web -p 8080:80 nginx'\n  ubertool docker-run to-compose --in ./cmd.txt --json\n\nExit codes:\n  3   malformed docker-run command (e.g., missing image)"
+    )]
     ToCompose(RunArgs),
 }
 

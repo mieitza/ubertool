@@ -5,7 +5,12 @@ use predicates::prelude::*;
 fn xml_to_json_simple_element() {
     let out = Command::cargo_bin("ubertool")
         .unwrap()
-        .args(["--json", "xml", "to-json", "<root><name>alice</name><age>30</age></root>"])
+        .args([
+            "--json",
+            "xml",
+            "to-json",
+            "<root><name>alice</name><age>30</age></root>",
+        ])
         .assert()
         .success()
         .get_output()
@@ -22,7 +27,12 @@ fn xml_to_json_simple_element() {
 fn xml_to_json_attributes() {
     let out = Command::cargo_bin("ubertool")
         .unwrap()
-        .args(["--json", "xml", "to-json", r#"<user id="42" role="admin">alice</user>"#])
+        .args([
+            "--json",
+            "xml",
+            "to-json",
+            r#"<user id="42" role="admin">alice</user>"#,
+        ])
         .assert()
         .success()
         .get_output()
@@ -58,7 +68,10 @@ fn xml_format_pretty_prints() {
         .stdout
         .clone();
     let s = String::from_utf8(out).unwrap();
-    assert!(s.contains('\n'), "format output should contain newlines: {s}");
+    assert!(
+        s.contains('\n'),
+        "format output should contain newlines: {s}"
+    );
     assert!(s.contains("<a>1</a>"));
 }
 

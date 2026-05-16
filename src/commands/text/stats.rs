@@ -26,5 +26,10 @@ pub fn run(args: RunArgs, out: &Out) -> Result<(), CliError> {
     let chars = s.chars().count();
     let words = s.split_whitespace().count();
     let lines = if s.is_empty() { 0 } else { s.lines().count() };
-    out.emit_value(&Out0 { chars, words, lines, bytes })
+    out.emit_value(&Out0 {
+        chars,
+        words,
+        lines,
+        bytes,
+    })
 }

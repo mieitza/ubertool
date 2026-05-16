@@ -33,8 +33,13 @@ fn parse_roman(s: &str) -> Option<u32> {
     }
     let val = |c: char| -> Option<u32> {
         match c {
-            'I' => Some(1), 'V' => Some(5), 'X' => Some(10),
-            'L' => Some(50), 'C' => Some(100), 'D' => Some(500), 'M' => Some(1000),
+            'I' => Some(1),
+            'V' => Some(5),
+            'X' => Some(10),
+            'L' => Some(50),
+            'C' => Some(100),
+            'D' => Some(500),
+            'M' => Some(1000),
             _ => None,
         }
     };

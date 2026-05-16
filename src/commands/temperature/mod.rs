@@ -15,7 +15,9 @@ pub struct TemperatureArgs {
 #[derive(Debug, Subcommand)]
 pub enum Verb {
     /// Convert between temperature units (celsius/fahrenheit/kelvin).
-    #[command(long_about = "Convert between temperature units.\n\nExamples:\n  ubertool temperature convert 100 --from celsius --to fahrenheit\n  ubertool temperature convert 32 --from fahrenheit --to kelvin --json")]
+    #[command(
+        long_about = "Convert between temperature units.\n\nExamples:\n  ubertool temperature convert 100 --from celsius --to fahrenheit\n  ubertool temperature convert 32 --from fahrenheit --to kelvin --json"
+    )]
     Convert(ConvertArgs),
 }
 

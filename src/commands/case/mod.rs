@@ -20,7 +20,9 @@ pub struct CaseArgs {
 #[derive(Debug, Subcommand)]
 pub enum Verb {
     /// Convert a string between case styles.
-    #[command(long_about = "Convert a string between case styles.\n\nExamples:\n  ubertool case convert \"hello world\" --style snake\n  ubertool case convert \"helloWorld\" --style kebab\n  ubertool case convert \"my var\" --style screaming-snake --json")]
+    #[command(
+        long_about = "Convert a string between case styles.\n\nExamples:\n  ubertool case convert \"hello world\" --style snake\n  ubertool case convert \"helloWorld\" --style kebab\n  ubertool case convert \"my var\" --style screaming-snake --json"
+    )]
     Convert(ConvertArgs),
 }
 
@@ -75,5 +77,7 @@ fn run(args: ConvertArgs, out: &Out) -> Result<(), CliError> {
         Style::Lower => Case::Lower,
         Style::Title => Case::Title,
     };
-    out.emit_value(&Out0 { result: s.to_case(case) })
+    out.emit_value(&Out0 {
+        result: s.to_case(case),
+    })
 }

@@ -20,10 +20,9 @@ pub fn run(args: RunArgs, out: &Out) -> Result<(), CliError> {
     )?;
     let s = input.as_str()?;
     const LETTERS: [&str; 26] = [
-        "Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot", "Golf", "Hotel",
-        "India", "Juliet", "Kilo", "Lima", "Mike", "November", "Oscar", "Papa",
-        "Quebec", "Romeo", "Sierra", "Tango", "Uniform", "Victor", "Whiskey",
-        "X-ray", "Yankee", "Zulu",
+        "Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot", "Golf", "Hotel", "India",
+        "Juliet", "Kilo", "Lima", "Mike", "November", "Oscar", "Papa", "Quebec", "Romeo", "Sierra",
+        "Tango", "Uniform", "Victor", "Whiskey", "X-ray", "Yankee", "Zulu",
     ];
     const DIGITS: [&str; 10] = [
         "Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine",
@@ -42,5 +41,7 @@ pub fn run(args: RunArgs, out: &Out) -> Result<(), CliError> {
             }
         })
         .collect();
-    out.emit_value(&Out0 { nato: words.join(" ") })
+    out.emit_value(&Out0 {
+        nato: words.join(" "),
+    })
 }

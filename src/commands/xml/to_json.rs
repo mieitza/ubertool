@@ -23,7 +23,10 @@ pub fn run(args: RunArgs, out: &Out) -> Result<(), CliError> {
     )?;
     let value = parse_xml_to_value(input.as_str()?)?;
     let json = serde_json::to_string(&value).map_err(|e| {
-        CliError::new(ErrorCode::Internal, format!("json serialization failed: {e}"))
+        CliError::new(
+            ErrorCode::Internal,
+            format!("json serialization failed: {e}"),
+        )
     })?;
     out.emit_value(&Out0 { json })
 }
@@ -59,11 +62,10 @@ fn parse_xml_to_value(xml: &str) -> Result<Value, CliError> {
     loop {
         match reader.read_event_into(&mut buf) {
             Err(e) => {
-                return Err(CliError::new(
-                    ErrorCode::InvalidXml,
-                    format!("invalid XML: {e}"),
-                )
-                .with_hint("ensure the input is well-formed XML"));
+                return Err(
+                    CliError::new(ErrorCode::InvalidXml, format!("invalid XML: {e}"))
+                        .with_hint("ensure the input is well-formed XML"),
+                );
             }
             Ok(Event::Eof) => break,
             Ok(Event::Start(e)) => {
@@ -94,10 +96,7 @@ fn parse_xml_to_value(xml: &str) -> Result<Value, CliError> {
             }
             Ok(Event::Text(t)) => {
                 if let Some(top) = stack.last_mut() {
-                    let s = t
-                        .unescape()
-                        .map(|c| c.into_owned())
-                        .unwrap_or_default();
+                    let s = t.unescape().map(|c| c.into_owned()).unwrap_or_default();
                     if !s.is_empty() {
                         top.text.push_str(&s);
                     }

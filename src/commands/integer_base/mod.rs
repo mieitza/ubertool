@@ -15,7 +15,9 @@ pub struct IntegerBaseArgs {
 #[derive(Debug, Subcommand)]
 pub enum Verb {
     /// Convert an integer between bases (2-36).
-    #[command(long_about = "Convert an integer between bases (2-36).\n\nExamples:\n  ubertool integer-base convert 255 --from 10 --to 16\n  ubertool integer-base convert ff --from 16 --to 2\n\nExit codes specific to this command:\n  2   base out of range (must be 2-36)\n  3   value contains digits invalid for the source base (invalid_integer_base)")]
+    #[command(
+        long_about = "Convert an integer between bases (2-36).\n\nExamples:\n  ubertool integer-base convert 255 --from 10 --to 16\n  ubertool integer-base convert ff --from 16 --to 2\n\nExit codes specific to this command:\n  2   base out of range (must be 2-36)\n  3   value contains digits invalid for the source base (invalid_integer_base)"
+    )]
     Convert(ConvertArgs),
 }
 
