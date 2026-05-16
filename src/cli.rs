@@ -61,6 +61,8 @@ pub enum Noun {
     Base64(crate::commands::base64::Base64Args),
     /// Email address normalization and validation.
     Email(crate::commands::email::EmailArgs),
+    /// IBAN validation (mod-97 check digits).
+    Iban(crate::commands::iban::IbanArgs),
     /// HTTP Basic auth header encoding/decoding.
     #[command(name = "basic-auth")]
     BasicAuth(crate::commands::basic_auth::BasicAuthArgs),
