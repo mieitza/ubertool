@@ -23,6 +23,7 @@ pub mod markdown;
 pub mod otp;
 pub mod math;
 pub mod password;
+pub mod pdf;
 pub mod percentage;
 pub mod roman;
 pub mod rsa;

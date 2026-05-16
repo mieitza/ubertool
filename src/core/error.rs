@@ -26,6 +26,7 @@ pub enum ErrorCode {
     InvalidUtf8,
     InvalidBinary,
     InvalidCodepoint,
+    InvalidPdf,
     FileNotFound,
     PermissionDenied,
     IoError,
@@ -53,7 +54,7 @@ impl ErrorCode {
             InvalidJson | InvalidYaml | InvalidToml | InvalidXml | InvalidRegex | InvalidIban
             | InvalidPhone | InvalidJwt | InvalidBase64 | InvalidBcrypt | InvalidCsv
             | InvalidIntegerBase | InvalidRoman | InvalidUtf8 | InvalidBinary
-            | InvalidCodepoint | InvalidDockerRun | InvalidIp | InvalidMac | InvalidMath
+            | InvalidCodepoint | InvalidPdf | InvalidDockerRun | InvalidIp | InvalidMac | InvalidMath
             | InvalidDate | InvalidCron | InvalidChmod | InvalidCipher => ExitCode::Invalid,
             FileNotFound | PermissionDenied | IoError => ExitCode::Io,
             SignatureMismatch | DecryptFailed | PdfSignatureInvalid => ExitCode::Crypto,
@@ -82,6 +83,7 @@ impl ErrorCode {
             InvalidUtf8 => "invalid_utf8",
             InvalidBinary => "invalid_binary",
             InvalidCodepoint => "invalid_codepoint",
+            InvalidPdf => "invalid_pdf",
             FileNotFound => "file_not_found",
             PermissionDenied => "permission_denied",
             IoError => "io_error",
@@ -178,6 +180,7 @@ mod tests {
         assert_eq!(ErrorCode::FileNotFound.exit(), ExitCode::Io);
         assert_eq!(ErrorCode::SignatureMismatch.exit(), ExitCode::Crypto);
         assert_eq!(ErrorCode::AlgoNotSupported.exit(), ExitCode::Unsupported);
+        assert_eq!(ErrorCode::InvalidPdf.exit(), ExitCode::Invalid);
         assert_eq!(ErrorCode::InvalidDockerRun.exit(), ExitCode::Invalid);
         assert_eq!(ErrorCode::InvalidMac.exit(), ExitCode::Invalid);
         assert_eq!(ErrorCode::InvalidMath.exit(), ExitCode::Invalid);
@@ -246,6 +249,7 @@ mod tests {
             ErrorCode::InvalidUtf8,
             ErrorCode::InvalidBinary,
             ErrorCode::InvalidCodepoint,
+            ErrorCode::InvalidPdf,
             ErrorCode::FileNotFound,
             ErrorCode::PermissionDenied,
             ErrorCode::IoError,

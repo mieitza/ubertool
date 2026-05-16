@@ -49,6 +49,7 @@ pub fn run() -> ProcExitCode {
         cli::Noun::Mac(a) => commands::mac::dispatch(a, &out),
         cli::Noun::Ipv6Ula(a) => commands::ipv6_ula::dispatch(a, &out),
         cli::Noun::Math(a) => commands::math::dispatch(a, &out),
+        cli::Noun::Pdf(a) => commands::pdf::dispatch(a, &out),
         cli::Noun::Percentage(a) => commands::percentage::dispatch(a, &out),
         cli::Noun::Eta(a) => commands::eta::dispatch(a, &out),
         cli::Noun::Date(a) => commands::date::dispatch(a, &out),

@@ -131,6 +131,8 @@ pub enum Noun {
     Ipv6Ula(crate::commands::ipv6_ula::Ipv6UlaArgs),
     /// Math expression evaluator (evalexpr).
     Math(crate::commands::math::MathArgs),
+    /// PDF utilities (signature info extraction).
+    Pdf(crate::commands::pdf::PdfArgs),
     /// Percentage calculations (of / change / of-total).
     Percentage(crate::commands::percentage::PercentageArgs),
     /// ETA calculator from progress (done / total / elapsed).
