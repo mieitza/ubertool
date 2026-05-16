@@ -1,6 +1,7 @@
 pub mod base64;
 pub mod basic_auth;
 pub mod bcrypt;
+pub mod case;
 pub mod csv;
 pub mod hash;
 pub mod hmac;
@@ -13,5 +14,6 @@ pub mod toml;
 pub mod ulid;
 pub mod url;
 pub mod uuid;
+pub mod slugify;
 pub mod yaml;
 pub mod xml;

@@ -64,6 +64,8 @@ pub enum Noun {
     BasicAuth(crate::commands::basic_auth::BasicAuthArgs),
     /// Bcrypt password hashing and verification.
     Bcrypt(crate::commands::bcrypt::BcryptArgs),
+    /// String case conversion (snake/kebab/camel/pascal/etc.).
+    Case(crate::commands::case::CaseArgs),
     /// CSV to JSON conversion.
     Csv(crate::commands::csv::CsvArgs),
     /// Cryptographic hash functions (md5, sha1, sha224, sha256, sha384, sha512, sha3-256, sha3-512).
@@ -92,4 +94,6 @@ pub enum Noun {
     Yaml(crate::commands::yaml::YamlArgs),
     /// XML conversion: to-json / format.
     Xml(crate::commands::xml::XmlArgs),
+    /// URL slug generation.
+    Slugify(crate::commands::slugify::SlugifyArgs),
 }
