@@ -42,6 +42,7 @@ Commands:
   xml           XML conversion: to-json / format
   integer-base  Integer base conversion (bases 2-36)
   list          List separator conversion (comma/newline/space/tab/semicolon/pipe)
+  roman         Roman numeral conversion (to-num / from-num, range 1-3999)
   slugify       URL slug generation
   help          Print this message or the help of the given subcommand(s)
 

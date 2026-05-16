@@ -34,6 +34,7 @@ pub fn run() -> ProcExitCode {
         cli::Noun::Xml(a) => commands::xml::dispatch(a, &out),
         cli::Noun::IntegerBase(a) => commands::integer_base::dispatch(a, &out),
         cli::Noun::List(a) => commands::list::dispatch(a, &out),
+        cli::Noun::Roman(a) => commands::roman::dispatch(a, &out),
         cli::Noun::Slugify(a) => commands::slugify::dispatch(a, &out),
     };
 

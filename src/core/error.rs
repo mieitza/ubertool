@@ -22,6 +22,7 @@ pub enum ErrorCode {
     InvalidBcrypt,
     InvalidCsv,
     InvalidIntegerBase,
+    InvalidRoman,
     InvalidUtf8,
     FileNotFound,
     PermissionDenied,
@@ -41,7 +42,7 @@ impl ErrorCode {
             UsageError | BinaryToTtyRefused => ExitCode::Usage,
             InvalidJson | InvalidYaml | InvalidToml | InvalidXml | InvalidRegex | InvalidIban
             | InvalidPhone | InvalidJwt | InvalidBase64 | InvalidBcrypt | InvalidCsv
-            | InvalidIntegerBase | InvalidUtf8 => {
+            | InvalidIntegerBase | InvalidRoman | InvalidUtf8 => {
                 ExitCode::Invalid
             }
             FileNotFound | PermissionDenied | IoError => ExitCode::Io,
@@ -67,6 +68,7 @@ impl ErrorCode {
             InvalidBcrypt => "invalid_bcrypt",
             InvalidCsv => "invalid_csv",
             InvalidIntegerBase => "invalid_integer_base",
+            InvalidRoman => "invalid_roman",
             InvalidUtf8 => "invalid_utf8",
             FileNotFound => "file_not_found",
             PermissionDenied => "permission_denied",
@@ -211,6 +213,7 @@ mod tests {
             ErrorCode::InvalidBcrypt,
             ErrorCode::InvalidCsv,
             ErrorCode::InvalidIntegerBase,
+            ErrorCode::InvalidRoman,
             ErrorCode::InvalidUtf8,
             ErrorCode::FileNotFound,
             ErrorCode::PermissionDenied,

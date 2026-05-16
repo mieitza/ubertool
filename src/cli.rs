@@ -99,6 +99,8 @@ pub enum Noun {
     IntegerBase(crate::commands::integer_base::IntegerBaseArgs),
     /// List separator conversion (comma/newline/space/tab/semicolon/pipe).
     List(crate::commands::list::ListArgs),
+    /// Roman numeral conversion (to-num / from-num, range 1-3999).
+    Roman(crate::commands::roman::RomanArgs),
     /// URL slug generation.
     Slugify(crate::commands::slugify::SlugifyArgs),
 }
