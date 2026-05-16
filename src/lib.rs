@@ -32,6 +32,8 @@ pub fn run() -> ProcExitCode {
         cli::Noun::Uuid(a) => commands::uuid::dispatch(a, &out),
         cli::Noun::Yaml(a) => commands::yaml::dispatch(a, &out),
         cli::Noun::Xml(a) => commands::xml::dispatch(a, &out),
+        cli::Noun::IntegerBase(a) => commands::integer_base::dispatch(a, &out),
+        cli::Noun::List(a) => commands::list::dispatch(a, &out),
         cli::Noun::Slugify(a) => commands::slugify::dispatch(a, &out),
     };
 

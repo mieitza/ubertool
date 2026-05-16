@@ -94,6 +94,11 @@ pub enum Noun {
     Yaml(crate::commands::yaml::YamlArgs),
     /// XML conversion: to-json / format.
     Xml(crate::commands::xml::XmlArgs),
+    /// Integer base conversion (bases 2-36).
+    #[command(name = "integer-base")]
+    IntegerBase(crate::commands::integer_base::IntegerBaseArgs),
+    /// List separator conversion (comma/newline/space/tab/semicolon/pipe).
+    List(crate::commands::list::ListArgs),
     /// URL slug generation.
     Slugify(crate::commands::slugify::SlugifyArgs),
 }
