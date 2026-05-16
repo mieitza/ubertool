@@ -45,6 +45,7 @@ pub fn run() -> ProcExitCode {
         cli::Noun::Safelink(a) => commands::safelink::dispatch(a, &out),
         cli::Noun::Mac(a) => commands::mac::dispatch(a, &out),
         cli::Noun::Ipv6Ula(a) => commands::ipv6_ula::dispatch(a, &out),
+        cli::Noun::Math(a) => commands::math::dispatch(a, &out),
     };
 
     match result {

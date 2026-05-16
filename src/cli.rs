@@ -123,4 +123,6 @@ pub enum Noun {
     /// RFC4193 Unique Local IPv6 prefix generator.
     #[command(name = "ipv6-ula")]
     Ipv6Ula(crate::commands::ipv6_ula::Ipv6UlaArgs),
+    /// Math expression evaluator (evalexpr).
+    Math(crate::commands::math::MathArgs),
 }

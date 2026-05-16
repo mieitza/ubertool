@@ -1,4 +1,5 @@
 pub mod base64;
+pub mod math;
 pub mod basic_auth;
 pub mod bcrypt;
 pub mod case;

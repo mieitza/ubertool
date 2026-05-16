@@ -1,6 +1,5 @@
 ---
 source: tests/snapshots.rs
-assertion_line: 18
 expression: s
 ---
 ubertool — agent-friendly developer utilities.
@@ -54,6 +53,7 @@ Commands:
   safelink      Unwrap Outlook/Google/generic URL wrappers
   mac           MAC address utilities (generate random, look up vendor OUI)
   ipv6-ula      RFC4193 Unique Local IPv6 prefix generator
+  math          Math expression evaluator (evalexpr)
   help          Print this message or the help of the given subcommand(s)
 
 Options:
