@@ -114,4 +114,6 @@ pub enum Noun {
     /// Convert `docker run` command to docker-compose YAML.
     #[command(name = "docker-run")]
     DockerRun(crate::commands::docker_run::DockerRunArgs),
+    /// Unwrap Outlook/Google/generic URL wrappers.
+    Safelink(crate::commands::safelink::SafelinkArgs),
 }

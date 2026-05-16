@@ -41,6 +41,7 @@ pub fn run() -> ProcExitCode {
         cli::Noun::Temperature(a) => commands::temperature::dispatch(a, &out),
         cli::Noun::Text(a) => commands::text::dispatch(a, &out),
         cli::Noun::DockerRun(a) => commands::docker_run::dispatch(a, &out),
+        cli::Noun::Safelink(a) => commands::safelink::dispatch(a, &out),
     };
 
     match result {
