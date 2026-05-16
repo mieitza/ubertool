@@ -44,6 +44,7 @@ Commands:
   list          List separator conversion (comma/newline/space/tab/semicolon/pipe)
   roman         Roman numeral conversion (to-num / from-num, range 1-3999)
   slugify       URL slug generation
+  temperature   Temperature unit conversion (celsius / fahrenheit / kelvin)
   help          Print this message or the help of the given subcommand(s)
 
 Options:

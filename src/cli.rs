@@ -103,4 +103,6 @@ pub enum Noun {
     Roman(crate::commands::roman::RomanArgs),
     /// URL slug generation.
     Slugify(crate::commands::slugify::SlugifyArgs),
+    /// Temperature unit conversion (celsius / fahrenheit / kelvin).
+    Temperature(crate::commands::temperature::TemperatureArgs),
 }
