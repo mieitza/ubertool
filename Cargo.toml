@@ -43,6 +43,14 @@ html-escape = "0.2"
 # M1 conversion
 serde_yaml = "0.9"
 toml = "0.8"
+# M2 conversion
+quick-xml = { version = "0.31", features = ["serialize"] }
+csv = "1"
+convert_case = "0.6"
+slug = "0.1"
+sqlformat = "0.2"
+pulldown-cmark = "0.10"
+similar = "2"
 
 [dev-dependencies]
 assert_cmd = "2"
