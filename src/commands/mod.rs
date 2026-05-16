@@ -1,4 +1,5 @@
 pub mod base64;
+pub mod date;
 pub mod eta;
 pub mod math;
 pub mod percentage;

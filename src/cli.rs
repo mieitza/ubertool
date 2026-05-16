@@ -129,4 +129,6 @@ pub enum Noun {
     Percentage(crate::commands::percentage::PercentageArgs),
     /// ETA calculator from progress (done / total / elapsed).
     Eta(crate::commands::eta::EtaArgs),
+    /// Date/time format conversion (unix / ISO 8601 / RFC 2822).
+    Date(crate::commands::date::DateArgs),
 }

@@ -38,6 +38,9 @@ pub enum ErrorCode {
     InvalidIp,
     InvalidMac,
     InvalidMath,
+    InvalidDate,
+    InvalidCron,
+    InvalidChmod,
     Internal,
 }
 
@@ -49,7 +52,8 @@ impl ErrorCode {
             InvalidJson | InvalidYaml | InvalidToml | InvalidXml | InvalidRegex | InvalidIban
             | InvalidPhone | InvalidJwt | InvalidBase64 | InvalidBcrypt | InvalidCsv
             | InvalidIntegerBase | InvalidRoman | InvalidUtf8 | InvalidBinary
-            | InvalidCodepoint | InvalidDockerRun | InvalidIp | InvalidMac | InvalidMath => ExitCode::Invalid,
+            | InvalidCodepoint | InvalidDockerRun | InvalidIp | InvalidMac | InvalidMath
+            | InvalidDate | InvalidCron | InvalidChmod => ExitCode::Invalid,
             FileNotFound | PermissionDenied | IoError => ExitCode::Io,
             SignatureMismatch | DecryptFailed | PdfSignatureInvalid => ExitCode::Crypto,
             AlgoNotSupported => ExitCode::Unsupported,
@@ -89,6 +93,9 @@ impl ErrorCode {
             InvalidIp => "invalid_ip",
             InvalidMac => "invalid_mac",
             InvalidMath => "invalid_math",
+            InvalidDate => "invalid_date",
+            InvalidCron => "invalid_cron",
+            InvalidChmod => "invalid_chmod",
             Internal => "internal",
         }
     }
@@ -172,6 +179,9 @@ mod tests {
         assert_eq!(ErrorCode::InvalidDockerRun.exit(), ExitCode::Invalid);
         assert_eq!(ErrorCode::InvalidMac.exit(), ExitCode::Invalid);
         assert_eq!(ErrorCode::InvalidMath.exit(), ExitCode::Invalid);
+        assert_eq!(ErrorCode::InvalidDate.exit(), ExitCode::Invalid);
+        assert_eq!(ErrorCode::InvalidCron.exit(), ExitCode::Invalid);
+        assert_eq!(ErrorCode::InvalidChmod.exit(), ExitCode::Invalid);
         assert_eq!(ErrorCode::Internal.exit(), ExitCode::Generic);
         assert_eq!(ErrorCode::BinaryToTtyRefused.exit(), ExitCode::Usage);
     }
@@ -245,6 +255,9 @@ mod tests {
             ErrorCode::InvalidIp,
             ErrorCode::InvalidMac,
             ErrorCode::InvalidMath,
+            ErrorCode::InvalidDate,
+            ErrorCode::InvalidCron,
+            ErrorCode::InvalidChmod,
             ErrorCode::Internal,
         ];
         for code in cases {
