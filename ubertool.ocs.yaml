@@ -978,3 +978,585 @@ commands:
         summary: Output bare value only (pipe-friendly)
         type: boolean
         default: false
+
+  ubertool case {command} [flags]:
+    group: true
+    summary: Case-style conversion (snake, camel, kebab, etc.)
+
+  ubertool case convert [input] [flags]:
+    summary: Convert input string to the specified case style
+    arguments:
+      - name: input
+        summary: Literal string to convert (omit to read from --in or stdin)
+        required: false
+        type: string
+    flags:
+      - name: in
+        summary: Read input from file
+        type: string
+      - name: style
+        summary: Target case style
+        type: string
+        required: true
+        choices:
+          - value: snake
+          - value: kebab
+          - value: camel
+          - value: pascal
+          - value: screaming-snake
+          - value: upper
+          - value: lower
+          - value: title
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool csv {command} [flags]:
+    group: true
+    summary: CSV utilities
+
+  ubertool csv to-json [input] [flags]:
+    summary: Convert CSV to JSON
+    arguments:
+      - name: input
+        summary: Literal CSV to convert (omit to read from --in or stdin)
+        required: false
+        type: string
+    flags:
+      - name: in
+        summary: Read input from file
+        type: string
+      - name: delimiter
+        summary: "Field delimiter character (default: comma)"
+        type: string
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool docker-run {command} [flags]:
+    group: true
+    summary: Docker run command utilities
+
+  ubertool docker-run to-compose [input] [flags]:
+    summary: Convert a docker run command to a Docker Compose service
+    arguments:
+      - name: input
+        summary: Literal docker run command (omit to read from --in or stdin)
+        required: false
+        type: string
+    flags:
+      - name: in
+        summary: Read input from file
+        type: string
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool integer-base {command} [flags]:
+    group: true
+    summary: Integer base conversion (bin, oct, dec, hex, etc.)
+
+  ubertool integer-base convert <input> [flags]:
+    summary: Convert an integer from one base to another
+    arguments:
+      - name: input
+        summary: Integer value to convert
+        required: true
+        type: string
+    flags:
+      - name: from
+        summary: Source base (radix)
+        type: integer
+        required: true
+      - name: to
+        summary: Target base (radix)
+        type: integer
+        required: true
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool list {command} [flags]:
+    group: true
+    summary: List format conversion and manipulation
+
+  ubertool list convert [input] [flags]:
+    summary: Convert a list from one delimiter format to another
+    arguments:
+      - name: input
+        summary: Literal list to convert (omit to read from --in or stdin)
+        required: false
+        type: string
+    flags:
+      - name: in
+        summary: Read input from file
+        type: string
+      - name: from
+        summary: Source delimiter format
+        type: string
+        required: true
+        choices:
+          - value: comma
+          - value: newline
+          - value: space
+          - value: tab
+          - value: semicolon
+          - value: pipe
+      - name: to
+        summary: Target delimiter format
+        type: string
+        required: true
+        choices:
+          - value: comma
+          - value: newline
+          - value: space
+          - value: tab
+          - value: semicolon
+          - value: pipe
+      - name: trim
+        summary: Trim whitespace from each item
+        type: boolean
+        default: false
+      - name: dedupe
+        summary: Remove duplicate items
+        type: boolean
+        default: false
+      - name: sort
+        summary: Sort items alphabetically
+        type: boolean
+        default: false
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool markdown {command} [flags]:
+    group: true
+    summary: Markdown conversion utilities
+
+  ubertool markdown to-html [input] [flags]:
+    summary: Convert Markdown to HTML
+    arguments:
+      - name: input
+        summary: Literal Markdown to convert (omit to read from --in or stdin)
+        required: false
+        type: string
+    flags:
+      - name: in
+        summary: Read input from file
+        type: string
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool roman {command} [flags]:
+    group: true
+    summary: Roman numeral conversion
+
+  ubertool roman to-num <input> [flags]:
+    summary: Convert a Roman numeral to its decimal integer value
+    arguments:
+      - name: input
+        summary: Roman numeral string to convert
+        required: true
+        type: string
+    flags:
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool roman from-num <input> [flags]:
+    summary: Convert a decimal integer to its Roman numeral representation
+    arguments:
+      - name: input
+        summary: Integer to convert to Roman numeral
+        required: true
+        type: string
+    flags:
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool safelink {command} [flags]:
+    group: true
+    summary: Safelink URL decoding
+
+  ubertool safelink decode [input] [flags]:
+    summary: Decode a safelink-wrapped URL to the original URL
+    arguments:
+      - name: input
+        summary: Safelink URL to decode (omit to read from --in or stdin)
+        required: false
+        type: string
+    flags:
+      - name: in
+        summary: Read input from file
+        type: string
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool slugify {command} [flags]:
+    group: true
+    summary: URL slug generation
+
+  ubertool slugify generate [input] [flags]:
+    summary: Generate a URL-friendly slug from the input string
+    arguments:
+      - name: input
+        summary: Literal string to slugify (omit to read from --in or stdin)
+        required: false
+        type: string
+    flags:
+      - name: in
+        summary: Read input from file
+        type: string
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool sql {command} [flags]:
+    group: true
+    summary: SQL formatting utilities
+
+  ubertool sql format [input] [flags]:
+    summary: Format a SQL query for readability
+    arguments:
+      - name: input
+        summary: Literal SQL to format (omit to read from --in or stdin)
+        required: false
+        type: string
+    flags:
+      - name: in
+        summary: Read input from file
+        type: string
+      - name: uppercase
+        summary: Uppercase SQL keywords
+        type: boolean
+        default: false
+      - name: indent
+        summary: Number of spaces for indentation
+        type: integer
+        default: "2"
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool temperature {command} [flags]:
+    group: true
+    summary: Temperature unit conversion
+
+  ubertool temperature convert <input> [flags]:
+    summary: Convert a temperature value between units
+    arguments:
+      - name: input
+        summary: Temperature value to convert
+        required: true
+        type: string
+    flags:
+      - name: from
+        summary: Source temperature unit
+        type: string
+        required: true
+        choices:
+          - value: celsius
+          - value: fahrenheit
+          - value: kelvin
+      - name: to
+        summary: Target temperature unit
+        type: string
+        required: true
+        choices:
+          - value: celsius
+          - value: fahrenheit
+          - value: kelvin
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool text {command} [flags]:
+    group: true
+    summary: Text encoding, analysis, and transformation utilities
+
+  ubertool text to-binary [input] [flags]:
+    summary: Convert text to binary representation
+    arguments:
+      - name: input
+        summary: Literal text to convert (omit to read from --in or stdin)
+        required: false
+        type: string
+    flags:
+      - name: in
+        summary: Read input from file
+        type: string
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool text from-binary [input] [flags]:
+    summary: Convert binary representation back to text
+    arguments:
+      - name: input
+        summary: Literal binary string to convert (omit to read from --in or stdin)
+        required: false
+        type: string
+    flags:
+      - name: in
+        summary: Read input from file
+        type: string
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool text to-unicode [input] [flags]:
+    summary: Convert text to Unicode escape sequences
+    arguments:
+      - name: input
+        summary: Literal text to convert (omit to read from --in or stdin)
+        required: false
+        type: string
+    flags:
+      - name: in
+        summary: Read input from file
+        type: string
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool text from-unicode [input] [flags]:
+    summary: Decode Unicode escape sequences to text
+    arguments:
+      - name: input
+        summary: Literal Unicode escape sequence string (omit to read from --in or stdin)
+        required: false
+        type: string
+    flags:
+      - name: in
+        summary: Read input from file
+        type: string
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool text to-nato [input] [flags]:
+    summary: Convert text to NATO phonetic alphabet
+    arguments:
+      - name: input
+        summary: Literal text to convert (omit to read from --in or stdin)
+        required: false
+        type: string
+    flags:
+      - name: in
+        summary: Read input from file
+        type: string
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool text stats [input] [flags]:
+    summary: Display statistics about the input text
+    arguments:
+      - name: input
+        summary: Literal text to analyse (omit to read from --in or stdin)
+        required: false
+        type: string
+    flags:
+      - name: in
+        summary: Read input from file
+        type: string
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool text obfuscate [input] [flags]:
+    summary: Obfuscate text with look-alike characters
+    arguments:
+      - name: input
+        summary: Literal text to obfuscate (omit to read from --in or stdin)
+        required: false
+        type: string
+    flags:
+      - name: in
+        summary: Read input from file
+        type: string
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool text diff [flags]:
+    summary: Show a word-level diff between two text inputs
+    flags:
+      - name: from-file
+        summary: Read the first (original) text from file
+        type: string
+      - name: to-file
+        summary: Read the second (changed) text from file
+        type: string
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool xml {command} [flags]:
+    group: true
+    summary: XML conversion and formatting utilities
+
+  ubertool xml to-json [input] [flags]:
+    summary: Convert XML to JSON
+    arguments:
+      - name: input
+        summary: Literal XML to convert (omit to read from --in or stdin)
+        required: false
+        type: string
+    flags:
+      - name: in
+        summary: Read input from file
+        type: string
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool xml format [input] [flags]:
+    summary: Format (pretty-print) an XML document
+    arguments:
+      - name: input
+        summary: Literal XML to format (omit to read from --in or stdin)
+        required: false
+        type: string
+    flags:
+      - name: in
+        summary: Read input from file
+        type: string
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
