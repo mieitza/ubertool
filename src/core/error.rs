@@ -35,6 +35,7 @@ pub enum ErrorCode {
     PdfSignatureInvalid,
     AlgoNotSupported,
     InvalidDockerRun,
+    InvalidIp,
     Internal,
 }
 
@@ -46,7 +47,7 @@ impl ErrorCode {
             InvalidJson | InvalidYaml | InvalidToml | InvalidXml | InvalidRegex | InvalidIban
             | InvalidPhone | InvalidJwt | InvalidBase64 | InvalidBcrypt | InvalidCsv
             | InvalidIntegerBase | InvalidRoman | InvalidUtf8 | InvalidBinary
-            | InvalidCodepoint | InvalidDockerRun => ExitCode::Invalid,
+            | InvalidCodepoint | InvalidDockerRun | InvalidIp => ExitCode::Invalid,
             FileNotFound | PermissionDenied | IoError => ExitCode::Io,
             SignatureMismatch | DecryptFailed | PdfSignatureInvalid => ExitCode::Crypto,
             AlgoNotSupported => ExitCode::Unsupported,
@@ -83,6 +84,7 @@ impl ErrorCode {
             PdfSignatureInvalid => "pdf_signature_invalid",
             AlgoNotSupported => "algo_not_supported",
             InvalidDockerRun => "invalid_docker_run",
+            InvalidIp => "invalid_ip",
             Internal => "internal",
         }
     }
@@ -234,6 +236,7 @@ mod tests {
             ErrorCode::PdfSignatureInvalid,
             ErrorCode::AlgoNotSupported,
             ErrorCode::InvalidDockerRun,
+            ErrorCode::InvalidIp,
             ErrorCode::Internal,
         ];
         for code in cases {

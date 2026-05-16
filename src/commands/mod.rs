@@ -8,6 +8,7 @@ pub mod hash;
 pub mod hmac;
 pub mod html;
 pub mod integer_base;
+pub mod ipv4;
 pub mod json;
 pub mod jwt;
 pub mod list;

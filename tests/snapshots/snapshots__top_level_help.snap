@@ -43,6 +43,7 @@ Commands:
   yaml          YAML conversion: to-json / to-toml
   xml           XML conversion: to-json / format
   integer-base  Integer base conversion (bases 2-36)
+  ipv4          IPv4 utilities (parse, subnet, range-expand, to-ipv6)
   list          List separator conversion (comma/newline/space/tab/semicolon/pipe)
   roman         Roman numeral conversion (to-num / from-num, range 1-3999)
   slugify       URL slug generation

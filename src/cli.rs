@@ -99,6 +99,8 @@ pub enum Noun {
     /// Integer base conversion (bases 2-36).
     #[command(name = "integer-base")]
     IntegerBase(crate::commands::integer_base::IntegerBaseArgs),
+    /// IPv4 utilities (parse, subnet, range-expand, to-ipv6).
+    Ipv4(crate::commands::ipv4::Ipv4Args),
     /// List separator conversion (comma/newline/space/tab/semicolon/pipe).
     List(crate::commands::list::ListArgs),
     /// Roman numeral conversion (to-num / from-num, range 1-3999).
