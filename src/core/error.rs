@@ -15,6 +15,7 @@ pub enum ErrorCode {
     InvalidToml,
     InvalidXml,
     InvalidRegex,
+    InvalidEmail,
     InvalidIban,
     InvalidPhone,
     InvalidJwt,
@@ -52,7 +53,7 @@ impl ErrorCode {
         match self {
             UsageError | BinaryToTtyRefused => ExitCode::Usage,
             InvalidJson | InvalidYaml | InvalidToml | InvalidXml | InvalidRegex | InvalidIban
-            | InvalidPhone | InvalidJwt | InvalidBase64 | InvalidBcrypt | InvalidCsv
+            | InvalidEmail | InvalidPhone | InvalidJwt | InvalidBase64 | InvalidBcrypt | InvalidCsv
             | InvalidIntegerBase | InvalidRoman | InvalidUtf8 | InvalidBinary
             | InvalidCodepoint | InvalidPdf | InvalidDockerRun | InvalidIp | InvalidMac | InvalidMath
             | InvalidDate | InvalidCron | InvalidChmod | InvalidCipher => ExitCode::Invalid,
@@ -72,6 +73,7 @@ impl ErrorCode {
             InvalidToml => "invalid_toml",
             InvalidXml => "invalid_xml",
             InvalidRegex => "invalid_regex",
+            InvalidEmail => "invalid_email",
             InvalidIban => "invalid_iban",
             InvalidPhone => "invalid_phone",
             InvalidJwt => "invalid_jwt",
@@ -238,6 +240,7 @@ mod tests {
             ErrorCode::InvalidToml,
             ErrorCode::InvalidXml,
             ErrorCode::InvalidRegex,
+            ErrorCode::InvalidEmail,
             ErrorCode::InvalidIban,
             ErrorCode::InvalidPhone,
             ErrorCode::InvalidJwt,

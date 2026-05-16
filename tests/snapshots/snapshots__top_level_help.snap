@@ -23,6 +23,7 @@ Usage: ubertool [OPTIONS] <COMMAND>
 
 Commands:
   base64        Base64 encoding and decoding
+  email         Email address normalization and validation
   basic-auth    HTTP Basic auth header encoding/decoding
   bcrypt        Bcrypt password hashing and verification
   case          String case conversion (snake/kebab/camel/pascal/etc.)
