@@ -58,6 +58,7 @@ Commands:
   percentage    Percentage calculations (of / change / of-total)
   eta           ETA calculator from progress (done / total / elapsed)
   date          Date/time format conversion (unix / ISO 8601 / RFC 2822)
+  crontab       Crontab expression utilities (describe, next)
   help          Print this message or the help of the given subcommand(s)
 
 Options:

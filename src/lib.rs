@@ -49,6 +49,7 @@ pub fn run() -> ProcExitCode {
         cli::Noun::Percentage(a) => commands::percentage::dispatch(a, &out),
         cli::Noun::Eta(a) => commands::eta::dispatch(a, &out),
         cli::Noun::Date(a) => commands::date::dispatch(a, &out),
+        cli::Noun::Crontab(a) => commands::crontab::dispatch(a, &out),
     };
 
     match result {
