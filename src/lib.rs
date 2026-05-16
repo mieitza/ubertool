@@ -18,6 +18,7 @@ pub fn run() -> ProcExitCode {
         cli::Noun::BasicAuth(a) => commands::basic_auth::dispatch(a, &out),
         cli::Noun::Bcrypt(a) => commands::bcrypt::dispatch(a, &out),
         cli::Noun::Case(a) => commands::case::dispatch(a, &out),
+        cli::Noun::Cipher(a) => commands::cipher::dispatch(a, &out),
         cli::Noun::Csv(a) => commands::csv::dispatch(a, &out),
         cli::Noun::Hash(a) => commands::hash::dispatch(a, &out),
         cli::Noun::Html(a) => commands::html::dispatch(a, &out),

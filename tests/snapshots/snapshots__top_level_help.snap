@@ -1,6 +1,5 @@
 ---
 source: tests/snapshots.rs
-assertion_line: 18
 expression: s
 ---
 ubertool — agent-friendly developer utilities.
@@ -27,6 +26,7 @@ Commands:
   basic-auth    HTTP Basic auth header encoding/decoding
   bcrypt        Bcrypt password hashing and verification
   case          String case conversion (snake/kebab/camel/pascal/etc.)
+  cipher        Authenticated encryption and decryption (AES-256-GCM / ChaCha20-Poly1305 + Argon2id / PBKDF2)
   csv           CSV to JSON conversion
   hash          Cryptographic hash functions (md5, sha1, sha224, sha256, sha384, sha512, sha3-256, sha3-512)
   html          HTML entity encoding and decoding

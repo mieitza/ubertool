@@ -66,6 +66,8 @@ pub enum Noun {
     Bcrypt(crate::commands::bcrypt::BcryptArgs),
     /// String case conversion (snake/kebab/camel/pascal/etc.).
     Case(crate::commands::case::CaseArgs),
+    /// Authenticated encryption and decryption (AES-256-GCM / ChaCha20-Poly1305 + Argon2id / PBKDF2).
+    Cipher(crate::commands::cipher::CipherArgs),
     /// CSV to JSON conversion.
     Csv(crate::commands::csv::CsvArgs),
     /// Cryptographic hash functions (md5, sha1, sha224, sha256, sha384, sha512, sha3-256, sha3-512).

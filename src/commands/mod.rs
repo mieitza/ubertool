@@ -2,6 +2,7 @@ pub mod base64;
 pub mod basic_auth;
 pub mod bcrypt;
 pub mod case;
+pub mod cipher;
 pub mod chmod;
 pub mod crontab;
 pub mod csv;

@@ -41,6 +41,7 @@ pub enum ErrorCode {
     InvalidDate,
     InvalidCron,
     InvalidChmod,
+    InvalidCipher,
     Internal,
 }
 
@@ -53,7 +54,7 @@ impl ErrorCode {
             | InvalidPhone | InvalidJwt | InvalidBase64 | InvalidBcrypt | InvalidCsv
             | InvalidIntegerBase | InvalidRoman | InvalidUtf8 | InvalidBinary
             | InvalidCodepoint | InvalidDockerRun | InvalidIp | InvalidMac | InvalidMath
-            | InvalidDate | InvalidCron | InvalidChmod => ExitCode::Invalid,
+            | InvalidDate | InvalidCron | InvalidChmod | InvalidCipher => ExitCode::Invalid,
             FileNotFound | PermissionDenied | IoError => ExitCode::Io,
             SignatureMismatch | DecryptFailed | PdfSignatureInvalid => ExitCode::Crypto,
             AlgoNotSupported => ExitCode::Unsupported,
@@ -96,6 +97,7 @@ impl ErrorCode {
             InvalidDate => "invalid_date",
             InvalidCron => "invalid_cron",
             InvalidChmod => "invalid_chmod",
+            InvalidCipher => "invalid_cipher",
             Internal => "internal",
         }
     }
@@ -182,6 +184,7 @@ mod tests {
         assert_eq!(ErrorCode::InvalidDate.exit(), ExitCode::Invalid);
         assert_eq!(ErrorCode::InvalidCron.exit(), ExitCode::Invalid);
         assert_eq!(ErrorCode::InvalidChmod.exit(), ExitCode::Invalid);
+        assert_eq!(ErrorCode::InvalidCipher.exit(), ExitCode::Invalid);
         assert_eq!(ErrorCode::Internal.exit(), ExitCode::Generic);
         assert_eq!(ErrorCode::BinaryToTtyRefused.exit(), ExitCode::Usage);
     }
@@ -258,6 +261,7 @@ mod tests {
             ErrorCode::InvalidDate,
             ErrorCode::InvalidCron,
             ErrorCode::InvalidChmod,
+            ErrorCode::InvalidCipher,
             ErrorCode::Internal,
         ];
         for code in cases {
