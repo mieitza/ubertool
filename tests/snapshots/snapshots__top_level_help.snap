@@ -1,5 +1,6 @@
 ---
 source: tests/snapshots.rs
+assertion_line: 18
 expression: s
 ---
 ubertool — agent-friendly developer utilities.
@@ -47,6 +48,7 @@ Commands:
   slugify       URL slug generation
   sql           SQL formatter (pretty-print with indentation and keyword casing)
   temperature   Temperature unit conversion (celsius / fahrenheit / kelvin)
+  text          Text encoding and analysis (to-binary, from-binary, to-unicode, from-unicode, to-nato, stats, diff, obfuscate)
   help          Print this message or the help of the given subcommand(s)
 
 Options:

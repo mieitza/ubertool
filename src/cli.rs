@@ -109,4 +109,6 @@ pub enum Noun {
     Sql(crate::commands::sql::SqlArgs),
     /// Temperature unit conversion (celsius / fahrenheit / kelvin).
     Temperature(crate::commands::temperature::TemperatureArgs),
+    /// Text encoding and analysis (to-binary, from-binary, to-unicode, from-unicode, to-nato, stats, diff, obfuscate).
+    Text(crate::commands::text::TextArgs),
 }

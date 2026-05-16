@@ -24,6 +24,8 @@ pub enum ErrorCode {
     InvalidIntegerBase,
     InvalidRoman,
     InvalidUtf8,
+    InvalidBinary,
+    InvalidCodepoint,
     FileNotFound,
     PermissionDenied,
     IoError,
@@ -42,7 +44,8 @@ impl ErrorCode {
             UsageError | BinaryToTtyRefused => ExitCode::Usage,
             InvalidJson | InvalidYaml | InvalidToml | InvalidXml | InvalidRegex | InvalidIban
             | InvalidPhone | InvalidJwt | InvalidBase64 | InvalidBcrypt | InvalidCsv
-            | InvalidIntegerBase | InvalidRoman | InvalidUtf8 => {
+            | InvalidIntegerBase | InvalidRoman | InvalidUtf8 | InvalidBinary
+            | InvalidCodepoint => {
                 ExitCode::Invalid
             }
             FileNotFound | PermissionDenied | IoError => ExitCode::Io,
@@ -70,6 +73,8 @@ impl ErrorCode {
             InvalidIntegerBase => "invalid_integer_base",
             InvalidRoman => "invalid_roman",
             InvalidUtf8 => "invalid_utf8",
+            InvalidBinary => "invalid_binary",
+            InvalidCodepoint => "invalid_codepoint",
             FileNotFound => "file_not_found",
             PermissionDenied => "permission_denied",
             IoError => "io_error",
@@ -153,6 +158,8 @@ mod tests {
     fn error_code_to_exit_code_mapping() {
         assert_eq!(ErrorCode::UsageError.exit(), ExitCode::Usage);
         assert_eq!(ErrorCode::InvalidBase64.exit(), ExitCode::Invalid);
+        assert_eq!(ErrorCode::InvalidBinary.exit(), ExitCode::Invalid);
+        assert_eq!(ErrorCode::InvalidCodepoint.exit(), ExitCode::Invalid);
         assert_eq!(ErrorCode::FileNotFound.exit(), ExitCode::Io);
         assert_eq!(ErrorCode::SignatureMismatch.exit(), ExitCode::Crypto);
         assert_eq!(ErrorCode::AlgoNotSupported.exit(), ExitCode::Unsupported);
@@ -215,6 +222,8 @@ mod tests {
             ErrorCode::InvalidIntegerBase,
             ErrorCode::InvalidRoman,
             ErrorCode::InvalidUtf8,
+            ErrorCode::InvalidBinary,
+            ErrorCode::InvalidCodepoint,
             ErrorCode::FileNotFound,
             ErrorCode::PermissionDenied,
             ErrorCode::IoError,

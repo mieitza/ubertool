@@ -39,6 +39,7 @@ pub fn run() -> ProcExitCode {
         cli::Noun::Slugify(a) => commands::slugify::dispatch(a, &out),
         cli::Noun::Sql(a) => commands::sql::dispatch(a, &out),
         cli::Noun::Temperature(a) => commands::temperature::dispatch(a, &out),
+        cli::Noun::Text(a) => commands::text::dispatch(a, &out),
     };
 
     match result {

@@ -23,3 +23,4 @@ pub mod sql;
 pub mod temperature;
 pub mod yaml;
 pub mod xml;
+pub mod text;
