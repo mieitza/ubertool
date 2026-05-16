@@ -49,6 +49,7 @@ Commands:
   sql           SQL formatter (pretty-print with indentation and keyword casing)
   temperature   Temperature unit conversion (celsius / fahrenheit / kelvin)
   text          Text encoding and analysis (to-binary, from-binary, to-unicode, from-unicode, to-nato, stats, diff, obfuscate)
+  docker-run    Convert `docker run` command to docker-compose YAML
   help          Print this message or the help of the given subcommand(s)
 
 Options:

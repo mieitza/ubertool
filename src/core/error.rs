@@ -34,6 +34,7 @@ pub enum ErrorCode {
     DecryptFailed,
     PdfSignatureInvalid,
     AlgoNotSupported,
+    InvalidDockerRun,
     Internal,
 }
 
@@ -45,7 +46,7 @@ impl ErrorCode {
             InvalidJson | InvalidYaml | InvalidToml | InvalidXml | InvalidRegex | InvalidIban
             | InvalidPhone | InvalidJwt | InvalidBase64 | InvalidBcrypt | InvalidCsv
             | InvalidIntegerBase | InvalidRoman | InvalidUtf8 | InvalidBinary
-            | InvalidCodepoint => {
+            | InvalidCodepoint | InvalidDockerRun => {
                 ExitCode::Invalid
             }
             FileNotFound | PermissionDenied | IoError => ExitCode::Io,
@@ -83,6 +84,7 @@ impl ErrorCode {
             DecryptFailed => "decrypt_failed",
             PdfSignatureInvalid => "pdf_signature_invalid",
             AlgoNotSupported => "algo_not_supported",
+            InvalidDockerRun => "invalid_docker_run",
             Internal => "internal",
         }
     }
@@ -163,6 +165,7 @@ mod tests {
         assert_eq!(ErrorCode::FileNotFound.exit(), ExitCode::Io);
         assert_eq!(ErrorCode::SignatureMismatch.exit(), ExitCode::Crypto);
         assert_eq!(ErrorCode::AlgoNotSupported.exit(), ExitCode::Unsupported);
+        assert_eq!(ErrorCode::InvalidDockerRun.exit(), ExitCode::Invalid);
         assert_eq!(ErrorCode::Internal.exit(), ExitCode::Generic);
         assert_eq!(ErrorCode::BinaryToTtyRefused.exit(), ExitCode::Usage);
     }
@@ -232,6 +235,7 @@ mod tests {
             ErrorCode::DecryptFailed,
             ErrorCode::PdfSignatureInvalid,
             ErrorCode::AlgoNotSupported,
+            ErrorCode::InvalidDockerRun,
             ErrorCode::Internal,
         ];
         for code in cases {

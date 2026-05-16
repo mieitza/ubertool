@@ -111,4 +111,7 @@ pub enum Noun {
     Temperature(crate::commands::temperature::TemperatureArgs),
     /// Text encoding and analysis (to-binary, from-binary, to-unicode, from-unicode, to-nato, stats, diff, obfuscate).
     Text(crate::commands::text::TextArgs),
+    /// Convert `docker run` command to docker-compose YAML.
+    #[command(name = "docker-run")]
+    DockerRun(crate::commands::docker_run::DockerRunArgs),
 }

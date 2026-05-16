@@ -24,3 +24,4 @@ pub mod temperature;
 pub mod yaml;
 pub mod xml;
 pub mod text;
+pub mod docker_run;
