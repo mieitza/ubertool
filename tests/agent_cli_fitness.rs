@@ -140,7 +140,8 @@ fn json_mode_error_path_writes_to_stderr_too() {
     );
 }
 
-const M1_NOUNS_AND_VERBS: &[(&str, &[&str])] = &[
+const ALL_NOUNS_AND_VERBS: &[(&str, &[&str])] = &[
+    // M0/M1
     ("base64", &["encode", "decode"]),
     (
         "hash",
@@ -166,11 +167,37 @@ const M1_NOUNS_AND_VERBS: &[(&str, &[&str])] = &[
     ("json", &["to-yaml", "to-toml", "minify", "prettify"]),
     ("yaml", &["to-json", "to-toml"]),
     ("toml", &["to-json", "to-yaml"]),
+    // M2
+    ("xml", &["to-json", "format"]),
+    ("csv", &["to-json"]),
+    ("case", &["convert"]),
+    ("slugify", &["generate"]),
+    ("list", &["convert"]),
+    ("integer-base", &["convert"]),
+    ("roman", &["to-num", "from-num"]),
+    ("temperature", &["convert"]),
+    ("sql", &["format"]),
+    ("markdown", &["to-html"]),
+    (
+        "text",
+        &[
+            "to-binary",
+            "from-binary",
+            "to-unicode",
+            "from-unicode",
+            "to-nato",
+            "stats",
+            "diff",
+            "obfuscate",
+        ],
+    ),
+    ("docker-run", &["to-compose"]),
+    ("safelink", &["decode"]),
 ];
 
 #[test]
-fn every_m1_noun_and_verb_has_discoverable_help() {
-    for (noun, verbs) in M1_NOUNS_AND_VERBS {
+fn every_noun_and_verb_has_discoverable_help() {
+    for (noun, verbs) in ALL_NOUNS_AND_VERBS {
         // noun-level help
         Command::cargo_bin("ubertool")
             .unwrap()
