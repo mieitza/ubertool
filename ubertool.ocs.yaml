@@ -1560,3 +1560,382 @@ commands:
         summary: Output bare value only (pipe-friendly)
         type: boolean
         default: false
+
+  ubertool chmod {command} [flags]:
+    group: true
+    summary: Unix file mode conversion (symbolic and octal)
+
+  ubertool chmod calc <input> [flags]:
+    summary: Convert symbolic mode (rwxr-xr-x) to octal (755)
+    arguments:
+      - name: input
+        summary: Symbolic mode string to convert
+        required: true
+        type: string
+    flags:
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool chmod parse <input> [flags]:
+    summary: Convert octal mode (755) to symbolic and per-class breakdown
+    arguments:
+      - name: input
+        summary: Octal mode string to convert
+        required: true
+        type: string
+    flags:
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool crontab {command} [flags]:
+    group: true
+    summary: Crontab expression utilities (describe, next)
+
+  ubertool crontab describe <input> [flags]:
+    summary: Describe a crontab expression in plain English
+    arguments:
+      - name: input
+        summary: Crontab expression to describe
+        required: true
+        type: string
+    flags:
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool crontab next <input> [flags]:
+    summary: Emit the next N matching timestamps for a crontab expression
+    arguments:
+      - name: input
+        summary: Crontab expression to compute next runs for
+        required: true
+        type: string
+    flags:
+      - name: count
+        summary: Number of timestamps to emit
+        type: integer
+        default: "5"
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool date {command} [flags]:
+    group: true
+    summary: "Date/time format conversion (unix / ISO 8601 / RFC 2822)"
+
+  ubertool date convert <input> [flags]:
+    summary: Convert between unix timestamp, ISO 8601, and RFC 2822 formats
+    arguments:
+      - name: input
+        summary: Date/time value to convert
+        required: true
+        type: string
+    flags:
+      - name: from
+        summary: Source date/time format
+        type: string
+        required: true
+        choices:
+          - value: unix
+          - value: iso8601
+          - value: rfc2822
+      - name: tz
+        summary: Target timezone for output (e.g. America/New_York)
+        type: string
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool eta {command} [flags]:
+    group: true
+    summary: ETA calculator from progress (done / total / elapsed)
+
+  ubertool eta calc [flags]:
+    summary: Calculate ETA from progress given done, total, and elapsed values
+    flags:
+      - name: done
+        summary: Number of items completed
+        type: string
+        required: true
+      - name: total
+        summary: Total number of items
+        type: string
+        required: true
+      - name: elapsed
+        summary: Elapsed time in seconds
+        type: string
+        required: true
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool ipv4 {command} [flags]:
+    group: true
+    summary: IPv4 utilities (parse, subnet, range-expand, to-ipv6)
+
+  ubertool ipv4 parse <input> [flags]:
+    summary: Parse an IPv4 address and emit its representations and classification
+    arguments:
+      - name: input
+        summary: IPv4 address to parse
+        required: true
+        type: string
+    flags:
+      - name: in
+        summary: Read input from file
+        type: string
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool ipv4 subnet <input> [flags]:
+    summary: Compute subnet info for a CIDR block
+    arguments:
+      - name: input
+        summary: CIDR block to compute subnet info for
+        required: true
+        type: string
+    flags:
+      - name: in
+        summary: Read input from file
+        type: string
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool ipv4 range-expand <input> [flags]:
+    summary: Expand a CIDR block into a list of addresses
+    arguments:
+      - name: input
+        summary: CIDR block to expand
+        required: true
+        type: string
+    flags:
+      - name: max
+        summary: Maximum number of addresses to expand (default 1024)
+        type: integer
+        default: "1024"
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool ipv4 to-ipv6 <input> [flags]:
+    summary: Convert IPv4 to IPv4-mapped IPv6 form (::ffff:a.b.c.d)
+    arguments:
+      - name: input
+        summary: IPv4 address to convert
+        required: true
+        type: string
+    flags:
+      - name: in
+        summary: Read input from file
+        type: string
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool ipv6-ula {command} [flags]:
+    group: true
+    summary: RFC4193 Unique Local IPv6 prefix generator
+
+  ubertool ipv6-ula new [flags]:
+    summary: Generate a random RFC4193 Unique Local IPv6 Address prefix
+    flags:
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool mac {command} [flags]:
+    group: true
+    summary: MAC address utilities (generate random, look up vendor OUI)
+
+  ubertool mac new [flags]:
+    summary: Generate a random locally-administered MAC address
+    flags:
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool mac lookup <input> [flags]:
+    summary: Look up the vendor for a MAC address from the bundled OUI table
+    arguments:
+      - name: input
+        summary: MAC address to look up (colon, hyphen, or dot-separated)
+        required: true
+        type: string
+    flags:
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool math {command} [flags]:
+    group: true
+    summary: Math expression evaluator
+
+  ubertool math eval <input> [flags]:
+    summary: Evaluate a math expression (supports +, -, *, /, %, ^, parens, functions)
+    arguments:
+      - name: input
+        summary: Math expression to evaluate
+        required: true
+        type: string
+    flags:
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool percentage {command} [flags]:
+    group: true
+    summary: "Percentage calculations (of / change / of-total)"
+
+  ubertool percentage of <percent> <value> [flags]:
+    summary: "Compute percent% of value"
+    arguments:
+      - name: percent
+        summary: Percentage to compute
+        required: true
+        type: string
+      - name: value
+        summary: Base value to compute percentage of
+        required: true
+        type: string
+    flags:
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool percentage change <from> <to> [flags]:
+    summary: Compute percentage change from one value to another
+    arguments:
+      - name: from
+        summary: Starting value
+        required: true
+        type: string
+      - name: to
+        summary: Ending value
+        required: true
+        type: string
+    flags:
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool percentage of-total <part> <total> [flags]:
+    summary: Compute what percent part is of total
+    arguments:
+      - name: part
+        summary: Part value
+        required: true
+        type: string
+      - name: total
+        summary: Total value
+        required: true
+        type: string
+    flags:
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
