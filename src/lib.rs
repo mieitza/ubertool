@@ -29,6 +29,7 @@ pub fn run() -> ProcExitCode {
         cli::Noun::Url(a) => commands::url::dispatch(a, &out),
         cli::Noun::Uuid(a) => commands::uuid::dispatch(a, &out),
         cli::Noun::Yaml(a) => commands::yaml::dispatch(a, &out),
+        cli::Noun::Xml(a) => commands::xml::dispatch(a, &out),
     };
 
     match result {

@@ -13,3 +13,4 @@ pub mod ulid;
 pub mod url;
 pub mod uuid;
 pub mod yaml;
+pub mod xml;

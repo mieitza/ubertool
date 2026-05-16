@@ -88,4 +88,6 @@ pub enum Noun {
     Uuid(crate::commands::uuid::UuidArgs),
     /// YAML conversion: to-json / to-toml.
     Yaml(crate::commands::yaml::YamlArgs),
+    /// XML conversion: to-json / format.
+    Xml(crate::commands::xml::XmlArgs),
 }
