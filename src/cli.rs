@@ -63,6 +63,8 @@ pub enum Noun {
     Email(crate::commands::email::EmailArgs),
     /// IBAN validation (mod-97 check digits).
     Iban(crate::commands::iban::IbanArgs),
+    /// Phone number parser (E.164 and regional formats).
+    Phone(crate::commands::phone::PhoneArgs),
     /// HTTP Basic auth header encoding/decoding.
     #[command(name = "basic-auth")]
     BasicAuth(crate::commands::basic_auth::BasicAuthArgs),

@@ -25,6 +25,7 @@ Commands:
   base64        Base64 encoding and decoding
   email         Email address normalization and validation
   iban          IBAN validation (mod-97 check digits)
+  phone         Phone number parser (E.164 and regional formats)
   basic-auth    HTTP Basic auth header encoding/decoding
   bcrypt        Bcrypt password hashing and verification
   case          String case conversion (snake/kebab/camel/pascal/etc.)

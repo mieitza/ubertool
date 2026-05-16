@@ -1,6 +1,7 @@
 pub mod base64;
 pub mod email;
 pub mod iban;
+pub mod phone;
 pub mod basic_auth;
 pub mod bcrypt;
 pub mod case;

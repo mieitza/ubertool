@@ -17,6 +17,7 @@ pub fn run() -> ProcExitCode {
         cli::Noun::Base64(a) => commands::base64::dispatch(a, &out),
         cli::Noun::Email(a) => commands::email::dispatch(a, &out),
         cli::Noun::Iban(a) => commands::iban::dispatch(a, &out),
+        cli::Noun::Phone(a) => commands::phone::dispatch(a, &out),
         cli::Noun::BasicAuth(a) => commands::basic_auth::dispatch(a, &out),
         cli::Noun::Bcrypt(a) => commands::bcrypt::dispatch(a, &out),
         cli::Noun::Case(a) => commands::case::dispatch(a, &out),
