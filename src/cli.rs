@@ -64,6 +64,8 @@ pub enum Noun {
     BasicAuth(crate::commands::basic_auth::BasicAuthArgs),
     /// Bcrypt password hashing and verification.
     Bcrypt(crate::commands::bcrypt::BcryptArgs),
+    /// CSV to JSON conversion.
+    Csv(crate::commands::csv::CsvArgs),
     /// Cryptographic hash functions (md5, sha1, sha224, sha256, sha384, sha512, sha3-256, sha3-512).
     Hash(crate::commands::hash::HashArgs),
     /// HTML entity encoding and decoding.

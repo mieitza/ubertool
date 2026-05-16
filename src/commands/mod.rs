@@ -1,6 +1,7 @@
 pub mod base64;
 pub mod basic_auth;
 pub mod bcrypt;
+pub mod csv;
 pub mod hash;
 pub mod hmac;
 pub mod html;

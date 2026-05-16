@@ -26,6 +26,7 @@ Commands:
   base64      Base64 encoding and decoding
   basic-auth  HTTP Basic auth header encoding/decoding
   bcrypt      Bcrypt password hashing and verification
+  csv         CSV to JSON conversion
   hash        Cryptographic hash functions (md5, sha1, sha224, sha256, sha384, sha512, sha3-256, sha3-512)
   html        HTML entity encoding and decoding
   hmac        Keyed-hash MAC (md5/sha1/sha224/sha256/sha384/sha512/sha3-256/sha3-512)
