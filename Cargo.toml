@@ -57,6 +57,27 @@ evalexpr = "11"
 chrono = { version = "0.4", default-features = false, features = ["clock", "std"] }
 chrono-tz = "0.8"
 cron = "0.12"
+# M4 crypto
+aes-gcm = "0.10"
+chacha20poly1305 = "0.10"
+argon2 = "0.5"
+pbkdf2 = "0.12"
+rsa = "0.9"
+pkcs1 = { version = "0.7", features = ["pem"] }
+pkcs8 = { version = "0.10", features = ["pem"] }
+totp-rs = "5"
+# M4 PDF
+lopdf = "0.32"
+# M4 regex
+regex = "1"
+regex_generate = "0.2"
+# M4 validators
+email_address = "0.2"
+iban_validate = "4"
+phonenumber = "0.3"
+woothee = "0.13"
+# M4 URL
+url = "2"
 
 [dev-dependencies]
 assert_cmd = "2"
