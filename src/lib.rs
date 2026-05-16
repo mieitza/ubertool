@@ -50,6 +50,7 @@ pub fn run() -> ProcExitCode {
         cli::Noun::Eta(a) => commands::eta::dispatch(a, &out),
         cli::Noun::Date(a) => commands::date::dispatch(a, &out),
         cli::Noun::Crontab(a) => commands::crontab::dispatch(a, &out),
+        cli::Noun::Chmod(a) => commands::chmod::dispatch(a, &out),
     };
 
     match result {

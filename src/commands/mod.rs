@@ -1,4 +1,5 @@
 pub mod base64;
+pub mod chmod;
 pub mod crontab;
 pub mod date;
 pub mod eta;

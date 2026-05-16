@@ -133,4 +133,6 @@ pub enum Noun {
     Date(crate::commands::date::DateArgs),
     /// Crontab expression utilities (describe, next).
     Crontab(crate::commands::crontab::CrontabArgs),
+    /// Unix file mode conversion (symbolic ↔ octal).
+    Chmod(crate::commands::chmod::ChmodArgs),
 }
