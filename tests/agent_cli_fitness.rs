@@ -193,6 +193,16 @@ const ALL_NOUNS_AND_VERBS: &[(&str, &[&str])] = &[
     ),
     ("docker-run", &["to-compose"]),
     ("safelink", &["decode"]),
+    // M3
+    ("ipv4", &["parse", "subnet", "range-expand", "to-ipv6"]),
+    ("mac", &["new", "lookup"]),
+    ("ipv6-ula", &["new"]),
+    ("math", &["eval"]),
+    ("percentage", &["of", "change", "of-total"]),
+    ("eta", &["calc"]),
+    ("date", &["convert"]),
+    ("crontab", &["describe", "next"]),
+    ("chmod", &["calc", "parse"]),
 ];
 
 #[test]
