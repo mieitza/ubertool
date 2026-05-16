@@ -118,4 +118,9 @@ pub enum Noun {
     DockerRun(crate::commands::docker_run::DockerRunArgs),
     /// Unwrap Outlook/Google/generic URL wrappers.
     Safelink(crate::commands::safelink::SafelinkArgs),
+    /// MAC address utilities (generate random, look up vendor OUI).
+    Mac(crate::commands::mac::MacArgs),
+    /// RFC4193 Unique Local IPv6 prefix generator.
+    #[command(name = "ipv6-ula")]
+    Ipv6Ula(crate::commands::ipv6_ula::Ipv6UlaArgs),
 }

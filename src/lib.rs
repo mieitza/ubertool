@@ -43,6 +43,8 @@ pub fn run() -> ProcExitCode {
         cli::Noun::Text(a) => commands::text::dispatch(a, &out),
         cli::Noun::DockerRun(a) => commands::docker_run::dispatch(a, &out),
         cli::Noun::Safelink(a) => commands::safelink::dispatch(a, &out),
+        cli::Noun::Mac(a) => commands::mac::dispatch(a, &out),
+        cli::Noun::Ipv6Ula(a) => commands::ipv6_ula::dispatch(a, &out),
     };
 
     match result {
