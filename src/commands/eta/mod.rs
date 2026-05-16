@@ -16,7 +16,9 @@ pub struct EtaArgs {
 #[derive(Debug, Subcommand)]
 pub enum Verb {
     /// Calculate ETA from progress (done/total/elapsed).
-    #[command(long_about = "Calculate ETA from progress.\n\nGiven `--done` items completed out of `--total` in `--elapsed` seconds, compute remaining time and the absolute ETA timestamp (UTC, ISO 8601).\n\nExamples:\n  ubertool eta calc --done 50 --total 100 --elapsed 60\n\nExit codes:\n  3   --done is 0 (rate is unknown)")]
+    #[command(
+        long_about = "Calculate ETA from progress.\n\nGiven `--done` items completed out of `--total` in `--elapsed` seconds, compute remaining time and the absolute ETA timestamp (UTC, ISO 8601).\n\nExamples:\n  ubertool eta calc --done 50 --total 100 --elapsed 60\n\nExit codes:\n  3   --done is 0 (rate is unknown)"
+    )]
     Calc(CalcArgs),
 }
 

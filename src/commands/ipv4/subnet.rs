@@ -29,8 +29,12 @@ pub fn run(args: RunArgs, out: &Out) -> Result<(), CliError> {
     let network = net.network();
     let broadcast = net.broadcast();
     let prefix = net.prefix_len();
-    let total = if prefix >= 32 { 1u64 } else { 1u64 << (32 - prefix) };
-    let usable = if total >= 2 { total - 2 } else { 0 };
+    let total = if prefix >= 32 {
+        1u64
+    } else {
+        1u64 << (32 - prefix)
+    };
+    let usable = total.saturating_sub(2);
     let net_oct = u32::from_be_bytes(network.octets());
     let bcast_oct = u32::from_be_bytes(broadcast.octets());
     let first_host = if total >= 2 {

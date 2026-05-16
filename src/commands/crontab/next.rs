@@ -22,11 +22,18 @@ pub fn run(args: NextArgs, out: &Out) -> Result<(), CliError> {
         args.input.clone()
     };
     let schedule = Schedule::from_str(&normalized).map_err(|e| {
-        CliError::new(ErrorCode::InvalidCron, format!("invalid cron expression: {e}"))
-            .with_input(serde_json::json!(args.input))
-            .with_hint("format: minute hour day-of-month month day-of-week")
+        CliError::new(
+            ErrorCode::InvalidCron,
+            format!("invalid cron expression: {e}"),
+        )
+        .with_input(serde_json::json!(args.input))
+        .with_hint("format: minute hour day-of-month month day-of-week")
     })?;
     let now = Utc::now();
-    let entries: Vec<String> = schedule.after(&now).take(args.count).map(|dt| dt.to_rfc3339()).collect();
+    let entries: Vec<String> = schedule
+        .after(&now)
+        .take(args.count)
+        .map(|dt| dt.to_rfc3339())
+        .collect();
     out.emit_value(&Out0 { next: entries })
 }

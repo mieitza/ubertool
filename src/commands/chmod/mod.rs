@@ -17,10 +17,14 @@ pub struct ChmodArgs {
 #[derive(Debug, Subcommand)]
 pub enum Verb {
     /// Convert symbolic mode (rwxr-xr-x) → octal (755).
-    #[command(long_about = "Convert symbolic mode like `rwxr-xr-x` to octal `755`.\n\nExamples:\n  ubertool chmod calc rwxr-xr-x\n\nExit codes:\n  3   invalid symbolic input (invalid_chmod)")]
+    #[command(
+        long_about = "Convert symbolic mode like `rwxr-xr-x` to octal `755`.\n\nExamples:\n  ubertool chmod calc rwxr-xr-x\n\nExit codes:\n  3   invalid symbolic input (invalid_chmod)"
+    )]
     Calc(CalcArgs),
     /// Convert octal mode (755) → symbolic + per-class breakdown.
-    #[command(long_about = "Convert octal mode like `755` to symbolic `rwxr-xr-x` plus per-class (owner/group/other) read/write/execute flags.\n\nExamples:\n  ubertool chmod parse 755\n\nExit codes:\n  3   octal must be 3 digits each 0-7 (invalid_chmod)")]
+    #[command(
+        long_about = "Convert octal mode like `755` to symbolic `rwxr-xr-x` plus per-class (owner/group/other) read/write/execute flags.\n\nExamples:\n  ubertool chmod parse 755\n\nExit codes:\n  3   octal must be 3 digits each 0-7 (invalid_chmod)"
+    )]
     Parse(ParseArgs),
 }
 

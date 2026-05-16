@@ -31,16 +31,24 @@ pub fn run(args: ParseArgs, out: &Out) -> Result<(), CliError> {
     let mut digits = [0u32; 3];
     for (i, c) in args.input.chars().enumerate() {
         let d = c.to_digit(8).ok_or_else(|| {
-            CliError::new(ErrorCode::InvalidChmod, format!("invalid octal digit `{c}`"))
+            CliError::new(
+                ErrorCode::InvalidChmod,
+                format!("invalid octal digit `{c}`"),
+            )
         })?;
         if d > 7 {
-            return Err(CliError::new(ErrorCode::InvalidChmod, format!("digit `{c}` is out of range 0-7")));
+            return Err(CliError::new(
+                ErrorCode::InvalidChmod,
+                format!("digit `{c}` is out of range 0-7"),
+            ));
         }
         digits[i] = d;
     }
     let symbolic = format!(
         "{}{}{}",
-        triplet(digits[0]), triplet(digits[1]), triplet(digits[2])
+        triplet(digits[0]),
+        triplet(digits[1]),
+        triplet(digits[2])
     );
     out.emit_value(&Out0 {
         octal: args.input.clone(),
@@ -59,5 +67,9 @@ fn triplet(d: u32) -> String {
 }
 
 fn bits_to_flags(d: u32) -> ClassFlags {
-    ClassFlags { read: d & 4 != 0, write: d & 2 != 0, execute: d & 1 != 0 }
+    ClassFlags {
+        read: d & 4 != 0,
+        write: d & 2 != 0,
+        execute: d & 1 != 0,
+    }
 }

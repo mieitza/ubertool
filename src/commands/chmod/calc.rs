@@ -23,7 +23,9 @@ pub fn run(args: CalcArgs, out: &Out) -> Result<(), CliError> {
     let owner = class_digit(&bytes[0..3])?;
     let group = class_digit(&bytes[3..6])?;
     let other = class_digit(&bytes[6..9])?;
-    out.emit_value(&Out0 { octal: format!("{owner}{group}{other}") })
+    out.emit_value(&Out0 {
+        octal: format!("{owner}{group}{other}"),
+    })
 }
 
 fn class_digit(triplet: &[u8]) -> Result<u32, CliError> {
@@ -36,7 +38,10 @@ fn class_digit(triplet: &[u8]) -> Result<u32, CliError> {
             other => {
                 return Err(CliError::new(
                     ErrorCode::InvalidChmod,
-                    format!("unexpected char `{}` at position {i} in triplet", other as char),
+                    format!(
+                        "unexpected char `{}` at position {i} in triplet",
+                        other as char
+                    ),
                 ));
             }
         }

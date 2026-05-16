@@ -18,13 +18,20 @@ pub struct PercentageArgs {
 #[derive(Debug, Subcommand)]
 pub enum Verb {
     /// Compute "<percent>% of <value>".
-    #[command(long_about = "Compute `<percent>% of <value>`.\n\nExamples:\n  ubertool percentage of 20 50    # 10\n  ubertool percentage of 15 80 --json")]
+    #[command(
+        long_about = "Compute `<percent>% of <value>`.\n\nExamples:\n  ubertool percentage of 20 50    # 10\n  ubertool percentage of 15 80 --json"
+    )]
     Of(OfArgs),
     /// Compute percentage change from <from> to <to>.
-    #[command(long_about = "Compute percentage change from <from> to <to>: `(to - from) / from * 100`.\n\nExamples:\n  ubertool percentage change 100 125   # 25\n\nExit codes:\n  3   from value is zero (cannot compute percentage change)")]
+    #[command(
+        long_about = "Compute percentage change from <from> to <to>: `(to - from) / from * 100`.\n\nExamples:\n  ubertool percentage change 100 125   # 25\n\nExit codes:\n  3   from value is zero (cannot compute percentage change)"
+    )]
     Change(ChangeArgs),
     /// Compute what percent <part> is of <total>.
-    #[command(name = "of-total", long_about = "Compute what percent <part> is of <total>.\n\nExamples:\n  ubertool percentage of-total 20 50   # 40")]
+    #[command(
+        name = "of-total",
+        long_about = "Compute what percent <part> is of <total>.\n\nExamples:\n  ubertool percentage of-total 20 50   # 40"
+    )]
     OfTotal(OfTotalArgs),
 }
 

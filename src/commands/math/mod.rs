@@ -15,7 +15,9 @@ pub struct MathArgs {
 #[derive(Debug, Subcommand)]
 pub enum Verb {
     /// Evaluate a math expression.
-    #[command(long_about = "Evaluate a math expression. Supports +, -, *, /, %, ^, parens, common functions (sqrt, sin, cos, etc.).\n\nExamples:\n  ubertool math eval '(2 + 3) * 4'\n  ubertool math eval '3.14 * 2' --json\n\nExit codes:\n  3   invalid math expression (invalid_math)")]
+    #[command(
+        long_about = "Evaluate a math expression. Supports +, -, *, /, %, ^, parens, common functions (sqrt, sin, cos, etc.).\n\nExamples:\n  ubertool math eval '(2 + 3) * 4'\n  ubertool math eval '3.14 * 2' --json\n\nExit codes:\n  3   invalid math expression (invalid_math)"
+    )]
     Eval(EvalArgs),
 }
 
@@ -37,8 +39,11 @@ pub fn dispatch(args: MathArgs, out: &Out) -> Result<(), CliError> {
 
 fn run(args: EvalArgs, out: &Out) -> Result<(), CliError> {
     let v = evalexpr::eval(&args.input).map_err(|e| {
-        CliError::new(ErrorCode::InvalidMath, format!("invalid math expression: {e}"))
-            .with_input(serde_json::json!(args.input))
+        CliError::new(
+            ErrorCode::InvalidMath,
+            format!("invalid math expression: {e}"),
+        )
+        .with_input(serde_json::json!(args.input))
     })?;
     let json_val = match v {
         evalexpr::Value::Int(i) => serde_json::json!(i),

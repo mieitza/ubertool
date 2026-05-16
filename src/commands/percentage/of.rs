@@ -15,7 +15,11 @@ struct Out0 {
 pub fn run(args: OfArgs, out: &Out) -> Result<(), CliError> {
     let result = args.percent / 100.0 * args.value;
     if out.mode == OutputMode::Json {
-        out.emit_value(&Out0 { percentage: args.percent, value: args.value, result })
+        out.emit_value(&Out0 {
+            percentage: args.percent,
+            value: args.value,
+            result,
+        })
     } else {
         use std::io::Write;
         let mut stdout = std::io::stdout().lock();

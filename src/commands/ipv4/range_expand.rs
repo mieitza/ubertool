@@ -21,7 +21,11 @@ pub fn run(args: RangeExpandArgs, out: &Out) -> Result<(), CliError> {
             .with_input(serde_json::json!(args.input))
     })?;
     let prefix = net.prefix_len();
-    let total = if prefix >= 32 { 1u64 } else { 1u64 << (32 - prefix) };
+    let total = if prefix >= 32 {
+        1u64
+    } else {
+        1u64 << (32 - prefix)
+    };
     let mut addresses = Vec::new();
     for (i, ip) in net.hosts().enumerate() {
         if i >= args.max {
@@ -30,5 +34,9 @@ pub fn run(args: RangeExpandArgs, out: &Out) -> Result<(), CliError> {
         addresses.push(ip.to_string());
     }
     let truncated = (addresses.len() as u64) < total;
-    out.emit_value(&Out0 { addresses, truncated, total })
+    out.emit_value(&Out0 {
+        addresses,
+        truncated,
+        total,
+    })
 }

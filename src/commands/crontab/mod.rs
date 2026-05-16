@@ -17,10 +17,14 @@ pub struct CrontabArgs {
 #[derive(Debug, Subcommand)]
 pub enum Verb {
     /// Describe a crontab expression in plain English.
-    #[command(long_about = "Describe a crontab expression in plain English.\n\nSupports the common Unix 5-field format: minute hour day-of-month month day-of-week.\n\nExamples:\n  ubertool crontab describe '* * * * *'\n  ubertool crontab describe '30 14 * * *'")]
+    #[command(
+        long_about = "Describe a crontab expression in plain English.\n\nSupports the common Unix 5-field format: minute hour day-of-month month day-of-week.\n\nExamples:\n  ubertool crontab describe '* * * * *'\n  ubertool crontab describe '30 14 * * *'"
+    )]
     Describe(DescribeArgs),
     /// Emit the next N matching timestamps.
-    #[command(long_about = "Emit the next N matching timestamps for a crontab expression (defaults to 5).\n\nExamples:\n  ubertool crontab next '0 * * * *'\n  ubertool crontab next '*/15 * * * *' --count 10 --json\n\nExit codes:\n  3   invalid cron expression (invalid_cron)")]
+    #[command(
+        long_about = "Emit the next N matching timestamps for a crontab expression (defaults to 5).\n\nExamples:\n  ubertool crontab next '0 * * * *'\n  ubertool crontab next '*/15 * * * *' --count 10 --json\n\nExit codes:\n  3   invalid cron expression (invalid_cron)"
+    )]
     Next(NextArgs),
 }
 

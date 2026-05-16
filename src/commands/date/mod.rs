@@ -17,7 +17,9 @@ pub struct DateArgs {
 #[derive(Debug, Subcommand)]
 pub enum Verb {
     /// Convert between date/time formats.
-    #[command(long_about = "Convert between unix timestamp, ISO 8601, and RFC 2822 representations of a moment in time.\n\nExamples:\n  ubertool date convert 1700000000 --from unix\n  ubertool date convert '2023-11-14T22:13:20Z' --from iso8601 --json\n  ubertool date convert 1700000000 --from unix --tz America/New_York\n\nExit codes:\n  3   invalid date/time input (invalid_date)")]
+    #[command(
+        long_about = "Convert between unix timestamp, ISO 8601, and RFC 2822 representations of a moment in time.\n\nExamples:\n  ubertool date convert 1700000000 --from unix\n  ubertool date convert '2023-11-14T22:13:20Z' --from iso8601 --json\n  ubertool date convert 1700000000 --from unix --tz America/New_York\n\nExit codes:\n  3   invalid date/time input (invalid_date)"
+    )]
     Convert(ConvertArgs),
 }
 
@@ -56,10 +58,16 @@ fn run(args: ConvertArgs, out: &Out) -> Result<(), CliError> {
     let dt: DateTime<Utc> = match args.from {
         Format::Unix => {
             let ts: i64 = args.input.parse().map_err(|_| {
-                CliError::new(ErrorCode::InvalidDate, format!("invalid unix timestamp: {}", args.input))
+                CliError::new(
+                    ErrorCode::InvalidDate,
+                    format!("invalid unix timestamp: {}", args.input),
+                )
             })?;
             Utc.timestamp_opt(ts, 0).single().ok_or_else(|| {
-                CliError::new(ErrorCode::InvalidDate, format!("timestamp out of range: {ts}"))
+                CliError::new(
+                    ErrorCode::InvalidDate,
+                    format!("timestamp out of range: {ts}"),
+                )
             })?
         }
         Format::Iso8601 => DateTime::parse_from_rfc3339(&args.input)
@@ -69,9 +77,7 @@ fn run(args: ConvertArgs, out: &Out) -> Result<(), CliError> {
             })?
             .with_timezone(&Utc),
         Format::Rfc2822 => DateTime::parse_from_rfc2822(&args.input)
-            .map_err(|e| {
-                CliError::new(ErrorCode::InvalidDate, format!("invalid RFC 2822: {e}"))
-            })?
+            .map_err(|e| CliError::new(ErrorCode::InvalidDate, format!("invalid RFC 2822: {e}")))?
             .with_timezone(&Utc),
     };
     let local = if let Some(tz_name) = &args.tz {

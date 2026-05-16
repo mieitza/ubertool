@@ -21,7 +21,11 @@ pub fn run(args: ChangeArgs, out: &Out) -> Result<(), CliError> {
     }
     let change = (args.to - args.from) / args.from * 100.0;
     if out.mode == OutputMode::Json {
-        out.emit_value(&Out0 { from: args.from, to: args.to, percentage_change: change })
+        out.emit_value(&Out0 {
+            from: args.from,
+            to: args.to,
+            percentage_change: change,
+        })
     } else {
         use std::io::Write;
         let mut stdout = std::io::stdout().lock();

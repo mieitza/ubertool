@@ -17,7 +17,10 @@ struct Out0 {
 
 pub fn run(args: RunArgs, out: &Out) -> Result<(), CliError> {
     let ip = Ipv4Addr::from_str(&args.input).map_err(|_| {
-        CliError::new(ErrorCode::InvalidIp, format!("invalid IPv4: {}", args.input))
+        CliError::new(
+            ErrorCode::InvalidIp,
+            format!("invalid IPv4: {}", args.input),
+        )
     })?;
     let mapped = ip.to_ipv6_mapped();
     let compat = ip.to_ipv6_compatible();

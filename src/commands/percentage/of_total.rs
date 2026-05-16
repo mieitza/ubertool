@@ -21,7 +21,11 @@ pub fn run(args: OfTotalArgs, out: &Out) -> Result<(), CliError> {
     }
     let pct = args.part / args.total * 100.0;
     if out.mode == OutputMode::Json {
-        out.emit_value(&Out0 { part: args.part, total: args.total, percentage: pct })
+        out.emit_value(&Out0 {
+            part: args.part,
+            total: args.total,
+            percentage: pct,
+        })
     } else {
         use std::io::Write;
         let mut stdout = std::io::stdout().lock();

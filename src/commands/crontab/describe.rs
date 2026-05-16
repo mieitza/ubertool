@@ -46,13 +46,14 @@ fn describe(p: &[&str]) -> String {
         }
     }
 
-    let mut bits = Vec::new();
-    bits.push(field_desc("minute", m));
-    bits.push(field_desc("hour", h));
-    bits.push(field_desc("day-of-month", dom));
-    bits.push(field_desc("month", mon));
-    bits.push(field_desc("day-of-week", dow));
-    bits.join(", ")
+    [
+        field_desc("minute", m),
+        field_desc("hour", h),
+        field_desc("day-of-month", dom),
+        field_desc("month", mon),
+        field_desc("day-of-week", dow),
+    ]
+    .join(", ")
 }
 
 fn field_desc(name: &str, v: &str) -> String {

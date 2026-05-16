@@ -24,14 +24,21 @@ struct Out0 {
 
 pub fn run(args: RunArgs, out: &Out) -> Result<(), CliError> {
     let ip = Ipv4Addr::from_str(&args.input).map_err(|_| {
-        CliError::new(ErrorCode::InvalidIp, format!("invalid IPv4 address: {}", args.input))
-            .with_input(serde_json::json!(args.input))
-            .with_hint("expected dotted-quad form like 192.168.1.1")
+        CliError::new(
+            ErrorCode::InvalidIp,
+            format!("invalid IPv4 address: {}", args.input),
+        )
+        .with_input(serde_json::json!(args.input))
+        .with_hint("expected dotted-quad form like 192.168.1.1")
     })?;
     let octets = ip.octets();
     let decimal: u32 = u32::from_be_bytes(octets);
     let hex = format!("0x{decimal:08x}");
-    let binary = octets.iter().map(|b| format!("{b:08b}")).collect::<Vec<_>>().join(".");
+    let binary = octets
+        .iter()
+        .map(|b| format!("{b:08b}"))
+        .collect::<Vec<_>>()
+        .join(".");
     out.emit_value(&Out0 {
         address: ip.to_string(),
         decimal,

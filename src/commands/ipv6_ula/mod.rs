@@ -16,7 +16,9 @@ pub struct Ipv6UlaArgs {
 #[derive(Debug, Subcommand)]
 pub enum Verb {
     /// Generate a random IPv6 ULA /48 prefix.
-    #[command(long_about = "Generate a random RFC4193 Unique Local IPv6 Address prefix (fd00::/8 with random 40-bit Global ID).\n\nExamples:\n  ubertool ipv6-ula new\n  ubertool ipv6-ula new --json")]
+    #[command(
+        long_about = "Generate a random RFC4193 Unique Local IPv6 Address prefix (fd00::/8 with random 40-bit Global ID).\n\nExamples:\n  ubertool ipv6-ula new\n  ubertool ipv6-ula new --json"
+    )]
     New,
 }
 
