@@ -76,6 +76,8 @@ pub enum Noun {
     Hmac(crate::commands::hmac::HmacArgs),
     /// JSON conversion: to-yaml / to-toml / minify / prettify.
     Json(crate::commands::json::JsonArgs),
+    /// Markdown to HTML conversion (CommonMark).
+    Markdown(crate::commands::markdown::MarkdownArgs),
     /// JSON Web Token decode and verify (HS* only).
     Jwt(crate::commands::jwt::JwtArgs),
     /// Password strength scoring (zxcvbn).

@@ -31,6 +31,7 @@ Commands:
   html          HTML entity encoding and decoding
   hmac          Keyed-hash MAC (md5/sha1/sha224/sha256/sha384/sha512/sha3-256/sha3-512)
   json          JSON conversion: to-yaml / to-toml / minify / prettify
+  markdown      Markdown to HTML conversion (CommonMark)
   jwt           JSON Web Token decode and verify (HS* only)
   password      Password strength scoring (zxcvbn)
   token         Random token generation (hex / base64 / alphanumeric)

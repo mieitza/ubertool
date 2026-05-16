@@ -16,6 +16,7 @@ pub mod toml;
 pub mod ulid;
 pub mod url;
 pub mod uuid;
+pub mod markdown;
 pub mod roman;
 pub mod slugify;
 pub mod sql;
