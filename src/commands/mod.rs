@@ -20,6 +20,7 @@ pub mod jwt;
 pub mod list;
 pub mod mac;
 pub mod markdown;
+pub mod otp;
 pub mod math;
 pub mod password;
 pub mod percentage;

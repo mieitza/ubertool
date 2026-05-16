@@ -25,6 +25,7 @@ pub fn run() -> ProcExitCode {
         cli::Noun::Hmac(a) => commands::hmac::dispatch(a, &out),
         cli::Noun::Json(a) => commands::json::dispatch(a, &out),
         cli::Noun::Markdown(a) => commands::markdown::dispatch(a, &out),
+        cli::Noun::Otp(a) => commands::otp::dispatch(a, &out),
         cli::Noun::Jwt(a) => commands::jwt::dispatch(a, &out),
         cli::Noun::Password(a) => commands::password::dispatch(a, &out),
         cli::Noun::Token(a) => commands::token::dispatch(a, &out),

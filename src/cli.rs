@@ -80,6 +80,8 @@ pub enum Noun {
     Json(crate::commands::json::JsonArgs),
     /// Markdown to HTML conversion (CommonMark).
     Markdown(crate::commands::markdown::MarkdownArgs),
+    /// Time-based One-Time Password generation and validation (TOTP, RFC 6238).
+    Otp(crate::commands::otp::OtpArgs),
     /// JSON Web Token decode and verify (HS* only).
     Jwt(crate::commands::jwt::JwtArgs),
     /// Password strength scoring (zxcvbn).

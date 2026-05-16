@@ -1,5 +1,6 @@
 ---
 source: tests/snapshots.rs
+assertion_line: 18
 expression: s
 ---
 ubertool — agent-friendly developer utilities.
@@ -33,6 +34,7 @@ Commands:
   hmac          Keyed-hash MAC (md5/sha1/sha224/sha256/sha384/sha512/sha3-256/sha3-512)
   json          JSON conversion: to-yaml / to-toml / minify / prettify
   markdown      Markdown to HTML conversion (CommonMark)
+  otp           Time-based One-Time Password generation and validation (TOTP, RFC 6238)
   jwt           JSON Web Token decode and verify (HS* only)
   password      Password strength scoring (zxcvbn)
   token         Random token generation (hex / base64 / alphanumeric)
@@ -46,6 +48,7 @@ Commands:
   ipv4          IPv4 utilities (parse, subnet, range-expand, to-ipv6)
   list          List separator conversion (comma/newline/space/tab/semicolon/pipe)
   roman         Roman numeral conversion (to-num / from-num, range 1-3999)
+  rsa           RSA keypair generation (PKCS#8 PEM, 2048/3072/4096 bits)
   slugify       URL slug generation
   sql           SQL formatter (pretty-print with indentation and keyword casing)
   temperature   Temperature unit conversion (celsius / fahrenheit / kelvin)
