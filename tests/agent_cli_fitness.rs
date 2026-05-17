@@ -156,7 +156,7 @@ const ALL_NOUNS_AND_VERBS: &[(&str, &[&str])] = &[
         ],
     ),
     ("bcrypt", &["hash", "verify"]),
-    ("url", &["encode", "decode"]),
+    ("url", &["encode", "decode", "parse"]),
     ("html", &["encode", "decode"]),
     ("basic-auth", &["encode", "decode"]),
     ("jwt", &["decode", "verify"]),
@@ -203,6 +203,16 @@ const ALL_NOUNS_AND_VERBS: &[(&str, &[&str])] = &[
     ("date", &["convert"]),
     ("crontab", &["describe", "next"]),
     ("chmod", &["calc", "parse"]),
+    // M4
+    ("cipher", &["encrypt", "decrypt"]),
+    ("rsa", &["keypair"]),
+    ("otp", &["generate", "validate"]),
+    ("pdf", &["signature"]),
+    ("regex", &["test", "generate"]),
+    ("email", &["normalize"]),
+    ("iban", &["validate"]),
+    ("phone", &["parse"]),
+    ("user-agent", &["parse"]),
 ];
 
 #[test]
