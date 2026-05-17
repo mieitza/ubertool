@@ -905,6 +905,24 @@ commands:
         type: boolean
         default: false
 
+  ubertool url parse [input] [flags]:
+    summary: Parse a URL into its component parts
+    arguments:
+      - name: input
+        summary: URL to parse (omit to read from stdin)
+        required: false
+        type: string
+    flags:
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
   ubertool uuid {command} [flags]:
     group: true
     summary: UUID generation (v4, v7)
@@ -1927,6 +1945,303 @@ commands:
         type: string
       - name: total
         summary: Total value
+        required: true
+        type: string
+    flags:
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool cipher {command} [flags]:
+    group: true
+    summary: Symmetric encryption and decryption
+
+  ubertool cipher encrypt <input> [flags]:
+    summary: Encrypt plaintext using a password-derived key
+    arguments:
+      - name: input
+        summary: Plaintext to encrypt
+        required: true
+        type: string
+    flags:
+      - name: password
+        summary: Password used to derive the encryption key
+        type: string
+        required: true
+      - name: algo
+        summary: Encryption algorithm
+        type: string
+        default: aes-gcm
+        choices:
+          - value: aes-gcm
+          - value: chacha20-poly1305
+      - name: kdf
+        summary: Key derivation function
+        type: string
+        default: argon2
+        choices:
+          - value: argon2
+          - value: pbkdf2
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool cipher decrypt <input> [flags]:
+    summary: Decrypt ciphertext using a password-derived key
+    arguments:
+      - name: input
+        summary: Ciphertext to decrypt
+        required: true
+        type: string
+    flags:
+      - name: password
+        summary: Password used to derive the decryption key
+        type: string
+        required: true
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool rsa {command} [flags]:
+    group: true
+    summary: RSA key pair generation
+
+  ubertool rsa keypair [flags]:
+    summary: Generate an RSA key pair
+    flags:
+      - name: bits
+        summary: Key size in bits
+        type: integer
+        default: "2048"
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool otp {command} [flags]:
+    group: true
+    summary: TOTP code generation and validation
+
+  ubertool otp generate [flags]:
+    summary: Generate a TOTP code from a shared secret
+    flags:
+      - name: secret
+        summary: Base32-encoded TOTP shared secret
+        type: string
+        required: true
+      - name: digits
+        summary: Number of OTP digits
+        type: integer
+        default: "6"
+      - name: period
+        summary: TOTP time step in seconds
+        type: integer
+        default: "30"
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool otp validate <code> [flags]:
+    summary: Validate a TOTP code against a shared secret
+    arguments:
+      - name: code
+        summary: OTP code to validate
+        required: true
+        type: string
+    flags:
+      - name: secret
+        summary: Base32-encoded TOTP shared secret
+        type: string
+        required: true
+      - name: digits
+        summary: Number of OTP digits
+        type: integer
+        default: "6"
+      - name: period
+        summary: TOTP time step in seconds
+        type: integer
+        default: "30"
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool pdf {command} [flags]:
+    group: true
+    summary: PDF inspection tools
+
+  ubertool pdf signature [flags]:
+    summary: Inspect digital signatures in a PDF file
+    flags:
+      - name: in
+        summary: Path to the PDF file to inspect
+        type: string
+        required: true
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool regex {command} [flags]:
+    group: true
+    summary: Regular expression test and generation
+
+  ubertool regex test [flags]:
+    summary: Test whether a pattern matches text
+    flags:
+      - name: pattern
+        summary: Regular expression pattern
+        type: string
+        required: true
+      - name: text
+        summary: Input text to test against the pattern
+        type: string
+        required: true
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool regex generate <pattern> [flags]:
+    summary: Generate a sample string that matches the given pattern
+    arguments:
+      - name: pattern
+        summary: Regular expression pattern to generate a match for
+        required: true
+        type: string
+    flags:
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool email {command} [flags]:
+    group: true
+    summary: Email address utilities
+
+  ubertool email normalize <input> [flags]:
+    summary: Normalize an email address to its canonical form
+    arguments:
+      - name: input
+        summary: Email address to normalize
+        required: true
+        type: string
+    flags:
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool iban {command} [flags]:
+    group: true
+    summary: IBAN validation
+
+  ubertool iban validate <input> [flags]:
+    summary: Validate an IBAN and decode its components
+    arguments:
+      - name: input
+        summary: IBAN to validate
+        required: true
+        type: string
+    flags:
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool phone {command} [flags]:
+    group: true
+    summary: Phone number parsing and formatting
+
+  ubertool phone parse <input> [flags]:
+    summary: Parse and format a phone number
+    arguments:
+      - name: input
+        summary: Phone number to parse
+        required: true
+        type: string
+    flags:
+      - name: region
+        summary: Default region hint (e.g. US, GB)
+        type: string
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool user-agent {command} [flags]:
+    group: true
+    summary: User-Agent string parsing
+
+  ubertool user-agent parse <input> [flags]:
+    summary: Parse a User-Agent string into its components
+    arguments:
+      - name: input
+        summary: User-Agent string to parse
         required: true
         type: string
     flags:
