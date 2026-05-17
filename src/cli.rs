@@ -65,6 +65,9 @@ pub enum Noun {
     Iban(crate::commands::iban::IbanArgs),
     /// Phone number parser (E.164 and regional formats).
     Phone(crate::commands::phone::PhoneArgs),
+    /// User-agent string parser.
+    #[command(name = "user-agent")]
+    UserAgent(crate::commands::user_agent::UserAgentArgs),
     /// HTTP Basic auth header encoding/decoding.
     #[command(name = "basic-auth")]
     BasicAuth(crate::commands::basic_auth::BasicAuthArgs),
