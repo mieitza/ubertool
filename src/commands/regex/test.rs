@@ -23,7 +23,10 @@ pub fn run(args: TestArgs, out: &Out) -> Result<(), CliError> {
             .iter()
             .map(|m| m.map(|x| x.as_str().to_string()).unwrap_or_default())
             .collect();
-        out.emit_value(&Out0 { matched: true, groups })
+        out.emit_value(&Out0 {
+            matched: true,
+            groups,
+        })
     } else {
         out.emit_value(&Out0 {
             matched: false,

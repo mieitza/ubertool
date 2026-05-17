@@ -17,10 +17,14 @@ pub struct RegexArgs {
 #[derive(Debug, Subcommand)]
 pub enum Verb {
     /// Test whether a pattern matches text; emit groups.
-    #[command(long_about = "Test whether a regex pattern matches text and emit any capture groups.\n\nNote: Rust's regex crate does not support lookaround.\n\nExamples:\n  ubertool regex test --pattern '\\d+' --text '42'\n  ubertool regex test --pattern '(\\w+)@(\\w+)' --text 'a@b' --json\n\nExit codes:\n  3   pattern does not compile (invalid_regex)")]
+    #[command(
+        long_about = "Test whether a regex pattern matches text and emit any capture groups.\n\nNote: Rust's regex crate does not support lookaround.\n\nExamples:\n  ubertool regex test --pattern '\\d+' --text '42'\n  ubertool regex test --pattern '(\\w+)@(\\w+)' --text 'a@b' --json\n\nExit codes:\n  3   pattern does not compile (invalid_regex)"
+    )]
     Test(TestArgs),
     /// Generate a string matching a pattern.
-    #[command(long_about = "Generate a string that matches a regex pattern.\n\nLimitations: lookaround, backreferences, and anchors are not supported.\n\nExamples:\n  ubertool regex generate '\\d{3}-\\d{4}'\n  ubertool regex generate '[A-Z]{2,4}'")]
+    #[command(
+        long_about = "Generate a string that matches a regex pattern.\n\nLimitations: lookaround, backreferences, and anchors are not supported.\n\nExamples:\n  ubertool regex generate '\\d{3}-\\d{4}'\n  ubertool regex generate '[A-Z]{2,4}'"
+    )]
     Generate(GenerateArgs),
 }
 

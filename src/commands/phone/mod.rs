@@ -16,7 +16,9 @@ pub struct PhoneArgs {
 #[derive(Debug, Subcommand)]
 pub enum Verb {
     /// Parse a phone number and emit structured info.
-    #[command(long_about = "Parse a phone number (E.164 or with --region default) and emit country, national format, E.164.\n\nExamples:\n  ubertool phone parse +14155552671\n  ubertool phone parse '415 555 2671' --region US --json\n\nExit codes:\n  3   invalid phone number (invalid_phone)")]
+    #[command(
+        long_about = "Parse a phone number (E.164 or with --region default) and emit country, national format, E.164.\n\nExamples:\n  ubertool phone parse +14155552671\n  ubertool phone parse '415 555 2671' --region US --json\n\nExit codes:\n  3   invalid phone number (invalid_phone)"
+    )]
     Parse(ParseArgs),
 }
 
@@ -56,8 +58,10 @@ fn run(args: ParseArgs, out: &Out) -> Result<(), CliError> {
     })?;
 
     if !num.is_valid() {
-        return Err(CliError::new(ErrorCode::InvalidPhone, "phone number failed validation")
-            .with_input(serde_json::json!(args.input)));
+        return Err(
+            CliError::new(ErrorCode::InvalidPhone, "phone number failed validation")
+                .with_input(serde_json::json!(args.input)),
+        );
     }
 
     let cc = num.country().code();

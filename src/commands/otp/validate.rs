@@ -25,19 +25,21 @@ pub fn run(args: ValidateArgs, out: &Out) -> Result<(), CliError> {
     let secret_bytes = Secret::Encoded(args.secret.clone())
         .to_bytes()
         .map_err(|e| {
-            CliError::new(ErrorCode::UsageError, format!("invalid base32 secret: {e:?}"))
-                .with_input(serde_json::json!({"secret": "<redacted>"}))
+            CliError::new(
+                ErrorCode::UsageError,
+                format!("invalid base32 secret: {e:?}"),
+            )
+            .with_input(serde_json::json!({"secret": "<redacted>"}))
         })?;
     let totp = TOTP::new_unchecked(Algorithm::SHA1, args.digits, 1, args.period, secret_bytes);
     let ok = totp
         .check_current(&args.code)
         .map_err(|e| CliError::new(ErrorCode::Internal, format!("TOTP validate: {e}")))?;
     if !ok {
-        return Err(CliError::new(
-            ErrorCode::SignatureMismatch,
-            "TOTP code does not match",
-        )
-        .with_input(serde_json::json!({"code": args.code, "secret": "<redacted>"})));
+        return Err(
+            CliError::new(ErrorCode::SignatureMismatch, "TOTP code does not match")
+                .with_input(serde_json::json!({"code": args.code, "secret": "<redacted>"})),
+        );
     }
     out.emit_value(&Out0 { valid: true })
 }

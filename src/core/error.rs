@@ -54,10 +54,11 @@ impl ErrorCode {
         match self {
             UsageError | BinaryToTtyRefused => ExitCode::Usage,
             InvalidJson | InvalidYaml | InvalidToml | InvalidXml | InvalidRegex | InvalidIban
-            | InvalidEmail | InvalidPhone | InvalidJwt | InvalidBase64 | InvalidBcrypt | InvalidCsv
-            | InvalidIntegerBase | InvalidRoman | InvalidUtf8 | InvalidBinary
-            | InvalidCodepoint | InvalidPdf | InvalidDockerRun | InvalidIp | InvalidMac | InvalidMath
-            | InvalidDate | InvalidCron | InvalidChmod | InvalidCipher | InvalidUrl => ExitCode::Invalid,
+            | InvalidEmail | InvalidPhone | InvalidJwt | InvalidBase64 | InvalidBcrypt
+            | InvalidCsv | InvalidIntegerBase | InvalidRoman | InvalidUtf8 | InvalidBinary
+            | InvalidCodepoint | InvalidPdf | InvalidDockerRun | InvalidIp | InvalidMac
+            | InvalidMath | InvalidDate | InvalidCron | InvalidChmod | InvalidCipher
+            | InvalidUrl => ExitCode::Invalid,
             FileNotFound | PermissionDenied | IoError => ExitCode::Io,
             SignatureMismatch | DecryptFailed | PdfSignatureInvalid => ExitCode::Crypto,
             AlgoNotSupported => ExitCode::Unsupported,

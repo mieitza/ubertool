@@ -17,10 +17,14 @@ pub struct CipherArgs {
 #[derive(Debug, Subcommand)]
 pub enum Verb {
     /// Encrypt input with password-derived AEAD.
-    #[command(long_about = "Encrypt input using AES-256-GCM or ChaCha20-Poly1305 with a key derived from the password via Argon2id (default) or PBKDF2-SHA256.\n\nOutput format: <algo>$<kdf>$<salt>$<nonce>$<ciphertext> with all components base64-encoded.\n\nExamples:\n  ubertool cipher encrypt 'hello' --password 'pw'\n  ubertool cipher encrypt 'msg' --password 'pw' --algo chacha20-poly1305\n  ubertool cipher encrypt 'msg' --password 'pw' --kdf pbkdf2 --json")]
+    #[command(
+        long_about = "Encrypt input using AES-256-GCM or ChaCha20-Poly1305 with a key derived from the password via Argon2id (default) or PBKDF2-SHA256.\n\nOutput format: <algo>$<kdf>$<salt>$<nonce>$<ciphertext> with all components base64-encoded.\n\nExamples:\n  ubertool cipher encrypt 'hello' --password 'pw'\n  ubertool cipher encrypt 'msg' --password 'pw' --algo chacha20-poly1305\n  ubertool cipher encrypt 'msg' --password 'pw' --kdf pbkdf2 --json"
+    )]
     Encrypt(encrypt::EncryptArgs),
     /// Decrypt input produced by `cipher encrypt`.
-    #[command(long_about = "Decrypt input previously produced by `cipher encrypt`.\n\nThe algo and KDF are auto-detected from the self-describing format.\n\nExamples:\n  ubertool cipher decrypt 'aes-gcm$argon2$...' --password 'pw'\n\nExit codes:\n  3   malformed cipher format (invalid_cipher)\n  5   authentication tag failed — wrong password or tampered ciphertext (decrypt_failed)")]
+    #[command(
+        long_about = "Decrypt input previously produced by `cipher encrypt`.\n\nThe algo and KDF are auto-detected from the self-describing format.\n\nExamples:\n  ubertool cipher decrypt 'aes-gcm$argon2$...' --password 'pw'\n\nExit codes:\n  3   malformed cipher format (invalid_cipher)\n  5   authentication tag failed — wrong password or tampered ciphertext (decrypt_failed)"
+    )]
     Decrypt(decrypt::DecryptArgs),
 }
 
@@ -77,7 +81,12 @@ pub fn dispatch(args: CipherArgs, out: &Out) -> Result<(), CliError> {
     }
 }
 
-pub(super) fn derive_key(kdf: Kdf, password: &[u8], salt: &[u8], key_len: usize) -> Result<Vec<u8>, CliError> {
+pub(super) fn derive_key(
+    kdf: Kdf,
+    password: &[u8],
+    salt: &[u8],
+    key_len: usize,
+) -> Result<Vec<u8>, CliError> {
     use crate::core::error::ErrorCode;
     let mut key = vec![0u8; key_len];
     match kdf {

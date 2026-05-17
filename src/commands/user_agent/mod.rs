@@ -16,7 +16,9 @@ pub struct UserAgentArgs {
 #[derive(Debug, Subcommand)]
 pub enum Verb {
     /// Parse a user-agent string into structured fields.
-    #[command(long_about = "Parse a user-agent string (browser, OS, version, etc.) using the woothee parser.\n\nExamples:\n  ubertool user-agent parse 'Mozilla/5.0 ...'\n  ubertool user-agent parse '...' --json")]
+    #[command(
+        long_about = "Parse a user-agent string (browser, OS, version, etc.) using the woothee parser.\n\nExamples:\n  ubertool user-agent parse 'Mozilla/5.0 ...'\n  ubertool user-agent parse '...' --json"
+    )]
     Parse(ParseArgs),
 }
 

@@ -24,8 +24,11 @@ pub fn run(args: GenerateArgs, out: &Out) -> Result<(), CliError> {
     let secret_bytes = Secret::Encoded(args.secret.clone())
         .to_bytes()
         .map_err(|e| {
-            CliError::new(ErrorCode::UsageError, format!("invalid base32 secret: {e:?}"))
-                .with_input(serde_json::json!({"secret": "<redacted>"}))
+            CliError::new(
+                ErrorCode::UsageError,
+                format!("invalid base32 secret: {e:?}"),
+            )
+            .with_input(serde_json::json!({"secret": "<redacted>"}))
         })?;
     let totp = TOTP::new_unchecked(Algorithm::SHA1, args.digits, 1, args.period, secret_bytes);
     let code = totp

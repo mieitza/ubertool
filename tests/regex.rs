@@ -5,7 +5,15 @@ use predicates::prelude::*;
 fn regex_test_match() {
     let out = Command::cargo_bin("ubertool")
         .unwrap()
-        .args(["--json", "regex", "test", "--pattern", r"^\d+$", "--text", "12345"])
+        .args([
+            "--json",
+            "regex",
+            "test",
+            "--pattern",
+            r"^\d+$",
+            "--text",
+            "12345",
+        ])
         .assert()
         .success()
         .get_output()
@@ -19,7 +27,15 @@ fn regex_test_match() {
 fn regex_test_no_match() {
     let out = Command::cargo_bin("ubertool")
         .unwrap()
-        .args(["--json", "regex", "test", "--pattern", r"^\d+$", "--text", "abc"])
+        .args([
+            "--json",
+            "regex",
+            "test",
+            "--pattern",
+            r"^\d+$",
+            "--text",
+            "abc",
+        ])
         .assert()
         .success()
         .get_output()
@@ -33,7 +49,15 @@ fn regex_test_no_match() {
 fn regex_test_with_groups() {
     let out = Command::cargo_bin("ubertool")
         .unwrap()
-        .args(["--json", "regex", "test", "--pattern", r"(\d+)-(\d+)", "--text", "42-17"])
+        .args([
+            "--json",
+            "regex",
+            "test",
+            "--pattern",
+            r"(\d+)-(\d+)",
+            "--text",
+            "42-17",
+        ])
         .assert()
         .success()
         .get_output()

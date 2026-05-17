@@ -24,8 +24,7 @@ fn pdf_signature_on_unsigned_pdf_emits_zero_count() {
                 lopdf::content::Operation::new("ET", vec![]),
             ],
         };
-        let content_id =
-            doc.add_object(Stream::new(dictionary! {}, content.encode().unwrap()));
+        let content_id = doc.add_object(Stream::new(dictionary! {}, content.encode().unwrap()));
         let page_id = doc.add_object(dictionary! {
             "Type" => "Page",
             "Parent" => pages_id,

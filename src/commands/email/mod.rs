@@ -18,7 +18,9 @@ pub struct EmailArgs {
 #[derive(Debug, Subcommand)]
 pub enum Verb {
     /// Normalize and validate an email address.
-    #[command(long_about = "Normalize and validate an email address.\n\nExamples:\n  ubertool email normalize Alice@Example.COM\n  ubertool email normalize ' bob@example.com ' --json\n\nExit codes:\n  3   invalid email address (invalid_email)")]
+    #[command(
+        long_about = "Normalize and validate an email address.\n\nExamples:\n  ubertool email normalize Alice@Example.COM\n  ubertool email normalize ' bob@example.com ' --json\n\nExit codes:\n  3   invalid email address (invalid_email)"
+    )]
     Normalize(NormalizeArgs),
 }
 
@@ -46,5 +48,8 @@ fn run(args: NormalizeArgs, out: &Out) -> Result<(), CliError> {
             .with_input(serde_json::json!(args.input))
     })?;
     let lower = parsed.to_string().to_lowercase();
-    out.emit_value(&Out0 { email: lower, valid: true })
+    out.emit_value(&Out0 {
+        email: lower,
+        valid: true,
+    })
 }

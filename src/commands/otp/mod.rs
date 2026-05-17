@@ -17,10 +17,14 @@ pub struct OtpArgs {
 #[derive(Debug, Subcommand)]
 pub enum Verb {
     /// Generate the current TOTP code from a base32 secret.
-    #[command(long_about = "Generate the current TOTP code (RFC 6238) from a base32 secret.\n\nExamples:\n  ubertool otp generate --secret JBSWY3DPEHPK3PXP\n  ubertool otp generate --secret JBSWY3DPEHPK3PXP --period 60 --digits 8 --json")]
+    #[command(
+        long_about = "Generate the current TOTP code (RFC 6238) from a base32 secret.\n\nExamples:\n  ubertool otp generate --secret JBSWY3DPEHPK3PXP\n  ubertool otp generate --secret JBSWY3DPEHPK3PXP --period 60 --digits 8 --json"
+    )]
     Generate(generate::GenerateArgs),
     /// Validate a TOTP code against the current time window.
-    #[command(long_about = "Validate a TOTP code against the current time window. Allows ±1 step skew by default.\n\nExamples:\n  ubertool otp validate 123456 --secret JBSWY3DPEHPK3PXP\n\nExit codes:\n  5   code does not match within the allowed window (signature_mismatch)")]
+    #[command(
+        long_about = "Validate a TOTP code against the current time window. Allows ±1 step skew by default.\n\nExamples:\n  ubertool otp validate 123456 --secret JBSWY3DPEHPK3PXP\n\nExit codes:\n  5   code does not match within the allowed window (signature_mismatch)"
+    )]
     Validate(validate::ValidateArgs),
 }
 

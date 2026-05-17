@@ -41,14 +41,22 @@ pub fn run(args: EncryptArgs, out: &Out) -> Result<(), CliError> {
                 .map_err(|e| CliError::new(ErrorCode::Internal, format!("AES key error: {e}")))?;
             cipher
                 .encrypt(Nonce::from_slice(&nonce), args.input.as_bytes())
-                .map_err(|e| CliError::new(ErrorCode::Internal, format!("AES encrypt failed: {e}")))?
+                .map_err(|e| {
+                    CliError::new(ErrorCode::Internal, format!("AES encrypt failed: {e}"))
+                })?
         }
         Algo::ChaCha20Poly1305 => {
-            let cipher = ChaCha20Poly1305::new_from_slice(&key)
-                .map_err(|e| CliError::new(ErrorCode::Internal, format!("ChaCha key error: {e}")))?;
+            let cipher = ChaCha20Poly1305::new_from_slice(&key).map_err(|e| {
+                CliError::new(ErrorCode::Internal, format!("ChaCha key error: {e}"))
+            })?;
             cipher
-                .encrypt(chacha20poly1305::Nonce::from_slice(&nonce), args.input.as_bytes())
-                .map_err(|e| CliError::new(ErrorCode::Internal, format!("ChaCha encrypt failed: {e}")))?
+                .encrypt(
+                    chacha20poly1305::Nonce::from_slice(&nonce),
+                    args.input.as_bytes(),
+                )
+                .map_err(|e| {
+                    CliError::new(ErrorCode::Internal, format!("ChaCha encrypt failed: {e}"))
+                })?
         }
     };
     let encoded = format!(
@@ -59,5 +67,7 @@ pub fn run(args: EncryptArgs, out: &Out) -> Result<(), CliError> {
         STANDARD.encode(nonce),
         STANDARD.encode(&ct)
     );
-    out.emit_value(&Out0 { ciphertext: encoded })
+    out.emit_value(&Out0 {
+        ciphertext: encoded,
+    })
 }

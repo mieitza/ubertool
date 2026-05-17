@@ -18,7 +18,9 @@ pub struct RsaArgs {
 #[derive(Debug, Subcommand)]
 pub enum Verb {
     /// Generate an RSA keypair (PKCS#8 PEM).
-    #[command(long_about = "Generate an RSA keypair and emit both keys as PKCS#8 PEM.\n\nExamples:\n  ubertool rsa keypair\n  ubertool rsa keypair --bits 4096 --json\n\nExit codes:\n  2   --bits not in {2048, 3072, 4096}")]
+    #[command(
+        long_about = "Generate an RSA keypair and emit both keys as PKCS#8 PEM.\n\nExamples:\n  ubertool rsa keypair\n  ubertool rsa keypair --bits 4096 --json\n\nExit codes:\n  2   --bits not in {2048, 3072, 4096}"
+    )]
     Keypair(KeypairArgs),
 }
 
@@ -46,7 +48,10 @@ fn run(args: KeypairArgs, out: &Out) -> Result<(), CliError> {
     if !matches!(args.bits, 2048 | 3072 | 4096) {
         return Err(CliError::new(
             ErrorCode::UsageError,
-            format!("unsupported --bits {} (must be 2048, 3072, or 4096)", args.bits),
+            format!(
+                "unsupported --bits {} (must be 2048, 3072, or 4096)",
+                args.bits
+            ),
         ));
     }
     let mut rng = OsRng;

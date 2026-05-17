@@ -28,7 +28,9 @@ pub enum Verb {
     )]
     Decode(decode::DecodeArgs),
     /// Parse a URL into its component parts.
-    #[command(long_about = "Parse a URL into scheme, host, port, path, query, fragment, username, password.\n\nExamples:\n  ubertool url parse 'https://example.com/path?q=1'\n  ubertool url parse 'https://user:pass@example.com:8080/path' --json\n\nExit codes:\n  3   invalid URL (invalid_url)")]
+    #[command(
+        long_about = "Parse a URL into scheme, host, port, path, query, fragment, username, password.\n\nExamples:\n  ubertool url parse 'https://example.com/path?q=1'\n  ubertool url parse 'https://user:pass@example.com:8080/path' --json\n\nExit codes:\n  3   invalid URL (invalid_url)"
+    )]
     Parse(parse::ParseArgs),
 }
 

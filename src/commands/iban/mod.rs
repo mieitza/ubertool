@@ -1,7 +1,7 @@
 //! IBAN validation.
 
 use clap::{Args, Subcommand};
-use iban::{IbanLike, Iban};
+use iban::{Iban, IbanLike};
 use serde::Serialize;
 
 use crate::core::error::{CliError, ErrorCode};
@@ -16,7 +16,9 @@ pub struct IbanArgs {
 #[derive(Debug, Subcommand)]
 pub enum Verb {
     /// Validate an IBAN check digit (mod-97).
-    #[command(long_about = "Validate an IBAN using the mod-97 check digit algorithm. Spaces and other separators are stripped.\n\nExamples:\n  ubertool iban validate GB82WEST12345698765432\n  ubertool iban validate 'GB82 WEST 1234 5698 7654 32' --json\n\nExit codes:\n  3   invalid IBAN (invalid_iban)")]
+    #[command(
+        long_about = "Validate an IBAN using the mod-97 check digit algorithm. Spaces and other separators are stripped.\n\nExamples:\n  ubertool iban validate GB82WEST12345698765432\n  ubertool iban validate 'GB82 WEST 1234 5698 7654 32' --json\n\nExit codes:\n  3   invalid IBAN (invalid_iban)"
+    )]
     Validate(ValidateArgs),
 }
 
