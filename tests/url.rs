@@ -85,3 +85,38 @@ fn url_encode_json_mode() {
     let v: serde_json::Value = serde_json::from_slice(&out).expect("valid JSON");
     assert_eq!(v["encoded"], "hello%20world");
 }
+
+#[test]
+fn url_parse_full() {
+    let out = Command::cargo_bin("ubertool").unwrap()
+        .args(["--json", "url", "parse", "https://user:pass@example.com:8080/path?q=1#frag"])
+        .assert().success().get_output().stdout.clone();
+    let v: serde_json::Value = serde_json::from_slice(&out).expect("valid JSON");
+    assert_eq!(v["scheme"], "https");
+    assert_eq!(v["host"], "example.com");
+    assert_eq!(v["port"], 8080);
+    assert_eq!(v["path"], "/path");
+    assert_eq!(v["query"], "q=1");
+    assert_eq!(v["fragment"], "frag");
+    assert_eq!(v["username"], "user");
+    assert_eq!(v["password"], "pass");
+}
+
+#[test]
+fn url_parse_minimal() {
+    let out = Command::cargo_bin("ubertool").unwrap()
+        .args(["--json", "url", "parse", "https://example.com"])
+        .assert().success().get_output().stdout.clone();
+    let v: serde_json::Value = serde_json::from_slice(&out).expect("valid JSON");
+    assert_eq!(v["scheme"], "https");
+    assert_eq!(v["host"], "example.com");
+    assert!(v["port"].is_null());
+}
+
+#[test]
+fn url_parse_invalid_exits_3() {
+    Command::cargo_bin("ubertool").unwrap()
+        .args(["url", "parse", "not a url"])
+        .assert().failure().code(3)
+        .stderr(predicate::str::contains("invalid_url"));
+}
