@@ -172,4 +172,7 @@ pub enum Noun {
     Numeronym(crate::commands::numeronym::NumeronymArgs),
     /// Random port number generator (IANA ephemeral range default).
     Port(crate::commands::port::PortArgs),
+    /// Generate shell completion script (bash, zsh, fish, powershell, elvish).
+    #[command(long_about = "Emit a shell completion script for the chosen shell.\n\nInstallation (examples):\n  Bash:  ubertool completions bash > /etc/bash_completion.d/ubertool\n  Zsh:   ubertool completions zsh > ~/.zsh/completions/_ubertool\n  Fish:  ubertool completions fish > ~/.config/fish/completions/ubertool.fish")]
+    Completions(crate::commands::completions::CompletionsArgs),
 }

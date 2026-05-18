@@ -1,6 +1,5 @@
 ---
 source: tests/snapshots.rs
-assertion_line: 18
 expression: s
 ---
 ubertool — agent-friendly developer utilities.
@@ -77,6 +76,7 @@ Commands:
   git              Git cheat sheet memo (bundled Markdown reference)
   numeronym        Numeronym generator (i18n-style contraction)
   port             Random port number generator (IANA ephemeral range default)
+  completions      Generate shell completion script (bash, zsh, fish, powershell, elvish)
   help             Print this message or the help of the given subcommand(s)
 
 Options:
