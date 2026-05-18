@@ -6,6 +6,7 @@ use crate::core::error::CliError;
 use crate::core::output::Out;
 
 pub mod generate;
+pub mod memo;
 pub mod test;
 
 #[derive(Debug, Args)]
@@ -26,6 +27,9 @@ pub enum Verb {
         long_about = "Generate a string that matches a regex pattern.\n\nLimitations: lookaround, backreferences, and anchors are not supported.\n\nExamples:\n  ubertool regex generate '\\d{3}-\\d{4}'\n  ubertool regex generate '[A-Z]{2,4}'"
     )]
     Generate(GenerateArgs),
+    /// Print the bundled regex cheat sheet (Markdown).
+    #[command(long_about = "Print the bundled regex cheat sheet as Markdown.\n\nCovers anchors, character classes, quantifiers, groups, lookaround, common patterns, and inline flags. Notes which features are not supported by Rust's `regex` crate.\n\nExamples:\n  ubertool regex memo\n  ubertool regex memo --json")]
+    Memo,
 }
 
 #[derive(Debug, Args)]
@@ -45,5 +49,6 @@ pub fn dispatch(args: RegexArgs, out: &Out) -> Result<(), CliError> {
     match args.verb {
         Verb::Test(a) => test::run(a, out),
         Verb::Generate(a) => generate::run(a, out),
+        Verb::Memo => memo::run(out),
     }
 }
