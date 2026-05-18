@@ -50,3 +50,4 @@ pub mod user_agent;
 pub mod uuid;
 pub mod xml;
 pub mod yaml;
+pub mod numeronym;

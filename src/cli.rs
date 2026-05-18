@@ -168,4 +168,6 @@ pub enum Noun {
     Ascii(crate::commands::ascii::AsciiArgs),
     /// Git cheat sheet memo (bundled Markdown reference).
     Git(crate::commands::git::GitArgs),
+    /// Numeronym generator (i18n-style contraction).
+    Numeronym(crate::commands::numeronym::NumeronymArgs),
 }
