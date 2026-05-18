@@ -19,10 +19,14 @@ pub struct QrArgs {
 #[derive(Debug, Subcommand)]
 pub enum Verb {
     /// Generate a QR code from arbitrary text.
-    #[command(long_about = "Generate a QR code from arbitrary text.\n\nFormats:\n  svg (default) — emitted to stdout (or --out path)\n  png — requires --out path or non-TTY stdout (binary)\n\nExamples:\n  ubertool qr generate 'https://example.com'\n  ubertool qr generate 'hello' --format png --out qr.png\n  ubertool qr generate 'hi' --json")]
+    #[command(
+        long_about = "Generate a QR code from arbitrary text.\n\nFormats:\n  svg (default) — emitted to stdout (or --out path)\n  png — requires --out path or non-TTY stdout (binary)\n\nExamples:\n  ubertool qr generate 'https://example.com'\n  ubertool qr generate 'hello' --format png --out qr.png\n  ubertool qr generate 'hi' --json"
+    )]
     Generate(generate::GenerateArgs),
     /// Generate a QR code encoding a Wi-Fi network URI.
-    #[command(long_about = "Generate a QR code that, when scanned by a mobile camera, prompts to join a Wi-Fi network.\n\nEncodes WIFI:T:<security>;S:<ssid>;P:<password>;H:<hidden>;;\n\nExamples:\n  ubertool qr wifi --ssid 'MyNet' --password 'pw'\n  ubertool qr wifi --ssid 'Public' --security nopass\n  ubertool qr wifi --ssid 'Hidden' --password 'pw' --hidden --out wifi.png --format png")]
+    #[command(
+        long_about = "Generate a QR code that, when scanned by a mobile camera, prompts to join a Wi-Fi network.\n\nEncodes WIFI:T:<security>;S:<ssid>;P:<password>;H:<hidden>;;\n\nExamples:\n  ubertool qr wifi --ssid 'MyNet' --password 'pw'\n  ubertool qr wifi --ssid 'Public' --security nopass\n  ubertool qr wifi --ssid 'Hidden' --password 'pw' --hidden --out wifi.png --format png"
+    )]
     Wifi(wifi::WifiArgs),
 }
 
@@ -57,10 +61,7 @@ pub(super) fn render(
     match format {
         Format::Svg => {
             use qrcode::render::svg;
-            let svg_str = code
-                .render::<svg::Color>()
-                .min_dimensions(200, 200)
-                .build();
+            let svg_str = code.render::<svg::Color>().min_dimensions(200, 200).build();
             if let Some(path) = out_path {
                 std::fs::write(path, &svg_str).map_err(CliError::from)?;
                 return Ok(());
@@ -75,7 +76,11 @@ pub(super) fn render(
             let width = code.width();
             // Build a bool matrix from the QR code.
             let pixels: Vec<Vec<bool>> = (0..width)
-                .map(|y| (0..width).map(|x| code[(x, y)] == qrcode::Color::Dark).collect())
+                .map(|y| {
+                    (0..width)
+                        .map(|x| code[(x, y)] == qrcode::Color::Dark)
+                        .collect()
+                })
                 .collect();
             let scale: u32 = 8;
             let border: u32 = 4;
@@ -96,8 +101,11 @@ pub(super) fn render(
                 }
             }
             let mut bytes: Vec<u8> = Vec::new();
-            img.write_to(&mut std::io::Cursor::new(&mut bytes), image::ImageFormat::Png)
-                .map_err(|e| CliError::new(ErrorCode::Internal, format!("PNG encode: {e}")))?;
+            img.write_to(
+                &mut std::io::Cursor::new(&mut bytes),
+                image::ImageFormat::Png,
+            )
+            .map_err(|e| CliError::new(ErrorCode::Internal, format!("PNG encode: {e}")))?;
             out.emit_binary(&bytes, out_path.map(|p| p.as_path()))
         }
     }

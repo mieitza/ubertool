@@ -11,5 +11,7 @@ struct Out0 {
 }
 
 pub fn run(out: &Out) -> Result<(), CliError> {
-    out.emit_value(&Out0 { memo: MEMO.to_string() })
+    out.emit_value(&Out0 {
+        memo: MEMO.to_string(),
+    })
 }

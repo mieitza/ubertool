@@ -15,7 +15,9 @@ pub struct SvgPlaceholderArgs {
 #[derive(Debug, Subcommand)]
 pub enum Verb {
     /// Generate a placeholder SVG image.
-    #[command(long_about = "Generate a placeholder SVG image with a centered label.\n\nUseful for prototyping when you need a sized image but no real content.\n\nExamples:\n  ubertool svg-placeholder generate --width 800 --height 600\n  ubertool svg-placeholder generate --text 'Logo'\n  ubertool svg-placeholder generate --width 100 --height 100 --bg '#333' --fg '#fff' --json")]
+    #[command(
+        long_about = "Generate a placeholder SVG image with a centered label.\n\nUseful for prototyping when you need a sized image but no real content.\n\nExamples:\n  ubertool svg-placeholder generate --width 800 --height 600\n  ubertool svg-placeholder generate --text 'Logo'\n  ubertool svg-placeholder generate --width 100 --height 100 --bg '#333' --fg '#fff' --json"
+    )]
     Generate(GenerateArgs),
 }
 
@@ -48,7 +50,9 @@ pub fn dispatch(args: SvgPlaceholderArgs, out: &Out) -> Result<(), CliError> {
 }
 
 fn run(args: GenerateArgs, out: &Out) -> Result<(), CliError> {
-    let label = args.text.unwrap_or_else(|| format!("{}x{}", args.width, args.height));
+    let label = args
+        .text
+        .unwrap_or_else(|| format!("{}x{}", args.width, args.height));
     let font_size = (args.width.min(args.height) / 8).max(12);
     let svg = format!(
         r#"<?xml version="1.0" encoding="UTF-8"?>

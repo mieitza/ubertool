@@ -16,7 +16,9 @@ pub struct PortArgs {
 #[derive(Debug, Subcommand)]
 pub enum Verb {
     /// Generate a random port number in a range.
-    #[command(long_about = "Generate a random TCP/UDP port number.\n\nDefault range is the IANA ephemeral range 49152-65535. Override with --min/--max.\n\nExamples:\n  ubertool port random\n  ubertool port random --min 8000 --max 8099\n\nExit codes:\n  2   --min greater than --max")]
+    #[command(
+        long_about = "Generate a random TCP/UDP port number.\n\nDefault range is the IANA ephemeral range 49152-65535. Override with --min/--max.\n\nExamples:\n  ubertool port random\n  ubertool port random --min 8000 --max 8099\n\nExit codes:\n  2   --min greater than --max"
+    )]
     Random(RandomArgs),
 }
 

@@ -28,7 +28,9 @@ pub enum Verb {
     )]
     Generate(GenerateArgs),
     /// Print the bundled regex cheat sheet (Markdown).
-    #[command(long_about = "Print the bundled regex cheat sheet as Markdown.\n\nCovers anchors, character classes, quantifiers, groups, lookaround, common patterns, and inline flags. Notes which features are not supported by Rust's `regex` crate.\n\nExamples:\n  ubertool regex memo\n  ubertool regex memo --json")]
+    #[command(
+        long_about = "Print the bundled regex cheat sheet as Markdown.\n\nCovers anchors, character classes, quantifiers, groups, lookaround, common patterns, and inline flags. Notes which features are not supported by Rust's `regex` crate.\n\nExamples:\n  ubertool regex memo\n  ubertool regex memo --json"
+    )]
     Memo,
 }
 

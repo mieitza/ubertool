@@ -20,7 +20,9 @@ pub struct HttpStatusArgs {
 #[derive(Debug, Subcommand)]
 pub enum Verb {
     /// Look up the name and category for an HTTP status code.
-    #[command(long_about = "Look up an HTTP status code.\n\nReturns `valid: false` and null name/category for unknown codes (no error).\n\nExamples:\n  ubertool http-status lookup 200\n  ubertool http-status lookup 404 --json\n\nExit codes:\n  2   input is not a valid integer")]
+    #[command(
+        long_about = "Look up an HTTP status code.\n\nReturns `valid: false` and null name/category for unknown codes (no error).\n\nExamples:\n  ubertool http-status lookup 200\n  ubertool http-status lookup 404 --json\n\nExit codes:\n  2   input is not a valid integer"
+    )]
     Lookup(LookupArgs),
 }
 

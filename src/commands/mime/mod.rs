@@ -20,7 +20,9 @@ pub struct MimeArgs {
 #[derive(Debug, Subcommand)]
 pub enum Verb {
     /// Look up the MIME type for a file extension or filename.
-    #[command(long_about = "Look up the MIME type for a file extension or filename.\n\nAccepts the extension alone (e.g., `json`), with a leading dot (`.json`), or a full filename (`report.pdf`). Lookup is case-insensitive.\n\nReturns `mime: null` for unknown extensions (no error).\n\nExamples:\n  ubertool mime lookup json\n  ubertool mime lookup report.pdf --json")]
+    #[command(
+        long_about = "Look up the MIME type for a file extension or filename.\n\nAccepts the extension alone (e.g., `json`), with a leading dot (`.json`), or a full filename (`report.pdf`). Lookup is case-insensitive.\n\nReturns `mime: null` for unknown extensions (no error).\n\nExamples:\n  ubertool mime lookup json\n  ubertool mime lookup report.pdf --json"
+    )]
     Lookup(LookupArgs),
 }
 
@@ -57,7 +59,10 @@ pub fn dispatch(args: MimeArgs, out: &Out) -> Result<(), CliError> {
 fn run(args: LookupArgs, out: &Out) -> Result<(), CliError> {
     let ext = extract_extension(&args.input);
     let mime = mime_table().get(&ext).cloned();
-    out.emit_value(&Out0 { extension: ext, mime })
+    out.emit_value(&Out0 {
+        extension: ext,
+        mime,
+    })
 }
 
 fn extract_extension(input: &str) -> String {

@@ -15,7 +15,9 @@ pub struct NumeronymArgs {
 #[derive(Debug, Subcommand)]
 pub enum Verb {
     /// Generate a numeronym (e.g., 'internationalization' -> 'i18n').
-    #[command(long_about = "Generate a numeronym: first char + count of middle chars + last char.\n\nWords \u{2264} 2 chars are passed through unchanged.\n\nExamples:\n  ubertool numeronym generate internationalization   # i18n\n  ubertool numeronym generate kubernetes              # k8s\n  ubertool numeronym generate accessibility           # a11y")]
+    #[command(
+        long_about = "Generate a numeronym: first char + count of middle chars + last char.\n\nWords \u{2264} 2 chars are passed through unchanged.\n\nExamples:\n  ubertool numeronym generate internationalization   # i18n\n  ubertool numeronym generate kubernetes              # k8s\n  ubertool numeronym generate accessibility           # a11y"
+    )]
     Generate(GenerateArgs),
 }
 

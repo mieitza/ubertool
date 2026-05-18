@@ -16,7 +16,9 @@ pub struct AsciiArgs {
 #[derive(Debug, Subcommand)]
 pub enum Verb {
     /// Render text as ASCII art using the figlet standard font.
-    #[command(long_about = "Render text as ASCII art using the figlet `standard` font.\n\nExamples:\n  ubertool ascii draw 'Hello'\n  ubertool ascii draw 'Hi' --json")]
+    #[command(
+        long_about = "Render text as ASCII art using the figlet `standard` font.\n\nExamples:\n  ubertool ascii draw 'Hello'\n  ubertool ascii draw 'Hi' --json"
+    )]
     Draw(DrawArgs),
 }
 
@@ -38,7 +40,10 @@ pub fn dispatch(args: AsciiArgs, out: &Out) -> Result<(), CliError> {
 
 fn run(args: DrawArgs, out: &Out) -> Result<(), CliError> {
     let font = FIGfont::standard().map_err(|e| {
-        CliError::new(ErrorCode::Internal, format!("could not load figlet font: {e}"))
+        CliError::new(
+            ErrorCode::Internal,
+            format!("could not load figlet font: {e}"),
+        )
     })?;
     let art = if args.input.is_empty() {
         String::new()

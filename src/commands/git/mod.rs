@@ -17,7 +17,9 @@ pub struct GitArgs {
 #[derive(Debug, Subcommand)]
 pub enum Verb {
     /// Print the bundled git cheat sheet (Markdown).
-    #[command(long_about = "Print the bundled git cheat sheet as Markdown.\n\nCovers setup, basic workflow, branches, remotes, undo/inspect, stash, search, tags.\n\nExamples:\n  ubertool git memo\n  ubertool git memo --json   # wraps Markdown in {\"memo\": \"...\"}")]
+    #[command(
+        long_about = "Print the bundled git cheat sheet as Markdown.\n\nCovers setup, basic workflow, branches, remotes, undo/inspect, stash, search, tags.\n\nExamples:\n  ubertool git memo\n  ubertool git memo --json   # wraps Markdown in {\"memo\": \"...\"}"
+    )]
     Memo,
 }
 
@@ -28,6 +30,8 @@ struct Out0 {
 
 pub fn dispatch(args: GitArgs, out: &Out) -> Result<(), CliError> {
     match args.verb {
-        Verb::Memo => out.emit_value(&Out0 { memo: MEMO.to_string() }),
+        Verb::Memo => out.emit_value(&Out0 {
+            memo: MEMO.to_string(),
+        }),
     }
 }
