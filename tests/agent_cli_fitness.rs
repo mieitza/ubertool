@@ -208,11 +208,20 @@ const ALL_NOUNS_AND_VERBS: &[(&str, &[&str])] = &[
     ("rsa", &["keypair"]),
     ("otp", &["generate", "validate"]),
     ("pdf", &["signature"]),
-    ("regex", &["test", "generate"]),
+    ("regex", &["test", "generate", "memo"]),
     ("email", &["normalize"]),
     ("iban", &["validate"]),
     ("phone", &["parse"]),
     ("user-agent", &["parse"]),
+    // M5
+    ("mime", &["lookup"]),
+    ("http-status", &["lookup"]),
+    ("qr", &["generate", "wifi"]),
+    ("svg-placeholder", &["generate"]),
+    ("ascii", &["draw"]),
+    ("git", &["memo"]),
+    ("numeronym", &["generate"]),
+    ("port", &["random"]),
 ];
 
 #[test]
