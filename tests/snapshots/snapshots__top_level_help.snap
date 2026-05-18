@@ -71,6 +71,7 @@ Commands:
   chmod         Unix file mode conversion (symbolic ↔ octal)
   mime          MIME type lookup from file extension or filename
   http-status   HTTP status code lookup
+  qr            QR code generation (SVG/PNG) including WiFi URIs
   help          Print this message or the help of the given subcommand(s)
 
 Options:

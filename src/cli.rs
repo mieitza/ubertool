@@ -159,4 +159,6 @@ pub enum Noun {
     /// HTTP status code lookup.
     #[command(name = "http-status")]
     HttpStatus(crate::commands::http_status::HttpStatusArgs),
+    /// QR code generation (SVG/PNG) including WiFi URIs.
+    Qr(crate::commands::qr::QrArgs),
 }

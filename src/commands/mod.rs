@@ -28,6 +28,7 @@ pub mod math;
 pub mod otp;
 pub mod password;
 pub mod pdf;
+pub mod qr;
 pub mod percentage;
 pub mod phone;
 pub mod regex;

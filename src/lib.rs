@@ -62,6 +62,7 @@ pub fn run() -> ProcExitCode {
         cli::Noun::Chmod(a) => commands::chmod::dispatch(a, &out),
         cli::Noun::Mime(a) => commands::mime::dispatch(a, &out),
         cli::Noun::HttpStatus(a) => commands::http_status::dispatch(a, &out),
+        cli::Noun::Qr(a) => commands::qr::dispatch(a, &out),
     };
 
     match result {
