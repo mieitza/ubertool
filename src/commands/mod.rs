@@ -20,6 +20,7 @@ pub mod ipv6_ula;
 pub mod json;
 pub mod jwt;
 pub mod list;
+pub mod http_status;
 pub mod mac;
 pub mod mime;
 pub mod markdown;

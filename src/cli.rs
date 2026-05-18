@@ -156,4 +156,7 @@ pub enum Noun {
     Chmod(crate::commands::chmod::ChmodArgs),
     /// MIME type lookup from file extension or filename.
     Mime(crate::commands::mime::MimeArgs),
+    /// HTTP status code lookup.
+    #[command(name = "http-status")]
+    HttpStatus(crate::commands::http_status::HttpStatusArgs),
 }
