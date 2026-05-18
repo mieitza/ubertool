@@ -67,6 +67,7 @@ pub fn run() -> ProcExitCode {
         cli::Noun::Ascii(a) => commands::ascii::dispatch(a, &out),
         cli::Noun::Git(a) => commands::git::dispatch(a, &out),
         cli::Noun::Numeronym(a) => commands::numeronym::dispatch(a, &out),
+        cli::Noun::Port(a) => commands::port::dispatch(a, &out),
     };
 
     match result {

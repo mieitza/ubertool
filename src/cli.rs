@@ -170,4 +170,6 @@ pub enum Noun {
     Git(crate::commands::git::GitArgs),
     /// Numeronym generator (i18n-style contraction).
     Numeronym(crate::commands::numeronym::NumeronymArgs),
+    /// Random port number generator (IANA ephemeral range default).
+    Port(crate::commands::port::PortArgs),
 }
