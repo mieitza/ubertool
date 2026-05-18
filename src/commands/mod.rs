@@ -1,11 +1,11 @@
 pub mod ascii;
 pub mod base64;
-pub mod completions;
 pub mod basic_auth;
 pub mod bcrypt;
 pub mod case;
 pub mod chmod;
 pub mod cipher;
+pub mod completions;
 pub mod crontab;
 pub mod csv;
 pub mod date;
