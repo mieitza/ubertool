@@ -161,4 +161,9 @@ pub enum Noun {
     HttpStatus(crate::commands::http_status::HttpStatusArgs),
     /// QR code generation (SVG/PNG) including WiFi URIs.
     Qr(crate::commands::qr::QrArgs),
+    /// SVG placeholder image generator.
+    #[command(name = "svg-placeholder")]
+    SvgPlaceholder(crate::commands::svg_placeholder::SvgPlaceholderArgs),
+    /// ASCII art rendering (figlet standard font).
+    Ascii(crate::commands::ascii::AsciiArgs),
 }

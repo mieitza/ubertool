@@ -1,3 +1,4 @@
+pub mod ascii;
 pub mod base64;
 pub mod basic_auth;
 pub mod bcrypt;
@@ -37,6 +38,7 @@ pub mod rsa;
 pub mod safelink;
 pub mod slugify;
 pub mod sql;
+pub mod svg_placeholder;
 pub mod temperature;
 pub mod text;
 pub mod token;

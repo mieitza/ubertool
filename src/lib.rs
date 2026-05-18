@@ -63,6 +63,8 @@ pub fn run() -> ProcExitCode {
         cli::Noun::Mime(a) => commands::mime::dispatch(a, &out),
         cli::Noun::HttpStatus(a) => commands::http_status::dispatch(a, &out),
         cli::Noun::Qr(a) => commands::qr::dispatch(a, &out),
+        cli::Noun::SvgPlaceholder(a) => commands::svg_placeholder::dispatch(a, &out),
+        cli::Noun::Ascii(a) => commands::ascii::dispatch(a, &out),
     };
 
     match result {
