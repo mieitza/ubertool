@@ -78,6 +78,10 @@ phonenumber = "0.3"
 woothee = "0.13"
 # M4 URL
 url = "2"
+# M5 images
+qrcode = "0.14"
+image = { version = "0.25", default-features = false, features = ["png"] }
+figlet-rs = "0.1"
 
 [dev-dependencies]
 assert_cmd = "2"
