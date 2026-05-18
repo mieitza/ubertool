@@ -166,4 +166,6 @@ pub enum Noun {
     SvgPlaceholder(crate::commands::svg_placeholder::SvgPlaceholderArgs),
     /// ASCII art rendering (figlet standard font).
     Ascii(crate::commands::ascii::AsciiArgs),
+    /// Git cheat sheet memo (bundled Markdown reference).
+    Git(crate::commands::git::GitArgs),
 }

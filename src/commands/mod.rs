@@ -1,5 +1,6 @@
 pub mod ascii;
 pub mod base64;
+pub mod git;
 pub mod basic_auth;
 pub mod bcrypt;
 pub mod case;

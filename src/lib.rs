@@ -65,6 +65,7 @@ pub fn run() -> ProcExitCode {
         cli::Noun::Qr(a) => commands::qr::dispatch(a, &out),
         cli::Noun::SvgPlaceholder(a) => commands::svg_placeholder::dispatch(a, &out),
         cli::Noun::Ascii(a) => commands::ascii::dispatch(a, &out),
+        cli::Noun::Git(a) => commands::git::dispatch(a, &out),
     };
 
     match result {
