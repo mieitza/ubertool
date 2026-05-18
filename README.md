@@ -7,20 +7,34 @@ A single-binary Rust port of [it-tools](https://it-tools.tech) for the terminal.
 ## Install
 
 ```bash
-# crates.io
+# One-line installer (recommended) — downloads the matching pre-built binary
+# from GitHub Releases for your OS/arch (linux/macos/windows × x86_64/aarch64).
+curl -fsSL https://raw.githubusercontent.com/mieitza/ubertool/main/install.sh | sh
+
+# Pin a version
+curl -fsSL https://raw.githubusercontent.com/mieitza/ubertool/main/install.sh | sh -s -- --version v0.1.0
+
+# Install binary + the Claude agent skill
+curl -fsSL https://raw.githubusercontent.com/mieitza/ubertool/main/install.sh | sh -s -- --with-claude-skill
+
+# From crates.io (once published)
 cargo install ubertool
-
-# Pre-built binary via cargo-binstall
-cargo binstall ubertool
-
-# Docker (after the ghcr.io image is published)
-docker run --rm ghcr.io/mieitza/ubertool:latest base64 encode hello
 
 # From source
 git clone https://github.com/mieitza/ubertool && cd ubertool && cargo install --path .
 ```
 
-A Homebrew tap is on the roadmap.
+The installer drops the binary at `~/.local/bin/ubertool`. Override with `--bin-dir /usr/local/bin` (may require `sudo`). A Homebrew tap and crates.io publish are on the roadmap.
+
+### Use with Claude (and other agents)
+
+ubertool ships an agent skill at [`docs/claude-skill/SKILL.md`](./docs/claude-skill/SKILL.md). With `--with-claude-skill` above the installer drops it at `~/.claude/skills/ubertool/SKILL.md` so Claude Code automatically picks it up and knows how to invoke ubertool (discovery, exit codes, error envelope, common patterns). Manual install:
+
+```bash
+mkdir -p ~/.claude/skills/ubertool
+curl -fsSL https://raw.githubusercontent.com/mieitza/ubertool/main/docs/claude-skill/SKILL.md \
+  -o ~/.claude/skills/ubertool/SKILL.md
+```
 
 ## Golden examples
 
