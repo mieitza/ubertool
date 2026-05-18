@@ -1,0 +1,19 @@
+---
+source: tests/help_snapshots.rs
+expression: out
+---
+MAC address utilities (generate random, look up vendor OUI)
+
+Usage: ubertool mac [OPTIONS] <COMMAND>
+
+Commands:
+  new     Generate a random locally-administered MAC address
+  lookup  Look up the vendor for a MAC address from the bundled OUI table
+  help    Print this message or the help of the given subcommand(s)
+
+Options:
+      --json     Output as JSON to stdout. Human messages still go to stderr
+  -q, --quiet    Bare values only (pipe-friendly)
+  -v, --verbose  Verbose progress to stderr
+  -h, --help     Print help
+  -V, --version  Print version

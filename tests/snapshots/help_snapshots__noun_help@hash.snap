@@ -1,0 +1,38 @@
+---
+source: tests/help_snapshots.rs
+expression: out
+---
+Cryptographic hash functions (md5, sha1, sha224, sha256, sha384, sha512, sha3-256, sha3-512)
+
+Usage: ubertool hash [OPTIONS] <COMMAND>
+
+Commands:
+  md5       Compute MD5 hash (legacy / not collision-resistant).
+            
+            Examples:
+              ubertool hash md5 "hello"
+              ubertool hash md5 --in ./file.bin
+              echo -n hello | ubertool hash md5
+  sha1      Compute SHA-1 hash (legacy / not collision-resistant).
+            
+            Examples:
+              ubertool hash sha1 "hello"
+              ubertool hash sha1 --in ./file.bin
+  sha224    Compute SHA-224 hash.
+  sha256    Compute SHA-256 hash.
+            
+            Examples:
+              ubertool hash sha256 "hello"
+              ubertool hash sha256 --in ./file.bin --json
+  sha384    Compute SHA-384 hash.
+  sha512    Compute SHA-512 hash.
+  sha3-256  Compute SHA3-256 hash (Keccak).
+  sha3-512  Compute SHA3-512 hash (Keccak).
+  help      Print this message or the help of the given subcommand(s)
+
+Options:
+      --json     Output as JSON to stdout. Human messages still go to stderr
+  -q, --quiet    Bare values only (pipe-friendly)
+  -v, --verbose  Verbose progress to stderr
+  -h, --help     Print help
+  -V, --version  Print version

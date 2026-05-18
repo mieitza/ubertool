@@ -1,0 +1,18 @@
+---
+source: tests/help_snapshots.rs
+expression: out
+---
+SQL formatter (pretty-print with indentation and keyword casing)
+
+Usage: ubertool sql [OPTIONS] <COMMAND>
+
+Commands:
+  format  Pretty-print SQL with consistent indentation
+  help    Print this message or the help of the given subcommand(s)
+
+Options:
+      --json     Output as JSON to stdout. Human messages still go to stderr
+  -q, --quiet    Bare values only (pipe-friendly)
+  -v, --verbose  Verbose progress to stderr
+  -h, --help     Print help
+  -V, --version  Print version

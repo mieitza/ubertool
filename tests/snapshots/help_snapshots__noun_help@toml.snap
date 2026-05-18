@@ -1,0 +1,19 @@
+---
+source: tests/help_snapshots.rs
+expression: out
+---
+TOML conversion: to-json / to-yaml
+
+Usage: ubertool toml [OPTIONS] <COMMAND>
+
+Commands:
+  to-json  Convert TOML to JSON
+  to-yaml  Convert TOML to YAML
+  help     Print this message or the help of the given subcommand(s)
+
+Options:
+      --json     Output as JSON to stdout. Human messages still go to stderr
+  -q, --quiet    Bare values only (pipe-friendly)
+  -v, --verbose  Verbose progress to stderr
+  -h, --help     Print help
+  -V, --version  Print version

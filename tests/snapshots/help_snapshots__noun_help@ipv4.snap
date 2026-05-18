@@ -1,0 +1,21 @@
+---
+source: tests/help_snapshots.rs
+expression: out
+---
+IPv4 utilities (parse, subnet, range-expand, to-ipv6)
+
+Usage: ubertool ipv4 [OPTIONS] <COMMAND>
+
+Commands:
+  parse         Parse an IPv4 address and emit its representations
+  subnet        Compute subnet info for a CIDR block
+  range-expand  Expand a CIDR block into a list of addresses (capped by --max)
+  to-ipv6       Convert IPv4 to IPv4-mapped IPv6 form (::ffff:a.b.c.d)
+  help          Print this message or the help of the given subcommand(s)
+
+Options:
+      --json     Output as JSON to stdout. Human messages still go to stderr
+  -q, --quiet    Bare values only (pipe-friendly)
+  -v, --verbose  Verbose progress to stderr
+  -h, --help     Print help
+  -V, --version  Print version

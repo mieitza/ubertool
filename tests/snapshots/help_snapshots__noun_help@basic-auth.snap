@@ -1,0 +1,19 @@
+---
+source: tests/help_snapshots.rs
+expression: out
+---
+HTTP Basic auth header encoding/decoding
+
+Usage: ubertool basic-auth [OPTIONS] <COMMAND>
+
+Commands:
+  encode  Encode a user/pass pair as an HTTP Basic Authorization header value
+  decode  Decode an HTTP Basic Authorization header value into user/pass
+  help    Print this message or the help of the given subcommand(s)
+
+Options:
+      --json     Output as JSON to stdout. Human messages still go to stderr
+  -q, --quiet    Bare values only (pipe-friendly)
+  -v, --verbose  Verbose progress to stderr
+  -h, --help     Print help
+  -V, --version  Print version

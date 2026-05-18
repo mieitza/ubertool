@@ -1,0 +1,19 @@
+---
+source: tests/help_snapshots.rs
+expression: out
+---
+Roman numeral conversion (to-num / from-num, range 1-3999)
+
+Usage: ubertool roman [OPTIONS] <COMMAND>
+
+Commands:
+  to-num    Convert Roman numeral → integer
+  from-num  Convert integer → Roman numeral
+  help      Print this message or the help of the given subcommand(s)
+
+Options:
+      --json     Output as JSON to stdout. Human messages still go to stderr
+  -q, --quiet    Bare values only (pipe-friendly)
+  -v, --verbose  Verbose progress to stderr
+  -h, --help     Print help
+  -V, --version  Print version

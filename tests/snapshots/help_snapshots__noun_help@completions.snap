@@ -1,0 +1,34 @@
+---
+source: tests/help_snapshots.rs
+expression: out
+---
+Emit a shell completion script for the chosen shell.
+
+Installation (examples):
+  Bash:  ubertool completions bash > /etc/bash_completion.d/ubertool
+  Zsh:   ubertool completions zsh > ~/.zsh/completions/_ubertool
+  Fish:  ubertool completions fish > ~/.config/fish/completions/ubertool.fish
+
+Usage: ubertool completions [OPTIONS] <SHELL>
+
+Arguments:
+  <SHELL>
+          Target shell
+          
+          [possible values: bash, elvish, fish, powershell, zsh]
+
+Options:
+      --json
+          Output as JSON to stdout. Human messages still go to stderr
+
+  -q, --quiet
+          Bare values only (pipe-friendly)
+
+  -v, --verbose
+          Verbose progress to stderr
+
+  -h, --help
+          Print help (see a summary with '-h')
+
+  -V, --version
+          Print version

@@ -1,0 +1,18 @@
+---
+source: tests/help_snapshots.rs
+expression: out
+---
+Date/time format conversion (unix / ISO 8601 / RFC 2822)
+
+Usage: ubertool date [OPTIONS] <COMMAND>
+
+Commands:
+  convert  Convert between date/time formats
+  help     Print this message or the help of the given subcommand(s)
+
+Options:
+      --json     Output as JSON to stdout. Human messages still go to stderr
+  -q, --quiet    Bare values only (pipe-friendly)
+  -v, --verbose  Verbose progress to stderr
+  -h, --help     Print help
+  -V, --version  Print version

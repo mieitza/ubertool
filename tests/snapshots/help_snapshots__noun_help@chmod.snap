@@ -1,0 +1,19 @@
+---
+source: tests/help_snapshots.rs
+expression: out
+---
+Unix file mode conversion (symbolic ↔ octal)
+
+Usage: ubertool chmod [OPTIONS] <COMMAND>
+
+Commands:
+  calc   Convert symbolic mode (rwxr-xr-x) → octal (755)
+  parse  Convert octal mode (755) → symbolic + per-class breakdown
+  help   Print this message or the help of the given subcommand(s)
+
+Options:
+      --json     Output as JSON to stdout. Human messages still go to stderr
+  -q, --quiet    Bare values only (pipe-friendly)
+  -v, --verbose  Verbose progress to stderr
+  -h, --help     Print help
+  -V, --version  Print version

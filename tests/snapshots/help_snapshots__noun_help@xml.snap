@@ -1,0 +1,19 @@
+---
+source: tests/help_snapshots.rs
+expression: out
+---
+XML conversion: to-json / format
+
+Usage: ubertool xml [OPTIONS] <COMMAND>
+
+Commands:
+  to-json  Convert XML to JSON. Attributes become `@attr` keys; text content becomes a string or `#text`
+  format   Pretty-print XML with indentation
+  help     Print this message or the help of the given subcommand(s)
+
+Options:
+      --json     Output as JSON to stdout. Human messages still go to stderr
+  -q, --quiet    Bare values only (pipe-friendly)
+  -v, --verbose  Verbose progress to stderr
+  -h, --help     Print help
+  -V, --version  Print version

@@ -1,0 +1,18 @@
+---
+source: tests/help_snapshots.rs
+expression: out
+---
+HTTP status code lookup
+
+Usage: ubertool http-status [OPTIONS] <COMMAND>
+
+Commands:
+  lookup  Look up the name and category for an HTTP status code
+  help    Print this message or the help of the given subcommand(s)
+
+Options:
+      --json     Output as JSON to stdout. Human messages still go to stderr
+  -q, --quiet    Bare values only (pipe-friendly)
+  -v, --verbose  Verbose progress to stderr
+  -h, --help     Print help
+  -V, --version  Print version

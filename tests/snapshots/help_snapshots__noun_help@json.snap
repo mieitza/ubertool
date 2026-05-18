@@ -1,0 +1,21 @@
+---
+source: tests/help_snapshots.rs
+expression: out
+---
+JSON conversion: to-yaml / to-toml / minify / prettify
+
+Usage: ubertool json [OPTIONS] <COMMAND>
+
+Commands:
+  to-yaml   Convert JSON to YAML
+  to-toml   Convert JSON to TOML
+  minify    Minify JSON (strip whitespace)
+  prettify  Prettify JSON with indentation
+  help      Print this message or the help of the given subcommand(s)
+
+Options:
+      --json     Output as JSON to stdout. Human messages still go to stderr
+  -q, --quiet    Bare values only (pipe-friendly)
+  -v, --verbose  Verbose progress to stderr
+  -h, --help     Print help
+  -V, --version  Print version
