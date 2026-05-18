@@ -21,6 +21,7 @@ pub mod json;
 pub mod jwt;
 pub mod list;
 pub mod mac;
+pub mod mime;
 pub mod markdown;
 pub mod math;
 pub mod otp;

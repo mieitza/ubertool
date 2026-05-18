@@ -154,4 +154,6 @@ pub enum Noun {
     Crontab(crate::commands::crontab::CrontabArgs),
     /// Unix file mode conversion (symbolic ↔ octal).
     Chmod(crate::commands::chmod::ChmodArgs),
+    /// MIME type lookup from file extension or filename.
+    Mime(crate::commands::mime::MimeArgs),
 }
