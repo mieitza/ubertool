@@ -1,0 +1,15 @@
+.git
+.github
+target
+docs
+tests
+benches
+fixtures
+*.md
+.gitignore
+.dockerignore
+Dockerfile
+ubertool.ocs.yaml
+scripts
+.vscode
+.idea
