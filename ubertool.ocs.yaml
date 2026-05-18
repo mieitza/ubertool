@@ -2164,6 +2164,19 @@ commands:
         type: boolean
         default: false
 
+  ubertool regex memo [flags]:
+    summary: Show a cheat-sheet of common regular expression syntax
+    flags:
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
   ubertool email {command} [flags]:
     group: true
     summary: Email address utilities
@@ -2245,6 +2258,246 @@ commands:
         required: true
         type: string
     flags:
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool mime {command} [flags]:
+    group: true
+    summary: MIME type lookup utilities
+
+  ubertool mime lookup <input> [flags]:
+    summary: Look up the MIME type for a file extension or filename
+    arguments:
+      - name: input
+        summary: File extension or filename to look up
+        required: true
+        type: string
+    flags:
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool http-status {command} [flags]:
+    group: true
+    summary: HTTP status code lookup
+
+  ubertool http-status lookup <code> [flags]:
+    summary: Look up the meaning of an HTTP status code
+    arguments:
+      - name: code
+        summary: HTTP status code to look up
+        required: true
+        type: integer
+    flags:
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool qr {command} [flags]:
+    group: true
+    summary: QR code generation
+
+  ubertool qr generate <input> [flags]:
+    summary: Generate a QR code from the given input string
+    arguments:
+      - name: input
+        summary: Text or URL to encode as a QR code
+        required: true
+        type: string
+    flags:
+      - name: format
+        summary: Output format (svg or png)
+        type: string
+        default: svg
+        choices:
+          - value: svg
+          - value: png
+      - name: out
+        summary: Output file path (prints to stdout if omitted)
+        type: string
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool qr wifi [flags]:
+    summary: Generate a QR code for Wi-Fi network credentials
+    flags:
+      - name: ssid
+        summary: Wi-Fi network name (SSID)
+        type: string
+        required: true
+      - name: password
+        summary: Wi-Fi password
+        type: string
+      - name: security
+        summary: Security type (WPA, WEP, or nopass)
+        type: string
+        default: WPA
+        choices:
+          - value: WPA
+          - value: WEP
+          - value: nopass
+      - name: hidden
+        summary: Mark the network as hidden
+        type: boolean
+        default: false
+      - name: format
+        summary: Output format (svg or png)
+        type: string
+        default: svg
+        choices:
+          - value: svg
+          - value: png
+      - name: out
+        summary: Output file path (prints to stdout if omitted)
+        type: string
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool svg-placeholder {command} [flags]:
+    group: true
+    summary: SVG placeholder image generation
+
+  ubertool svg-placeholder generate [flags]:
+    summary: Generate an SVG placeholder image with custom dimensions and colours
+    flags:
+      - name: width
+        summary: Image width in pixels
+        type: integer
+        default: "400"
+      - name: height
+        summary: Image height in pixels
+        type: integer
+        default: "300"
+      - name: text
+        summary: Label text to render inside the placeholder
+        type: string
+      - name: bg
+        summary: Background colour (hex)
+        type: string
+        default: "#cccccc"
+      - name: fg
+        summary: Foreground/text colour (hex)
+        type: string
+        default: "#333333"
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool ascii {command} [flags]:
+    group: true
+    summary: ASCII art utilities
+
+  ubertool ascii draw <input> [flags]:
+    summary: Render text as ASCII art
+    arguments:
+      - name: input
+        summary: Text to render as ASCII art
+        required: true
+        type: string
+    flags:
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool git {command} [flags]:
+    group: true
+    summary: Git utilities and cheat-sheets
+
+  ubertool git memo [flags]:
+    summary: Show a cheat-sheet of common git commands
+    flags:
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool numeronym {command} [flags]:
+    group: true
+    summary: Numeronym generation
+
+  ubertool numeronym generate <input> [flags]:
+    summary: Generate a numeronym from a word (e.g. internationalization → i18n)
+    arguments:
+      - name: input
+        summary: Word to convert to a numeronym
+        required: true
+        type: string
+    flags:
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool port {command} [flags]:
+    group: true
+    summary: Network port utilities
+
+  ubertool port random [flags]:
+    summary: Generate a random available port number in the ephemeral range
+    flags:
+      - name: min
+        summary: Minimum port number
+        type: integer
+        default: "49152"
+      - name: max
+        summary: Maximum port number
+        type: integer
+        default: "65535"
       - name: json
         summary: Output result as JSON on stdout
         type: boolean
