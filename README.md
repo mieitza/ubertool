@@ -1,75 +1,139 @@
 # ubertool
 
-Developer-focused data-transform utilities — a single Rust binary,
-agent-friendly by construction. A CLI port of [it-tools](https://it-tools.tech).
+> Developer-focused data-transform CLI — agent-friendly by construction.
 
-> M0 scaffolding only. Tools land milestone-by-milestone; see
-> `docs/superpowers/plans/` for the rollout.
+A single-binary Rust port of [it-tools](https://it-tools.tech) for the terminal. **55 nouns, 102 leaf verbs**, structured `--json` output on every command, meaningful exit codes, machine-parseable error envelopes, no hangs on TTY stdin. Designed so an LLM coding agent (Claude Code, Codex, Cursor, OpenCode) can call it through a shell without surprises.
 
-## Status
+## Install
 
-Pre-alpha. M0 ships `base64 encode|decode` end-to-end through the full
-agent-friendly contract (`--json`, typed errors with documented exit codes,
-TTY fail-fast, snapshot-tested `--help`).
+```bash
+# crates.io
+cargo install ubertool
 
-## Quickstart
+# Pre-built binary via cargo-binstall
+cargo binstall ubertool
 
-```sh
-cargo build --release
-./target/release/ubertool base64 encode "hello"
-./target/release/ubertool base64 encode "hello" --json
-echo -n hello | ./target/release/ubertool base64 encode
+# Docker (after the ghcr.io image is published)
+docker run --rm ghcr.io/mieitza/ubertool:latest base64 encode hello
+
+# From source
+git clone https://github.com/mieitza/ubertool && cd ubertool && cargo install --path .
 ```
+
+A Homebrew tap is on the roadmap.
+
+## Golden examples
+
+```bash
+# Hash a string
+$ ubertool hash sha256 "hello"
+2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824
+
+# JSON output for an agent (UUID v4 is non-deterministic; format is stable)
+$ ubertool --json uuid new
+{"uuid":"73cec104-5e9b-4169-8853-f83de78a911e"}
+
+# Convert JSON to YAML
+$ ubertool json to-yaml '{"name":"alice","age":30}'
+age: 30
+name: alice
+
+# Subnet math
+$ ubertool ipv4 subnet 10.0.0.0/24 --json
+{"cidr":"10.0.0.0/24","network":"10.0.0.0","broadcast":"10.0.0.255","first_host":"10.0.0.1","last_host":"10.0.0.254","host_count":254,"mask":"255.255.255.0","prefix":24}
+
+# Numeronym (i18n-style)
+$ ubertool numeronym generate internationalization
+i18n
+
+# Case conversion
+$ ubertool case convert "hello world" --style snake
+hello_world
+
+# Integer base conversion
+$ ubertool integer-base convert 255 --from 10 --to 16
+ff
+
+# Percentage of
+$ ubertool percentage of 20 50
+10
+```
+
+(All examples in this README run against the binary built from this commit. They're checked by the per-noun help snapshot suite in `tests/help_snapshots.rs`.)
 
 ## Output modes
 
-`ubertool` is designed for LLM coding agents first; humans second. Every
-data-returning command supports:
-
-- default — `key: value` lines on stdout
-- `--json` — flat JSON on stdout, nothing else
-- `--quiet` — bare values, one per line, pipe-friendly
-
-Errors carry a typed code, a human message, an echo of the failing input
-(with secrets redacted), an optional hint, and a `retriable` boolean. The
-JSON envelope is stable across commands.
+| Mode | Flag | Use |
+|------|------|-----|
+| Text (default) | (none) | Human-readable; bare value for single-field, `key: value` lines for multi-field. |
+| JSON | `--json` | Structured JSON on stdout. Stable schema. Nothing else lands on stdout. |
+| Quiet | `--quiet` / `-q` | Bare values for piping. |
 
 ## Exit codes
 
 | Code | Meaning |
 |------|---------|
-| 0 | success |
-| 1 | general failure |
-| 2 | usage error |
-| 3 | input validation error |
-| 4 | i/o error |
-| 5 | cryptographic / integrity failure |
-| 6 | feature not built in this binary |
+| 0 | Success |
+| 1 | General failure |
+| 2 | Usage error (bad arguments, missing required flag) |
+| 3 | Input validation failed (malformed JSON, invalid IP, bad regex, ...) |
+| 4 | I/O error (file missing, permission denied) |
+| 5 | Cryptographic / integrity failure (bcrypt mismatch, JWT signature, decrypt MAC fail) |
+| 6 | Feature not built in this binary |
 
-## Dev loop
+## Error envelope (`--json` mode)
 
-```sh
-make build          # debug build
-make test           # cargo test
-make ci             # fmt + clippy + test + verify-spec
-make gen            # validate spec + regenerate docs/cli/ and docs/llms.txt
-make verify-spec    # check ubertool.ocs.yaml ↔ --help consistency
+```json
+{
+  "error": "signature_mismatch",
+  "message": "JWT signature does not verify with the provided secret",
+  "input": {"token": "eyJ...", "secret": "<redacted>"},
+  "hint": "if the JWT uses RS*/ES*, this build does not support asymmetric keys",
+  "retriable": false
+}
 ```
 
-`ubertool.ocs.yaml` is an [OpenCLI](https://github.com/bcdxn/opencli)
-spec — the source of truth for command structure, flags, and exit codes.
-The spec generates documentation; `verify-spec.sh` ensures the binary's
-`--help` stays consistent with the spec.
+Field types are stable across all commands. Secrets are always redacted from `input`.
+
+## Discovery
+
+```bash
+ubertool --help                  # all 55 nouns
+ubertool <noun> --help           # all verbs for a noun
+ubertool <noun> <verb> --help    # arguments, flags, examples, exit codes
+```
+
+For an LLM-friendly single-file reference, see `docs/llms.txt` (generated from `ubertool.ocs.yaml` via `ocli gen docs`).
+
+## Shell completions
+
+```bash
+# Install (bash example)
+ubertool completions bash > /etc/bash_completion.d/ubertool
+
+# Other shells: zsh, fish, powershell, elvish
+ubertool completions zsh > ~/.zsh/completions/_ubertool
+ubertool completions fish > ~/.config/fish/completions/ubertool.fish
+```
 
 ## Design
 
-See `docs/superpowers/specs/2026-05-15-ubertool-cli-design.md` for the
-full design (command surface, output contract, crate selection, milestone
-rollout). The design is rooted in two skills authored for LLM coding
-agents:
-- `agent-cli-design` — the eight rules for agent-callable CLIs
-- `opencli-spec-author` — spec-first CLI design
+- Design spec: [`docs/superpowers/specs/2026-05-15-ubertool-cli-design.md`](./docs/superpowers/specs/2026-05-15-ubertool-cli-design.md)
+- OpenCLI source-of-truth: [`ubertool.ocs.yaml`](./ubertool.ocs.yaml)
+- Implementation plans: [`docs/superpowers/plans/`](./docs/superpowers/plans/)
+- Generated CLI reference: [`docs/cli/docs.gen.md`](./docs/cli/docs.gen.md)
+
+Built around the eight rules of [agent-cli-design](https://github.com/anthropics/agent-cli-design):
+
+1. Structured output is not optional (`--json` everywhere).
+2. Exit codes are control flow (not just 0/1).
+3. Idempotent operations.
+4. Self-documenting `--help`.
+5. Composable (`--quiet`, stdin, pipes).
+6. Dry-run + confirmation bypass on destructive commands.
+7. Actionable typed errors.
+8. Noun-verb hierarchy.
 
 ## License
 
-GPL-3.0, matching the source [it-tools](https://github.com/CorentinTh/it-tools) project.
+GPL-3.0 — same as the source project [it-tools](https://github.com/CorentinTh/it-tools).
