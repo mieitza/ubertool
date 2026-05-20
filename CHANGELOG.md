@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.0] - 2026-05-20
+
+Self-improvement release. **56 nouns, 104 leaf commands.**
+
+### Added
+
+- `self version` — print the running binary's version.
+- `self update` — update the binary in place from the latest GitHub release
+  (`self_update` crate). `--check` reports current vs latest without installing.
+- `install.sh --with-completions` — auto-detects the shell from `$SHELL` and
+  installs the completion script to the conventional location (bash / zsh /
+  fish); `--completions-dir` overrides the target directory.
+- One-line installer (`install.sh`) and Claude agent skill
+  (`docs/claude-skill/SKILL.md`), with `install.sh --with-claude-skill` to
+  install both. End-to-end skill test guide at `docs/claude-skill/TESTING.md`.
+
 ## [0.1.0] - 2026-05-18
 
 First tagged release. **55 nouns, 102 leaf commands.**
@@ -87,4 +103,5 @@ First tagged release. **55 nouns, 102 leaf commands.**
 - Every data-returning command supports `--json`, `--quiet`, `--in`, and stdin pipe.
 - Eight rules from the agent-cli-design skill enforced by the fitness checklist test.
 
+[0.2.0]: https://github.com/mieitza/ubertool/releases/tag/v0.2.0
 [0.1.0]: https://github.com/mieitza/ubertool/releases/tag/v0.1.0

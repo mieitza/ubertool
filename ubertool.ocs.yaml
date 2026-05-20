@@ -2507,3 +2507,37 @@ commands:
         summary: Output bare value only (pipe-friendly)
         type: boolean
         default: false
+
+  ubertool self {command} [flags]:
+    group: true
+    summary: Self-management — version reporting and in-place update
+
+  ubertool self version [flags]:
+    summary: Print the running ubertool binary version
+    flags:
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool self update [flags]:
+    summary: Update the ubertool binary in place from the latest GitHub release
+    flags:
+      - name: check
+        summary: Report current vs latest version without installing
+        type: boolean
+        default: false
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
