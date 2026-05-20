@@ -2112,12 +2112,21 @@ commands:
     summary: PDF inspection tools
 
   ubertool pdf signature [flags]:
-    summary: Inspect digital signatures in a PDF file
+    summary: Inspect digital signatures in a PDF file; optionally verify integrity
     flags:
       - name: in
         summary: Path to the PDF file to inspect
         type: string
         required: true
+      - name: verify
+        summary: >
+          Cryptographically verify each RSA signature's integrity (ByteRange
+          digest + RSA signature over signed attributes). Does NOT validate
+          certificate chains or trust anchors — a self-signed cert that
+          correctly signs the PDF reports verified=true. ECDSA/DSA signatures
+          report verified=null. No timestamp or revocation checking.
+        type: boolean
+        default: false
       - name: json
         summary: Output result as JSON on stdout
         type: boolean

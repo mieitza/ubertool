@@ -68,3 +68,81 @@ fn pdf_signature_missing_file_exits_4() {
         .failure()
         .code(4);
 }
+
+#[test]
+fn pdf_signature_verify_genuine_signed_pdf() {
+    let out = Command::cargo_bin("ubertool")
+        .unwrap()
+        .args([
+            "--json",
+            "pdf",
+            "signature",
+            "--verify",
+            "--in",
+            "tests/fixtures/signed.pdf",
+        ])
+        .assert()
+        .success()
+        .get_output()
+        .stdout
+        .clone();
+    let v: serde_json::Value = serde_json::from_slice(&out).unwrap();
+    assert_eq!(v["signature_count"], 1);
+    assert_eq!(
+        v["signatures"][0]["verified"], true,
+        "genuine signed PDF must verify as true"
+    );
+    assert_eq!(v["signatures"][0]["digest_algorithm"], "SHA-256");
+}
+
+#[test]
+fn pdf_signature_verify_tampered_pdf_is_false() {
+    let out = Command::cargo_bin("ubertool")
+        .unwrap()
+        .args([
+            "--json",
+            "pdf",
+            "signature",
+            "--verify",
+            "--in",
+            "tests/fixtures/tampered.pdf",
+        ])
+        .assert()
+        .success()
+        .get_output()
+        .stdout
+        .clone();
+    let v: serde_json::Value = serde_json::from_slice(&out).unwrap();
+    // A tampered PDF must NOT verify.
+    assert_eq!(
+        v["signatures"][0]["verified"], false,
+        "tampered PDF must verify as false"
+    );
+}
+
+#[test]
+fn pdf_signature_without_verify_omits_verified_field() {
+    let out = Command::cargo_bin("ubertool")
+        .unwrap()
+        .args([
+            "--json",
+            "pdf",
+            "signature",
+            "--in",
+            "tests/fixtures/signed.pdf",
+        ])
+        .assert()
+        .success()
+        .get_output()
+        .stdout
+        .clone();
+    let v: serde_json::Value = serde_json::from_slice(&out).unwrap();
+    assert!(
+        v["signatures"][0].get("verified").is_none(),
+        "verified field must be absent when --verify is not given"
+    );
+    assert!(
+        v["signatures"][0].get("digest_algorithm").is_none(),
+        "digest_algorithm field must be absent when --verify is not given"
+    );
+}

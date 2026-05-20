@@ -7,7 +7,7 @@ PDF utilities (signature info extraction)
 Usage: ubertool pdf [OPTIONS] <COMMAND>
 
 Commands:
-  signature  Extract signature info from a PDF
+  signature  Extract signature info from a PDF; optionally verify integrity
   help       Print this message or the help of the given subcommand(s)
 
 Options:
