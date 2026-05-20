@@ -38,7 +38,7 @@ Commands:
   json             JSON conversion: to-yaml / to-toml / minify / prettify
   markdown         Markdown to HTML conversion (CommonMark)
   otp              Time-based One-Time Password generation and validation (TOTP, RFC 6238)
-  jwt              JSON Web Token decode and verify (HS* only)
+  jwt              JSON Web Token decode and verify (HS*, RS*, ES*)
   password         Password strength scoring (zxcvbn)
   token            Random token generation (hex / base64 / alphanumeric)
   ulid             ULID generation

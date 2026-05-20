@@ -21,9 +21,9 @@ pub enum Verb {
         long_about = "Decode a JWT without verifying its signature — useful for inspection.\n\nExamples:\n  ubertool jwt decode \"eyJhbGc...\"\n  ubertool jwt decode \"eyJhbGc...\" --json\n\nExit codes specific to this command:\n  3   malformed JWT (invalid_jwt)"
     )]
     Decode(decode::DecodeArgs),
-    /// Verify a JWT signature (HS256/HS384/HS512 only in this build).
+    /// Verify a JWT signature (HS256/384/512 or RS256/384/512 or ES256/384).
     #[command(
-        long_about = "Verify a JWT signature against a shared secret. HS256, HS384, HS512 only.\n\nExamples:\n  ubertool jwt verify \"eyJhbGc...\" --secret \"my-secret\"\n  ubertool jwt verify \"eyJhbGc...\" --secret \"my-secret\" --algo hs512 --json\n\nExit codes specific to this command:\n  3   malformed JWT (invalid_jwt)\n  5   signature mismatch / wrong secret (signature_mismatch)\n  6   asymmetric algorithm not supported in this build (algo_not_supported)"
+        long_about = "Verify a JWT signature.\n\nSymmetric (HS*): requires --secret.\nAsymmetric (RS*/ES*): requires --key-file (path to a PEM public key).\n\nExamples:\n  ubertool jwt verify \"eyJhbGc...\" --secret \"my-secret\"\n  ubertool jwt verify \"eyJhbGc...\" --secret \"my-secret\" --algo hs512 --json\n  ubertool jwt verify \"eyJhbGc...\" --algo rs256 --key-file /path/to/pub.pem\n  ubertool jwt verify \"eyJhbGc...\" --algo es256 --key-file /path/to/ec_pub.pem --json\n\nExit codes specific to this command:\n  3   malformed JWT (invalid_jwt)\n  5   signature mismatch / wrong key (signature_mismatch)\n  2   missing required flag for the chosen algorithm (usage_error)"
     )]
     Verify(verify::VerifyArgs),
 }
@@ -33,6 +33,11 @@ pub enum JwtAlgo {
     Hs256,
     Hs384,
     Hs512,
+    Rs256,
+    Rs384,
+    Rs512,
+    Es256,
+    Es384,
 }
 
 impl JwtAlgo {
@@ -41,7 +46,17 @@ impl JwtAlgo {
             JwtAlgo::Hs256 => jsonwebtoken::Algorithm::HS256,
             JwtAlgo::Hs384 => jsonwebtoken::Algorithm::HS384,
             JwtAlgo::Hs512 => jsonwebtoken::Algorithm::HS512,
+            JwtAlgo::Rs256 => jsonwebtoken::Algorithm::RS256,
+            JwtAlgo::Rs384 => jsonwebtoken::Algorithm::RS384,
+            JwtAlgo::Rs512 => jsonwebtoken::Algorithm::RS512,
+            JwtAlgo::Es256 => jsonwebtoken::Algorithm::ES256,
+            JwtAlgo::Es384 => jsonwebtoken::Algorithm::ES384,
         }
+    }
+
+    /// Returns true for symmetric HMAC algorithms (HS*).
+    pub fn is_symmetric(self) -> bool {
+        matches!(self, JwtAlgo::Hs256 | JwtAlgo::Hs384 | JwtAlgo::Hs512)
     }
 }
 

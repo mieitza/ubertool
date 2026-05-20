@@ -91,7 +91,7 @@ pub enum Noun {
     Markdown(crate::commands::markdown::MarkdownArgs),
     /// Time-based One-Time Password generation and validation (TOTP, RFC 6238).
     Otp(crate::commands::otp::OtpArgs),
-    /// JSON Web Token decode and verify (HS* only).
+    /// JSON Web Token decode and verify (HS*, RS*, ES*).
     Jwt(crate::commands::jwt::JwtArgs),
     /// Password strength scoring (zxcvbn).
     Password(crate::commands::password::PasswordArgs),

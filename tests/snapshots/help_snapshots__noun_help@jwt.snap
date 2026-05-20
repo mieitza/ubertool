@@ -2,13 +2,13 @@
 source: tests/help_snapshots.rs
 expression: out
 ---
-JSON Web Token decode and verify (HS* only)
+JSON Web Token decode and verify (HS*, RS*, ES*)
 
 Usage: ubertool jwt [OPTIONS] <COMMAND>
 
 Commands:
   decode  Decode a JWT without verifying its signature
-  verify  Verify a JWT signature (HS256/HS384/HS512 only in this build)
+  verify  Verify a JWT signature (HS256/384/512 or RS256/384/512 or ES256/384)
   help    Print this message or the help of the given subcommand(s)
 
 Options:
