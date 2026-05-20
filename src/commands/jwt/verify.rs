@@ -48,11 +48,8 @@ pub fn run(args: VerifyArgs, out: &Out) -> Result<(), CliError> {
     let key = if args.algo.is_symmetric() {
         // HS* — require --secret
         let secret = args.secret.as_deref().ok_or_else(|| {
-            CliError::new(
-                ErrorCode::UsageError,
-                "HS* algorithms require --secret",
-            )
-            .with_hint("provide --secret <shared-secret> for HS256/HS384/HS512")
+            CliError::new(ErrorCode::UsageError, "HS* algorithms require --secret")
+                .with_hint("provide --secret <shared-secret> for HS256/HS384/HS512")
         })?;
         DecodingKey::from_secret(secret.as_bytes())
     } else {

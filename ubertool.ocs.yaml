@@ -702,7 +702,7 @@ commands:
         default: false
 
   ubertool jwt verify [input] [flags]:
-    summary: Verify a JWT signature (HS256/HS384/HS512 only)
+    summary: Verify a JWT signature (HS256/384/512 or RS256/384/512 or ES256/384)
     arguments:
       - name: input
         summary: JWT to verify (omit to read from --in or stdin)
@@ -713,9 +713,11 @@ commands:
         summary: Read input from file
         type: string
       - name: secret
-        summary: Shared HMAC secret (required)
+        summary: Shared HMAC secret (for HS* algorithms)
         type: string
-        required: true
+      - name: key-file
+        summary: Path to a PEM public key (for RS*/ES* algorithms)
+        type: string
       - name: algo
         summary: Signing algorithm
         type: string
@@ -724,6 +726,11 @@ commands:
           - value: hs256
           - value: hs384
           - value: hs512
+          - value: rs256
+          - value: rs384
+          - value: rs512
+          - value: es256
+          - value: es384
       - name: validate-exp
         summary: Validate exp claim against the current time
         type: boolean
@@ -2136,6 +2143,10 @@ commands:
         summary: Input text to test against the pattern
         type: string
         required: true
+      - name: fancy
+        summary: Use the fancy-regex engine (supports lookaround and backreferences)
+        type: boolean
+        default: false
       - name: json
         summary: Output result as JSON on stdout
         type: boolean

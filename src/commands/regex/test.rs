@@ -24,7 +24,9 @@ fn run_std(args: TestArgs, out: &Out) -> Result<(), CliError> {
     let re = Regex::new(&args.pattern).map_err(|e| {
         CliError::new(ErrorCode::InvalidRegex, format!("invalid regex: {e}"))
             .with_input(serde_json::json!({"pattern": args.pattern}))
-            .with_hint("Rust's regex crate does not support lookaround or backreferences; try --fancy")
+            .with_hint(
+                "Rust's regex crate does not support lookaround or backreferences; try --fancy",
+            )
     })?;
     if let Some(caps) = re.captures(&args.text) {
         let groups: Vec<String> = caps
