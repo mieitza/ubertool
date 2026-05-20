@@ -15,13 +15,20 @@ struct Out0 {
     vendor: Option<String>,
 }
 
-const OUI_CSV: &str = include_str!("../../data/oui.csv");
+const OUI_CSV_GZ: &[u8] = include_bytes!("../../data/oui.csv.gz");
 
 fn oui_table() -> &'static HashMap<String, String> {
     static TABLE: OnceLock<HashMap<String, String>> = OnceLock::new();
     TABLE.get_or_init(|| {
+        use std::io::Read;
+        let mut decoder = flate2::read::GzDecoder::new(OUI_CSV_GZ);
+        let mut csv = String::new();
+        decoder
+            .read_to_string(&mut csv)
+            .expect("bundled oui.csv.gz must decompress");
         let mut map = HashMap::new();
-        for line in OUI_CSV.lines().skip(1) {
+        for line in csv.lines().skip(1) {
+            // Split on the FIRST comma only — vendor names may contain commas.
             if let Some((oui, vendor)) = line.split_once(',') {
                 map.insert(oui.trim().to_uppercase(), vendor.trim().to_string());
             }

@@ -3219,6 +3219,7 @@ dependencies = [
  "evalexpr",
  "fancy-regex 0.13.0",
  "figlet-rs",
+ "flate2",
  "hmac",
  "html-escape",
  "iban_validate",

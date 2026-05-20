@@ -59,9 +59,10 @@ fn mac_lookup_apple() {
 
 #[test]
 fn mac_lookup_unknown_oui_emits_null_vendor() {
+    // 02:00:00 is in the locally-administered space — never assigned by IEEE.
     let out = Command::cargo_bin("ubertool")
         .unwrap()
-        .args(["--json", "mac", "lookup", "12:34:56:00:00:00"])
+        .args(["--json", "mac", "lookup", "02:00:00:00:00:00"])
         .assert()
         .success()
         .get_output()
@@ -69,6 +70,32 @@ fn mac_lookup_unknown_oui_emits_null_vendor() {
         .clone();
     let v: serde_json::Value = serde_json::from_slice(&out).expect("valid JSON");
     assert!(v["vendor"].is_null());
+}
+
+#[test]
+fn mac_lookup_covers_many_vendors() {
+    // Spot-check well-known OUIs that must be in the full IEEE registry.
+    for (mac, vendor_substr) in [
+        ("F0:F6:1C:00:00:00", "apple"),
+        ("00:00:0C:00:00:00", "cisco"),
+        ("00:50:56:00:00:00", "vmware"),
+        ("DC:A6:32:00:00:00", "raspberry"),
+    ] {
+        let out = Command::cargo_bin("ubertool")
+            .unwrap()
+            .args(["--json", "mac", "lookup", mac])
+            .assert()
+            .success()
+            .get_output()
+            .stdout
+            .clone();
+        let v: serde_json::Value = serde_json::from_slice(&out).unwrap();
+        let got = v["vendor"].as_str().unwrap_or("").to_lowercase();
+        assert!(
+            got.contains(vendor_substr),
+            "OUI {mac}: expected '{vendor_substr}', got '{got}'"
+        );
+    }
 }
 
 #[test]

@@ -23,7 +23,7 @@ pub enum Verb {
     New,
     /// Look up the vendor for a MAC address from the bundled OUI table.
     #[command(
-        long_about = "Look up the vendor for a MAC address from the bundled OUI table. The OUI is the first 24 bits.\n\nThe bundled table covers ~50 common vendors. For full IEEE OUI coverage, future builds will ship a complete CSV.\n\nExamples:\n  ubertool mac lookup F0:F6:1C:00:11:22\n  ubertool mac lookup 00:1c:42:aa:bb:cc --json\n\nExit codes:\n  3   invalid MAC address (invalid_mac)"
+        long_about = "Look up the vendor for a MAC address from the bundled OUI table. The OUI is the first 24 bits.\n\nThe bundled table is the full IEEE OUI MA-L registry (~35k vendors), gzip-compressed and decompressed lazily at first lookup.\n\nExamples:\n  ubertool mac lookup F0:F6:1C:00:11:22\n  ubertool mac lookup 00:1c:42:aa:bb:cc --json\n\nExit codes:\n  3   invalid MAC address (invalid_mac)"
     )]
     Lookup(LookupArgs),
 }
