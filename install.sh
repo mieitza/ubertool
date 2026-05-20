@@ -12,6 +12,18 @@
 #
 # Override install dir:
 #   curl -fsSL .../install.sh | sh -s -- --bin-dir /usr/local/bin
+#
+# Install shell completions (auto-detects shell from $SHELL):
+#   curl -fsSL .../install.sh | sh -s -- --with-completions
+#
+# Install completions to a custom directory:
+#   curl -fsSL .../install.sh | sh -s -- --with-completions --completions-dir /some/dir
+#
+# Combine flags freely:
+#   curl -fsSL .../install.sh | sh -s -- --with-claude-skill --with-completions
+#
+# Env var overrides:
+#   UBERTOOL_BIN_DIR, UBERTOOL_VERSION, UBERTOOL_SKILL_DIR, UBERTOOL_COMPLETIONS_DIR
 
 set -eu
 
@@ -20,6 +32,8 @@ BIN_DIR="${UBERTOOL_BIN_DIR:-$HOME/.local/bin}"
 VERSION="${UBERTOOL_VERSION:-latest}"
 WITH_CLAUDE_SKILL=0
 SKILL_DIR="${UBERTOOL_SKILL_DIR:-$HOME/.claude/skills/ubertool}"
+WITH_COMPLETIONS=0
+COMPLETIONS_DIR="${UBERTOOL_COMPLETIONS_DIR:-}"
 
 # ---- parse args ----
 while [ $# -gt 0 ]; do
@@ -40,8 +54,16 @@ while [ $# -gt 0 ]; do
             SKILL_DIR="$2"
             shift 2
             ;;
+        --with-completions)
+            WITH_COMPLETIONS=1
+            shift
+            ;;
+        --completions-dir)
+            COMPLETIONS_DIR="$2"
+            shift 2
+            ;;
         -h|--help)
-            sed -n 's/^# //p;s/^#$//p' "$0" | head -16
+            sed -n 's/^# //p;s/^#$//p' "$0" | head -26
             exit 0
             ;;
         *)
@@ -165,11 +187,71 @@ if [ "$WITH_CLAUDE_SKILL" = "1" ]; then
     fi
 fi
 
+# ---- optional shell completion install ----
+COMPLETIONS_PATH=""
+if [ "$WITH_COMPLETIONS" = "1" ]; then
+    shell_name=$(basename "${SHELL:-}")
+
+    # Determine target path (custom dir overrides shell convention)
+    if [ -n "$COMPLETIONS_DIR" ]; then
+        case "$shell_name" in
+            zsh)        comp_file="_ubertool" ;;
+            fish)       comp_file="ubertool.fish" ;;
+            powershell) comp_file="ubertool.ps1" ;;
+            elvish)     comp_file="ubertool.elv" ;;
+            *)          comp_file="ubertool" ;;
+        esac
+        COMPLETIONS_PATH="$COMPLETIONS_DIR/$comp_file"
+    else
+        case "$shell_name" in
+            bash)
+                COMPLETIONS_PATH="$HOME/.local/share/bash-completion/completions/ubertool"
+                ;;
+            zsh)
+                COMPLETIONS_PATH="$HOME/.zsh/completions/_ubertool"
+                ;;
+            fish)
+                COMPLETIONS_PATH="$HOME/.config/fish/completions/ubertool.fish"
+                ;;
+            powershell|elvish)
+                echo ""
+                echo "  completions: auto-install not supported for $shell_name."
+                echo "    Run the following and source the output in your profile:"
+                echo "      ubertool completions $shell_name"
+                ;;
+            "")
+                echo ""
+                echo "  completions: \$SHELL is unset; skipping completion install."
+                echo "    Run 'ubertool completions <shell>' manually."
+                ;;
+            *)
+                echo ""
+                echo "  completions: unrecognised shell '$shell_name'; skipping."
+                echo "    Run 'ubertool completions <shell>' manually."
+                ;;
+        esac
+    fi
+
+    if [ -n "$COMPLETIONS_PATH" ]; then
+        comp_dir=$(dirname "$COMPLETIONS_PATH")
+        mkdir -p "$comp_dir"
+        "$BIN_DIR/$bin_name" completions "$shell_name" > "$COMPLETIONS_PATH"
+        echo "Installing shell completions ($shell_name) to $COMPLETIONS_PATH"
+        if [ "$shell_name" = "zsh" ] && [ -z "$COMPLETIONS_DIR" ]; then
+            echo "  Note: add the following to your ~/.zshrc BEFORE 'compinit':"
+            echo "    fpath=(~/.zsh/completions \$fpath)"
+        fi
+    fi
+fi
+
 # ---- post-install ----
 echo ""
 echo "  installed: $BIN_DIR/$bin_name"
 if [ "$WITH_CLAUDE_SKILL" = "1" ]; then
     echo "  skill:     $SKILL_DIR/SKILL.md"
+fi
+if [ -n "$COMPLETIONS_PATH" ]; then
+    echo "  completions: $COMPLETIONS_PATH"
 fi
 echo ""
 
