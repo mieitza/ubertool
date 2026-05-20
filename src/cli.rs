@@ -177,4 +177,7 @@ pub enum Noun {
         long_about = "Emit a shell completion script for the chosen shell.\n\nInstallation (examples):\n  Bash:  ubertool completions bash > /etc/bash_completion.d/ubertool\n  Zsh:   ubertool completions zsh > ~/.zsh/completions/_ubertool\n  Fish:  ubertool completions fish > ~/.config/fish/completions/ubertool.fish"
     )]
     Completions(crate::commands::completions::CompletionsArgs),
+    /// Show version / update the binary in place.
+    #[command(name = "self")]
+    SelfCmd(crate::commands::self_cmd::SelfArgs),
 }

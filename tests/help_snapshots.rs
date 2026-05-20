@@ -59,6 +59,7 @@ const NOUNS: &[&str] = &[
     "numeronym",
     "port",
     "completions",
+    "self",
 ];
 
 fn run_help(noun: &str) -> String {

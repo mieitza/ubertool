@@ -89,6 +89,9 @@ qrcode = "0.14"
 image = { version = "0.25", default-features = false, features = ["png"] }
 figlet-rs = "0.1"
 
+# Self-update
+self_update = { version = "0.43", default-features = false, features = ["archive-tar", "archive-zip", "compression-flate2", "reqwest", "rustls"] }
+
 [dev-dependencies]
 assert_cmd = "2"
 predicates = "3"
