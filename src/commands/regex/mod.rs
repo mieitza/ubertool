@@ -19,7 +19,7 @@ pub struct RegexArgs {
 pub enum Verb {
     /// Test whether a pattern matches text; emit groups.
     #[command(
-        long_about = "Test whether a regex pattern matches text and emit any capture groups.\n\nNote: Rust's regex crate does not support lookaround.\n\nExamples:\n  ubertool regex test --pattern '\\d+' --text '42'\n  ubertool regex test --pattern '(\\w+)@(\\w+)' --text 'a@b' --json\n\nExit codes:\n  3   pattern does not compile (invalid_regex)"
+        long_about = "Test whether a regex pattern matches text and emit any capture groups.\n\nNote: Rust's regex crate does not support lookaround or backreferences.\nUse --fancy to switch to the fancy-regex engine which supports both.\n\nExamples:\n  ubertool regex test --pattern '\\d+' --text '42'\n  ubertool regex test --pattern '(\\w+)@(\\w+)' --text 'a@b' --json\n  ubertool regex test --pattern 'foo(?=bar)' --text 'foobar' --fancy\n  ubertool regex test --pattern '(\\w+) \\1' --text 'hello hello' --fancy\n\nExit codes:\n  3   pattern does not compile (invalid_regex)"
     )]
     Test(TestArgs),
     /// Generate a string matching a pattern.
@@ -40,6 +40,9 @@ pub struct TestArgs {
     pub pattern: String,
     #[arg(long)]
     pub text: String,
+    /// Use the fancy-regex engine (supports lookaround and backreferences).
+    #[arg(long, default_value_t = false)]
+    pub fancy: bool,
 }
 
 #[derive(Debug, Args)]

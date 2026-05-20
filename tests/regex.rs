@@ -83,6 +83,73 @@ fn regex_test_invalid_pattern_exits_3() {
 }
 
 #[test]
+fn regex_test_fancy_lookahead() {
+    // foo(?=bar) uses a lookahead — unsupported by std regex, supported by --fancy.
+    let out = Command::cargo_bin("ubertool")
+        .unwrap()
+        .args([
+            "--json",
+            "regex",
+            "test",
+            "--pattern",
+            "foo(?=bar)",
+            "--text",
+            "foobar",
+            "--fancy",
+        ])
+        .assert()
+        .success()
+        .get_output()
+        .stdout
+        .clone();
+    let v: serde_json::Value = serde_json::from_slice(&out).expect("valid JSON");
+    assert_eq!(v["matched"], true);
+}
+
+#[test]
+fn regex_test_lookahead_without_fancy_exits_3() {
+    // Same lookahead pattern without --fancy → std regex rejects it with exit 3.
+    Command::cargo_bin("ubertool")
+        .unwrap()
+        .args([
+            "regex",
+            "test",
+            "--pattern",
+            "foo(?=bar)",
+            "--text",
+            "foobar",
+        ])
+        .assert()
+        .failure()
+        .code(3)
+        .stderr(predicate::str::contains("invalid_regex"));
+}
+
+#[test]
+fn regex_test_fancy_backreference() {
+    // (\w+) \1 — backreference, fancy-only.
+    let out = Command::cargo_bin("ubertool")
+        .unwrap()
+        .args([
+            "--json",
+            "regex",
+            "test",
+            "--pattern",
+            r"(\w+) \1",
+            "--text",
+            "hello hello",
+            "--fancy",
+        ])
+        .assert()
+        .success()
+        .get_output()
+        .stdout
+        .clone();
+    let v: serde_json::Value = serde_json::from_slice(&out).expect("valid JSON");
+    assert_eq!(v["matched"], true);
+}
+
+#[test]
 fn regex_generate_basic() {
     // Use [0-9] instead of \d to guarantee ASCII digits (regex_generate uses
     // Unicode \d which may produce multibyte characters).

@@ -926,6 +926,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "fancy-regex"
+version = "0.13.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "531e46835a22af56d1e3b66f04844bed63158bc094a628bec1d321d9b4c44bf2"
+dependencies = [
+ "bit-set",
+ "regex-automata",
+ "regex-syntax 0.8.10",
+]
+
+[[package]]
 name = "fastrand"
 version = "2.4.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3206,6 +3217,7 @@ dependencies = [
  "digest",
  "email_address",
  "evalexpr",
+ "fancy-regex 0.13.0",
  "figlet-rs",
  "hmac",
  "html-escape",
@@ -4014,7 +4026,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "103fa851fff70ea29af380e87c25c48ff7faac5c530c70bd0e65366d4e0c94e4"
 dependencies = [
  "derive_builder",
- "fancy-regex",
+ "fancy-regex 0.11.0",
  "itertools",
  "js-sys",
  "lazy_static",

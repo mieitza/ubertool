@@ -77,6 +77,7 @@ lopdf = "0.32"
 # M4 regex
 regex = "1"
 regex_generate = "0.2"
+fancy-regex = "0.13"
 # M4 validators
 email_address = "0.2"
 iban_validate = "4"
