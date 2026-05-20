@@ -5,6 +5,32 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.0] - 2026-05-20
+
+Feature-gap release — fills four scope-downs from earlier milestones.
+
+### Added
+
+- **`jwt verify` asymmetric algorithms** — RS256/384/512 and ES256/384 via
+  `--key-file <pem>` (a PEM public key). HS* still uses `--secret`. Wrong
+  algo/key combination is a usage error.
+- **`regex test --fancy`** — opt into the `fancy-regex` engine for lookaround
+  (`(?=...)`, `(?<=...)`) and backreferences (`\1`), which Rust's default
+  `regex` crate does not support.
+
+### Changed
+
+- **`mac lookup`** now ships the full IEEE OUI MA-L registry (~39,400 vendor
+  entries, gzip-bundled and decompressed lazily) instead of the 53-entry
+  curated stub.
+- **`pdf signature --verify`** — cryptographically verifies RSA PKCS#7/CMS
+  detached signatures: confirms the ByteRange digest matches the signed
+  `messageDigest` attribute and that the RSA signature over the signed
+  attributes is valid against the embedded signer certificate. Reports
+  `verified: true|false|null` (null = non-RSA, not yet supported). This is an
+  integrity check — it does NOT validate the certificate trust chain. Without
+  `--verify`, the command's M4 info-extraction behavior is unchanged.
+
 ## [0.2.0] - 2026-05-20
 
 Self-improvement release. **56 nouns, 104 leaf commands.**
@@ -103,5 +129,6 @@ First tagged release. **55 nouns, 102 leaf commands.**
 - Every data-returning command supports `--json`, `--quiet`, `--in`, and stdin pipe.
 - Eight rules from the agent-cli-design skill enforced by the fitness checklist test.
 
+[0.3.0]: https://github.com/mieitza/ubertool/releases/tag/v0.3.0
 [0.2.0]: https://github.com/mieitza/ubertool/releases/tag/v0.2.0
 [0.1.0]: https://github.com/mieitza/ubertool/releases/tag/v0.1.0
