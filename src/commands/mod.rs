@@ -40,6 +40,7 @@ pub mod regex;
 pub mod roman;
 pub mod rsa;
 pub mod safelink;
+pub mod schema;
 pub mod self_cmd;
 pub mod slugify;
 pub mod sql;

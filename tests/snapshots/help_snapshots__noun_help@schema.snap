@@ -1,0 +1,37 @@
+---
+source: tests/help_snapshots.rs
+expression: out
+---
+Emit ubertool's entire command surface as one JSON document.
+
+Lets an agent introspect all nouns, verbs, flags, types, and exit codes in a single call instead of walking dozens of --help pages. The output is the OpenCLI spec (ubertool.ocs.yaml) rendered as JSON.
+
+With --noun, emit only that noun's commands.
+
+Output is always pretty-printed JSON on stdout.
+
+Examples:
+  ubertool schema
+  ubertool schema --noun hash
+  ubertool schema | jq '.commands | keys'
+
+Usage: ubertool schema [OPTIONS]
+
+Options:
+      --json
+          Output as JSON to stdout. Human messages still go to stderr
+
+      --noun <NOUN>
+          Emit only the commands belonging to this noun (e.g. `hash`). Omit for the full surface
+
+  -q, --quiet
+          Bare values only (pipe-friendly)
+
+  -v, --verbose
+          Verbose progress to stderr
+
+  -h, --help
+          Print help (see a summary with '-h')
+
+  -V, --version
+          Print version

@@ -69,6 +69,7 @@ pub fn run() -> ProcExitCode {
         cli::Noun::Numeronym(a) => commands::numeronym::dispatch(a, &out),
         cli::Noun::Port(a) => commands::port::dispatch(a, &out),
         cli::Noun::Completions(a) => commands::completions::run(a, &out),
+        cli::Noun::Schema(a) => commands::schema::run(a, &out),
         cli::Noun::SelfCmd(a) => commands::self_cmd::dispatch(a, &out),
     };
 

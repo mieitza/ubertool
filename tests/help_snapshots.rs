@@ -59,6 +59,7 @@ const NOUNS: &[&str] = &[
     "numeronym",
     "port",
     "completions",
+    "schema",
     "self",
 ];
 

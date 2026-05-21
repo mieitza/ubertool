@@ -177,6 +177,11 @@ pub enum Noun {
         long_about = "Emit a shell completion script for the chosen shell.\n\nInstallation (examples):\n  Bash:  ubertool completions bash > /etc/bash_completion.d/ubertool\n  Zsh:   ubertool completions zsh > ~/.zsh/completions/_ubertool\n  Fish:  ubertool completions fish > ~/.config/fish/completions/ubertool.fish"
     )]
     Completions(crate::commands::completions::CompletionsArgs),
+    /// Emit the full ubertool command surface as JSON (agent introspection).
+    #[command(
+        long_about = "Emit ubertool's entire command surface as one JSON document.\n\nLets an agent introspect all nouns, verbs, flags, types, and exit codes in a single call instead of walking dozens of --help pages. The output is the OpenCLI spec (ubertool.ocs.yaml) rendered as JSON.\n\nWith --noun, emit only that noun's commands.\n\nOutput is always pretty-printed JSON on stdout.\n\nExamples:\n  ubertool schema\n  ubertool schema --noun hash\n  ubertool schema | jq '.commands | keys'"
+    )]
+    Schema(crate::commands::schema::SchemaArgs),
     /// Show version / update the binary in place.
     #[command(name = "self")]
     SelfCmd(crate::commands::self_cmd::SelfArgs),
