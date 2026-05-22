@@ -46,6 +46,7 @@ pub enum ErrorCode {
     InvalidCipher,
     InvalidUrl,
     Internal,
+    BatchPartialFailure,
 }
 
 impl ErrorCode {
@@ -58,7 +59,7 @@ impl ErrorCode {
             | InvalidCsv | InvalidIntegerBase | InvalidRoman | InvalidUtf8 | InvalidBinary
             | InvalidCodepoint | InvalidPdf | InvalidDockerRun | InvalidIp | InvalidMac
             | InvalidMath | InvalidDate | InvalidCron | InvalidChmod | InvalidCipher
-            | InvalidUrl => ExitCode::Invalid,
+            | InvalidUrl | BatchPartialFailure => ExitCode::Invalid,
             FileNotFound | PermissionDenied | IoError => ExitCode::Io,
             SignatureMismatch | DecryptFailed | PdfSignatureInvalid => ExitCode::Crypto,
             AlgoNotSupported => ExitCode::Unsupported,
@@ -106,6 +107,7 @@ impl ErrorCode {
             InvalidCipher => "invalid_cipher",
             InvalidUrl => "invalid_url",
             Internal => "internal",
+            BatchPartialFailure => "batch_partial_failure",
         }
     }
 }
@@ -196,6 +198,7 @@ mod tests {
         assert_eq!(ErrorCode::InvalidUrl.exit(), ExitCode::Invalid);
         assert_eq!(ErrorCode::Internal.exit(), ExitCode::Generic);
         assert_eq!(ErrorCode::BinaryToTtyRefused.exit(), ExitCode::Usage);
+        assert_eq!(ErrorCode::BatchPartialFailure.exit(), ExitCode::Invalid);
     }
 
     #[test]
@@ -275,6 +278,7 @@ mod tests {
             ErrorCode::InvalidCipher,
             ErrorCode::InvalidUrl,
             ErrorCode::Internal,
+            ErrorCode::BatchPartialFailure,
         ];
         for code in cases {
             let v = serde_json::to_value(code).unwrap();

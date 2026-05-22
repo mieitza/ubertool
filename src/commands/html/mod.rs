@@ -18,12 +18,12 @@ pub struct HtmlArgs {
 pub enum Verb {
     /// Encode HTML-special characters into entities.
     #[command(
-        long_about = "Encode HTML-special characters into entities (<, >, &, \", ').\n\nExamples:\n  ubertool html encode \"<b>hi</b>\"\n  ubertool html encode \"<b>hi</b>\" --json"
+        long_about = "Encode HTML-special characters into entities (<, >, &, \", ').\n\nExamples:\n  ubertool html encode \"<b>hi</b>\"\n  ubertool html encode \"<b>hi</b>\" --json\n  printf '<b>\\n&\\n' | ubertool html encode --batch"
     )]
     Encode(encode::EncodeArgs),
     /// Decode HTML entities back to characters.
     #[command(
-        long_about = "Decode HTML entities back to characters. Unknown entities pass through unchanged.\n\nExamples:\n  ubertool html decode \"&lt;b&gt;hi&lt;/b&gt;\"\n  ubertool html decode \"&amp;\" --json"
+        long_about = "Decode HTML entities back to characters. Unknown entities pass through unchanged.\n\nExamples:\n  ubertool html decode \"&lt;b&gt;hi&lt;/b&gt;\"\n  ubertool html decode \"&amp;\" --json\n  printf '&lt;b&gt;\\n&amp;\\n' | ubertool html decode --batch"
     )]
     Decode(decode::DecodeArgs),
 }

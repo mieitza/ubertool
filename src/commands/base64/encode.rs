@@ -14,6 +14,11 @@ struct EncodeOutput<'a> {
 }
 
 pub fn run(args: EncodeArgs, out: &Out) -> Result<(), CliError> {
+    if args.batch {
+        return crate::core::batch::run_jsonl("encoded", |line| {
+            Ok(STANDARD.encode(line.as_bytes()))
+        });
+    }
     let input = resolve_input(
         args.input.as_deref(),
         args.in_path.as_deref(),

@@ -11,17 +11,43 @@ Commands:
             
             Examples:
               ubertool hmac md5 "msg" --key "secret"
+              printf 'alice\nbob\n' | ubertool hmac md5 --key "secret" --batch
   sha1      Compute HMAC-SHA1 (legacy).
+            
+            Examples:
+              ubertool hmac sha1 "msg" --key "secret"
+              printf 'alice\nbob\n' | ubertool hmac sha1 --key "secret" --batch
   sha224    Compute HMAC-SHA224.
+            
+            Examples:
+              ubertool hmac sha224 "msg" --key "secret"
+              printf 'alice\nbob\n' | ubertool hmac sha224 --key "secret" --batch
   sha256    Compute HMAC-SHA256.
             
             Examples:
               ubertool hmac sha256 "msg" --key "secret"
               ubertool hmac sha256 --in ./file --key "secret" --json
+              printf 'alice\nbob\n' | ubertool hmac sha256 --key "secret" --batch
   sha384    Compute HMAC-SHA384.
+            
+            Examples:
+              ubertool hmac sha384 "msg" --key "secret"
+              printf 'alice\nbob\n' | ubertool hmac sha384 --key "secret" --batch
   sha512    Compute HMAC-SHA512.
+            
+            Examples:
+              ubertool hmac sha512 "msg" --key "secret"
+              printf 'alice\nbob\n' | ubertool hmac sha512 --key "secret" --batch
   sha3-256  Compute HMAC-SHA3-256.
+            
+            Examples:
+              ubertool hmac sha3-256 "msg" --key "secret"
+              printf 'alice\nbob\n' | ubertool hmac sha3-256 --key "secret" --batch
   sha3-512  Compute HMAC-SHA3-512.
+            
+            Examples:
+              ubertool hmac sha3-512 "msg" --key "secret"
+              printf 'alice\nbob\n' | ubertool hmac sha3-512 --key "secret" --batch
   help      Print this message or the help of the given subcommand(s)
 
 Options:

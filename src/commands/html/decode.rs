@@ -15,6 +15,9 @@ pub struct DecodeArgs {
     /// Read input from file.
     #[arg(long = "in")]
     pub in_path: Option<PathBuf>,
+    /// Read one item per line from stdin and emit JSONL (one record per line).
+    #[arg(long)]
+    pub batch: bool,
 }
 
 #[derive(Serialize)]
@@ -23,6 +26,11 @@ struct DecodeOutput {
 }
 
 pub fn run(args: DecodeArgs, out: &Out) -> Result<(), CliError> {
+    if args.batch {
+        return crate::core::batch::run_jsonl("decoded", |line| {
+            Ok(html_escape::decode_html_entities(line).into_owned())
+        });
+    }
     let input = resolve_input(
         args.input.as_deref(),
         args.in_path.as_deref(),

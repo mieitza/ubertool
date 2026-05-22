@@ -19,12 +19,12 @@ pub struct UrlArgs {
 pub enum Verb {
     /// Percent-encode a string for use in URLs.
     #[command(
-        long_about = "Percent-encode a string for use in URLs (non-ASCII + reserved chars become %XX).\n\nExamples:\n  ubertool url encode \"hello world\"\n  ubertool url encode \"a+b=c\" --json"
+        long_about = "Percent-encode a string for use in URLs (non-ASCII + reserved chars become %XX).\n\nExamples:\n  ubertool url encode \"hello world\"\n  ubertool url encode \"a+b=c\" --json\n  printf 'a b\\nc&d\\n' | ubertool url encode --batch"
     )]
     Encode(encode::EncodeArgs),
     /// Decode a percent-encoded string.
     #[command(
-        long_about = "Decode a percent-encoded string.\n\nExamples:\n  ubertool url decode \"hello%20world\"\n  ubertool url decode \"a%2Bb%3Dc\" --json\n\nExit codes specific to this command:\n  3   decoded bytes are not valid UTF-8"
+        long_about = "Decode a percent-encoded string.\n\nExamples:\n  ubertool url decode \"hello%20world\"\n  ubertool url decode \"a%2Bb%3Dc\" --json\n  printf 'hello%20world\\nfoo%2Fbar\\n' | ubertool url decode --batch\n\nExit codes specific to this command:\n  3   decoded bytes are not valid UTF-8"
     )]
     Decode(decode::DecodeArgs),
     /// Parse a URL into its component parts.

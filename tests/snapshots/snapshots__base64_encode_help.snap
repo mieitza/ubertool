@@ -8,6 +8,7 @@ Examples:
   ubertool base64 encode "hello"
   echo -n hello | ubertool base64 encode
   ubertool base64 encode "hello" --json
+  printf 'alice\nbob\n' | ubertool base64 encode --batch
 
 Usage: ubertool base64 encode [OPTIONS] [INPUT]
 
@@ -27,6 +28,9 @@ Options:
 
   -q, --quiet
           Bare values only (pipe-friendly)
+
+      --batch
+          Read one item per line from stdin and emit JSONL (one record per line)
 
   -v, --verbose
           Verbose progress to stderr

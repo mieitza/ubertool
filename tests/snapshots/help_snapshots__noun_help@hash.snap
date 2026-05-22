@@ -13,21 +13,44 @@ Commands:
               ubertool hash md5 "hello"
               ubertool hash md5 --in ./file.bin
               echo -n hello | ubertool hash md5
+              printf 'alice\nbob\n' | ubertool hash md5 --batch
   sha1      Compute SHA-1 hash (legacy / not collision-resistant).
             
             Examples:
               ubertool hash sha1 "hello"
               ubertool hash sha1 --in ./file.bin
+              printf 'alice\nbob\n' | ubertool hash sha1 --batch
   sha224    Compute SHA-224 hash.
+            
+            Examples:
+              ubertool hash sha224 "hello"
+              printf 'alice\nbob\n' | ubertool hash sha224 --batch
   sha256    Compute SHA-256 hash.
             
             Examples:
               ubertool hash sha256 "hello"
               ubertool hash sha256 --in ./file.bin --json
+              printf 'alice\nbob\n' | ubertool hash sha256 --batch
   sha384    Compute SHA-384 hash.
+            
+            Examples:
+              ubertool hash sha384 "hello"
+              printf 'alice\nbob\n' | ubertool hash sha384 --batch
   sha512    Compute SHA-512 hash.
+            
+            Examples:
+              ubertool hash sha512 "hello"
+              printf 'alice\nbob\n' | ubertool hash sha512 --batch
   sha3-256  Compute SHA3-256 hash (Keccak).
+            
+            Examples:
+              ubertool hash sha3-256 "hello"
+              printf 'alice\nbob\n' | ubertool hash sha3-256 --batch
   sha3-512  Compute SHA3-512 hash (Keccak).
+            
+            Examples:
+              ubertool hash sha3-512 "hello"
+              printf 'alice\nbob\n' | ubertool hash sha3-512 --batch
   help      Print this message or the help of the given subcommand(s)
 
 Options:

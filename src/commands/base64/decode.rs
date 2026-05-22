@@ -8,12 +8,25 @@ use crate::core::tty::is_stdin_tty;
 
 use super::DecodeArgs;
 
+fn decode_line(line: &str) -> Result<String, CliError> {
+    let trimmed = line.trim();
+    let bytes = STANDARD
+        .decode(trimmed)
+        .map_err(|e| CliError::new(ErrorCode::InvalidBase64, format!("invalid base64: {e}")))?;
+    std::str::from_utf8(&bytes)
+        .map(|s| s.to_owned())
+        .map_err(|_| CliError::new(ErrorCode::InvalidUtf8, "decoded bytes are not valid UTF-8"))
+}
+
 #[derive(Serialize)]
 struct DecodeOutput<'a> {
     decoded: &'a str,
 }
 
 pub fn run(args: DecodeArgs, out: &Out) -> Result<(), CliError> {
+    if args.batch {
+        return crate::core::batch::run_jsonl("decoded", decode_line);
+    }
     let input = resolve_input(
         args.input.as_deref(),
         args.in_path.as_deref(),

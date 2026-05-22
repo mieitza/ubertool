@@ -24,7 +24,8 @@ pub enum Verb {
                             Examples:\n  \
                             ubertool base64 encode \"hello\"\n  \
                             echo -n hello | ubertool base64 encode\n  \
-                            ubertool base64 encode \"hello\" --json"
+                            ubertool base64 encode \"hello\" --json\n  \
+                            printf 'alice\\nbob\\n' | ubertool base64 encode --batch"
     )]
     Encode(EncodeArgs),
 
@@ -34,7 +35,8 @@ pub enum Verb {
                             \n\
                             Examples:\n  \
                             ubertool base64 decode aGVsbG8=\n  \
-                            ubertool base64 decode aGVsbG8= --json\n\
+                            ubertool base64 decode aGVsbG8= --json\n  \
+                            printf 'aGVsbG8=\\nd29ybGQ=\\n' | ubertool base64 decode --batch\n\
                             \n\
                             Exit codes specific to this command:\n  \
                             3   invalid base64 (input could not be decoded)"
@@ -54,6 +56,10 @@ pub struct EncodeArgs {
     /// Write encoded output to file. If absent, output goes to stdout.
     #[arg(long = "out")]
     pub out_path: Option<PathBuf>,
+
+    /// Read one item per line from stdin and emit JSONL (one record per line).
+    #[arg(long)]
+    pub batch: bool,
 }
 
 #[derive(Debug, Args)]
@@ -69,6 +75,10 @@ pub struct DecodeArgs {
     /// emits as text; otherwise refuses to write binary to a TTY.
     #[arg(long = "out")]
     pub out_path: Option<PathBuf>,
+
+    /// Read one item per line from stdin and emit JSONL (one record per line).
+    #[arg(long)]
+    pub batch: bool,
 }
 
 pub fn dispatch(args: Base64Args, out: &Out) -> Result<(), CliError> {
