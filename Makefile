@@ -30,6 +30,12 @@ verify-spec: build  ## check spec ↔ CLI consistency
 
 ci: fmt clippy test verify-spec  ## what CI runs locally
 
+fuzz-smoke:  ## run each fuzz target for 30s (CI smoke check)
+	@for t in fuzz_json fuzz_yaml fuzz_toml fuzz_xml fuzz_csv; do \
+	    echo "==> fuzz $$t (30s)"; \
+	    PATH="$$HOME/.rustup/toolchains/nightly-aarch64-apple-darwin/bin:$$PATH" cargo fuzz run $$t -- -max_total_time=30 || exit 1; \
+	done
+
 clean:  ## remove build artifacts and generated docs
 	cargo clean
 	rm -rf docs/cli docs/llms.txt

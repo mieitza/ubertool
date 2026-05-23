@@ -55,7 +55,7 @@ pub fn dispatch(args: TomlArgs, out: &Out) -> Result<(), CliError> {
     }
 }
 
-pub(super) fn parse_toml(s: &str) -> Result<toml::Value, CliError> {
+pub fn parse_toml(s: &str) -> Result<toml::Value, CliError> {
     s.parse::<toml::Value>().map_err(|e| {
         CliError::new(ErrorCode::InvalidToml, format!("invalid TOML: {e}"))
             .with_hint("ensure the input is well-formed TOML")

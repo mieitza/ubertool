@@ -38,7 +38,7 @@ struct Frame {
     text: String,
 }
 
-fn parse_xml_to_value(xml: &str) -> Result<Value, CliError> {
+pub fn parse_xml_to_value(xml: &str) -> Result<Value, CliError> {
     let mut reader = Reader::from_str(xml);
     reader.trim_text(true);
 
@@ -103,7 +103,15 @@ fn parse_xml_to_value(xml: &str) -> Result<Value, CliError> {
                 }
             }
             Ok(Event::End(_)) => {
-                let frame = stack.pop().expect("End without matching Start");
+                let frame = match stack.pop() {
+                    Some(f) => f,
+                    None => {
+                        return Err(CliError::new(
+                            ErrorCode::InvalidXml,
+                            "XML has an end tag without a matching start tag",
+                        ));
+                    }
+                };
                 let v = frame_to_value(&frame);
                 if let Some(parent) = stack.last_mut() {
                     parent.children.push((frame.name, v));

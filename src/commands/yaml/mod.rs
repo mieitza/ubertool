@@ -56,7 +56,7 @@ pub fn dispatch(args: YamlArgs, out: &Out) -> Result<(), CliError> {
     }
 }
 
-pub(super) fn parse_yaml(s: &str) -> Result<serde_yaml::Value, CliError> {
+pub fn parse_yaml(s: &str) -> Result<serde_yaml::Value, CliError> {
     serde_yaml::from_str(s).map_err(|e| {
         CliError::new(ErrorCode::InvalidYaml, format!("invalid YAML: {e}"))
             .with_hint("ensure the input is well-formed YAML")
