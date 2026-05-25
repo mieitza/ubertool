@@ -1,11 +1,11 @@
 ---
 name: ubertool
-description: Use ubertool — a single-binary agent-friendly CLI with 102 leaf commands — whenever the user asks for a quick local data transform (hash, encode/decode, JWT, regex, UUID, IPv4 subnet, date conversion, JSON/YAML/TOML/XML/CSV interop, QR code, base32/64, AES/ChaCha encrypt, etc.) that doesn't require web access. ubertool has --json on every command, stable exit codes (0/2/3/4/5/6), and machine-parseable error envelopes. If `ubertool` is not on PATH, install it first with one shell command — see "Install if missing" below.
+description: Use ubertool — a single-binary agent-friendly CLI with 114 leaf commands — whenever the user asks for a quick local data transform (hash, encode/decode, JWT, regex, UUID, IPv4 subnet, date conversion, JSON/YAML/TOML/XML/CSV interop, QR code, base32/64, AES/ChaCha encrypt, secrets vault, etc.) that doesn't require web access. ubertool has --json on every command, stable exit codes (0/2/3/4/5/6), and machine-parseable error envelopes. If `ubertool` is not on PATH, install it first with one shell command — see "Install if missing" below.
 ---
 
 # ubertool
 
-A single-binary Rust CLI: 55 nouns, 102 leaf verbs. Designed from the ground up for agent invocation. Stable `--json` schema, meaningful exit codes, machine-parseable errors, never hangs on TTY.
+A single-binary Rust CLI: 56 nouns, 114 leaf verbs. Designed from the ground up for agent invocation. Stable `--json` schema, meaningful exit codes, machine-parseable errors, never hangs on TTY. Includes an encrypted local secrets vault and a one-call schema introspection command.
 
 ## Install if missing
 
@@ -22,9 +22,17 @@ Pin a version: `... | sh -s -- --version v0.1.0`. Custom dir: `... | sh -s -- --
 The surface is hierarchical. Walk it like a tree:
 
 ```bash
-ubertool --help                  # all 55 nouns + global flags
+ubertool --help                  # all 56 nouns + global flags
 ubertool <noun> --help           # all verbs for that noun
 ubertool <noun> <verb> --help    # required args, flags, examples, exit codes
+```
+
+When you need to survey capabilities in one shot (preferred for agents — cheaper than walking 56 `--help` pages):
+
+```bash
+ubertool schema --json                   # full command tree as JSON
+ubertool schema --json | jq '.commands | keys'   # just the command signatures
+ubertool schema --noun hash              # narrow to one noun
 ```
 
 For a single-file LLM reference: `curl https://raw.githubusercontent.com/mieitza/ubertool/main/docs/llms.txt`.
@@ -54,6 +62,48 @@ For a single-file LLM reference: `curl https://raw.githubusercontent.com/mieitza
 **Images:** `qr` (generate/wifi), `svg-placeholder`
 
 **Memos:** `git memo`, `regex memo`
+
+**Secrets:** `vault` (init/set/get/list/delete/export/import/unlock/lock) — encrypted local secrets store
+
+**Introspection:** `schema` — one-call JSON dump of the entire command tree; `self` (version/update) — binary lifecycle
+
+## Secrets vault
+
+ubertool ships an encrypted local secrets store (`vault`). Secrets are stored in a single AES-256-GCM encrypted file (default: `~/.config/ubertool/vault.enc`); the KDF is Argon2id. The vault is standalone — there are no `--from-vault` flags on other commands. Feed secrets into other commands with command substitution:
+
+```bash
+ubertool vault init                          # create the vault (first time only)
+ubertool vault set MY_API_KEY                # prompts for value; or pipe: echo -n "val" | ubertool vault set MY_API_KEY
+ubertool vault get MY_API_KEY                # retrieve value
+ubertool vault list                          # list names only (values never printed)
+
+# Feed a vault secret into another command
+ubertool hmac sha256 "payload" --key "$(ubertool vault get MY_API_KEY)"
+```
+
+Password unlock chain (checked in order): **session cache → OS keyring → `UBERTOOL_VAULT_PASSWORD` env → interactive TTY prompt**.
+
+Agent-friendly patterns:
+
+- **Headless / CI**: set `UBERTOOL_VAULT_PASSWORD` in the environment before running vault commands. Never hardcode the password in conversation context — have the user supply it out-of-band, then set the env var on the spawned command.
+- **Interactive session**: run `ubertool vault unlock --ttl 30` once (prompts the user); subsequent vault calls in that session use the session cache without re-prompting.
+- **Non-default vault file**: `--vault-file /path/to/vault.enc` or `UBERTOOL_VAULT_FILE` env var.
+
+**Important for agents**: never store the master vault password in conversation context or in a file. Prompt the user out-of-band (or read from an env var the user has already set).
+
+## Batch mode (`--batch`) for bulk operations
+
+The `hash`, `hmac`, `base64`, `url`, and `html` commands accept `--batch`: read one input per line from stdin, emit one JSON object per line on stdout (JSONL). This is far more efficient than spawning a separate process per input.
+
+```bash
+# Hash 3 strings in one process invocation
+printf 'a\nb\nc\n' | ubertool hash sha256 --batch
+# {"hash":"ca978112...","input":"a"}
+# {"hash":"3e23e816...","input":"b"}
+# {"hash":"2e7d2c03...","input":"c"}
+```
+
+Per-line errors do not abort the batch — the error is emitted as a JSON object on that line and processing continues. Exit code is **3** if any line failed, **0** if all succeeded.
 
 ## Rules for invocation
 
@@ -105,6 +155,9 @@ The 3-vs-5 split matters: exit 3 = "this isn't a real JWT" (re-fetch token); exi
 ubertool hash sha256 "data" --json
 # {"hash":"3a6eb0..."}
 
+# Batch hash (--batch: one input per line → one JSON per line)
+printf 'a\nb\nc\n' | ubertool hash sha256 --batch
+
 # HMAC with secret
 ubertool hmac sha256 "msg" --key "secret" --json
 
@@ -114,6 +167,10 @@ ubertool jwt decode "$TOKEN" --json
 # JWT verify with HS256 secret
 ubertool jwt verify "$TOKEN" --secret "$SECRET" --json
 # exit 0 + {"verified":true,...} OR exit 5 + signature_mismatch
+
+# JWT verify with RS256 public key (PEM file)
+ubertool jwt verify "$TOKEN" --algo rs256 --key-file /path/to/pub.pem --json
+# also supports rs384, rs512, es256, es384
 
 # Generate UUID v7 (time-ordered)
 ubertool uuid new --version 7 --json
@@ -131,6 +188,10 @@ ubertool date convert 1700000000 --from unix --tz America/New_York --json
 
 # Regex test (captures emitted as array)
 ubertool regex test --pattern '(\d+)-(\d+)' --text '42-17' --json
+
+# Regex with lookaround / backreferences (--fancy engine)
+ubertool regex test --pattern 'foo(?=bar)' --text 'foobar' --fancy
+ubertool regex test --pattern '(\w+) \1' --text 'hello hello' --fancy --json
 
 # Encrypt with password
 ubertool cipher encrypt "secret data" --password "$PW"
@@ -155,6 +216,23 @@ ubertool phone parse "+14155552671" --json
 ubertool token new --length 32 --format hex
 ubertool port random --min 8000 --max 8099
 ubertool mac new
+
+# Secrets vault
+ubertool vault init                            # create vault (first time)
+ubertool vault set MY_API_KEY                  # store a secret (value prompted)
+ubertool vault get MY_API_KEY                  # retrieve plaintext value
+ubertool vault list                            # list names only
+ubertool vault unlock --ttl 30                 # cache password for 30 min
+ubertool hmac sha256 "data" --key "$(ubertool vault get MY_API_KEY)"
+
+# Schema introspection (agent: use this instead of walking --help pages)
+ubertool schema --json | jq '.commands | keys'        # all command signatures
+ubertool schema --noun hash                            # narrow to one noun
+
+# Self lifecycle
+ubertool self version --json                   # running binary version
+ubertool self update --check                   # check for newer release (no write)
+ubertool self update                           # in-place update to latest
 ```
 
 ## Input from stdin
@@ -184,8 +262,9 @@ ubertool iban validate "$IBAN" --json | jq -r '.country'
 
 - Web access / HTTP requests — ubertool is offline.
 - Stateful operations (file system mutations beyond `--out`, database connections, etc.).
-- Anything not in the surface map above. Run `ubertool --help` to confirm before assuming a verb exists.
-- Cryptographic signature verification of arbitrary PDF/JWT-RS — only basic info-extraction for PDF, only HS-family for JWT verify.
+- Anything not in the surface map above. Run `ubertool schema --json` or `ubertool --help` to confirm before assuming a verb exists.
+- Full PKI / trust-chain verification of PDF signatures — `pdf signature --verify` checks RSA integrity only; it does NOT validate certificate chains, timestamps, or revocation.
+- For local secrets storage, prefer `ubertool vault` over ad-hoc password files or plaintext env vars.
 
 ## Reference
 

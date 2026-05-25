@@ -2,7 +2,7 @@
 
 > Developer-focused data-transform CLI — agent-friendly by construction.
 
-A single-binary Rust port of [it-tools](https://it-tools.tech) for the terminal. **55 nouns, 102 leaf verbs**, structured `--json` output on every command, meaningful exit codes, machine-parseable error envelopes, no hangs on TTY stdin. Designed so an LLM coding agent (Claude Code, Codex, Cursor, OpenCode) can call it through a shell without surprises.
+A single-binary Rust port of [it-tools](https://it-tools.tech) for the terminal. **56 nouns, 114 leaf verbs**, structured `--json` output on every command, meaningful exit codes, machine-parseable error envelopes, no hangs on TTY stdin. Designed so an LLM coding agent (Claude Code, Codex, Cursor, OpenCode) can call it through a shell without surprises.
 
 ## Install
 
@@ -71,6 +71,16 @@ ff
 # Percentage of
 $ ubertool percentage of 20 50
 10
+
+# Secrets vault
+$ ubertool vault init
+$ ubertool vault set MY_KEY
+$ ubertool vault get MY_KEY
+<value you stored>
+
+# Schema introspection (first 3 keys as example)
+$ ubertool schema --json | jq '[.commands | keys[0:3]]'
+[["ubertool ascii draw <input> [flags]","ubertool ascii table [flags]","ubertool base64 decode [input] [flags]"]]
 ```
 
 (All examples in this README run against the binary built from this commit. They're checked by the per-noun help snapshot suite in `tests/help_snapshots.rs`.)
@@ -112,12 +122,23 @@ Field types are stable across all commands. Secrets are always redacted from `in
 ## Discovery
 
 ```bash
-ubertool --help                  # all 55 nouns
+ubertool --help                  # all 56 nouns
 ubertool <noun> --help           # all verbs for a noun
 ubertool <noun> <verb> --help    # arguments, flags, examples, exit codes
 ```
 
 For an LLM-friendly single-file reference, see `docs/llms.txt` (generated from `ubertool.ocs.yaml` via `ocli gen docs`).
+
+## Schema introspection
+
+Agents and scripts can introspect the entire command surface in one call — no need to parse multiple `--help` pages:
+
+```bash
+ubertool schema --json | jq '.commands | keys'   # list all command signatures
+ubertool schema --noun hash                        # narrow to a single noun
+```
+
+This is the preferred agent-discovery entry point when surveying ubertool's capabilities programmatically.
 
 ## Shell completions
 
@@ -129,6 +150,21 @@ ubertool completions bash > /etc/bash_completion.d/ubertool
 ubertool completions zsh > ~/.zsh/completions/_ubertool
 ubertool completions fish > ~/.config/fish/completions/ubertool.fish
 ```
+
+## Secrets vault
+
+ubertool ships an encrypted local secrets store backed by AES-256-GCM and Argon2id. Use it to keep API keys and credentials out of shell history and plaintext files.
+
+```bash
+ubertool vault init                  # create the vault (once)
+ubertool vault set MY_API_KEY        # store a secret (value is prompted)
+ubertool vault get MY_API_KEY        # retrieve it
+
+# Feed into another command
+ubertool hmac sha256 "payload" --key "$(ubertool vault get MY_API_KEY)"
+```
+
+Password is resolved from: session cache → OS keyring → `UBERTOOL_VAULT_PASSWORD` env → interactive prompt. For headless/CI flows, set `UBERTOOL_VAULT_PASSWORD`. For interactive sessions, run `ubertool vault unlock --ttl 30` once. See [`docs/claude-skill/SKILL.md`](./docs/claude-skill/SKILL.md) for the full agent-friendly usage guide.
 
 ## Design
 

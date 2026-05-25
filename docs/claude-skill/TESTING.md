@@ -66,9 +66,43 @@ Then it runs `ubertool hash sha256 "hello world"` and reports the digest.
 
 **Pass criteria:** Claude explains ubertool can't do network requests and does not hallucinate a verb.
 
+### Prompt F — schema introspection
+
+> "What nouns does ubertool support?"
+
+**Expected:** Claude should run `ubertool schema --json` (or `ubertool schema --json | jq '.commands | keys'`) and answer from the structured output — not from memory or by guessing. The skill says `schema --json` is the preferred agent discovery move.
+
+**Pass criteria:**
+- Claude invokes `ubertool schema --json` (not `ubertool --help` parsed as a table, not a list from training memory).
+- The answer cites nouns visible in the schema output (e.g. `hash`, `vault`, `jwt`, `ipv4`, etc.).
+- Claude does not fabricate nouns that aren't present.
+
+### Prompt G — vault usage
+
+> "I have an API key I need to store securely for later use with ubertool."
+
+**Expected:** Claude should walk the user through the vault workflow: `vault init` (if needed), `vault set <name>`, and explain how to retrieve it later with `vault get` or via `UBERTOOL_VAULT_PASSWORD` env for headless flows.
+
+**Pass criteria:**
+- Claude suggests `ubertool vault init` and `ubertool vault set <name>`.
+- Claude explains `ubertool vault get <name>` or `--secret "$(ubertool vault get <name>)"` for consumption.
+- Claude mentions the `UBERTOOL_VAULT_PASSWORD` env var for non-interactive (CI/headless) flows.
+- Claude does NOT suggest storing the master password in conversation context or a plaintext file.
+
+### Prompt H — batch hashing
+
+> "Hash these 5 strings with SHA-256: alpha, beta, gamma, delta, epsilon."
+
+**Expected:** Claude should pipe all 5 strings through `ubertool hash sha256 --batch` in a single invocation, not run 5 separate `ubertool hash sha256` calls.
+
+**Pass criteria:**
+- Claude uses `printf` (or equivalent) to pipe all inputs and runs exactly one `ubertool hash sha256 --batch` command.
+- Output is JSONL (one `{"hash":"...","input":"..."}` per line).
+- Claude does not invoke `ubertool hash sha256` five separate times.
+
 ## 3. Record results
 
-For each prompt A–E, note PASS / FAIL and any surprises:
+For each prompt A–H, note PASS / FAIL and any surprises:
 
 | Prompt | Pass? | Notes |
 |--------|-------|-------|
@@ -77,6 +111,9 @@ For each prompt A–E, note PASS / FAIL and any surprises:
 | C — exit codes | | |
 | D — discovery | | |
 | E — boundary | | |
+| F — schema introspection | | |
+| G — vault usage | | |
+| H — batch hashing | | |
 
 ## 4. Common failure modes and fixes
 

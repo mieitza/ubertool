@@ -19,7 +19,7 @@
 # Install completions to a custom directory:
 #   curl -fsSL .../install.sh | sh -s -- --with-completions --completions-dir /some/dir
 #
-# Combine flags freely:
+# Install binary + agent skill + shell completions (everything):
 #   curl -fsSL .../install.sh | sh -s -- --with-claude-skill --with-completions
 #
 # Env var overrides:
