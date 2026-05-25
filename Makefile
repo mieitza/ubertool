@@ -1,4 +1,6 @@
-.PHONY: help build release test fmt clippy gen verify-spec ci clean
+COVERAGE_MIN ?= 75
+
+.PHONY: help build release test fmt clippy gen verify-spec coverage coverage-summary coverage-gate ci clean
 
 help:  ## list targets
 	@grep -E '^[a-zA-Z_-]+:.*##' $(MAKEFILE_LIST) | awk -F':.*##' '{printf "  %-15s %s\n", $$1, $$2}'
@@ -27,6 +29,15 @@ gen:  ## validate spec + regenerate docs/cli and docs/llms.txt
 
 verify-spec: build  ## check spec ↔ CLI consistency
 	./scripts/verify-spec.sh
+
+coverage:  ## generate HTML coverage report at target/llvm-cov/html/
+	cargo llvm-cov clean --workspace && cargo llvm-cov --lib --tests --html
+
+coverage-summary:  ## print line/function/region coverage to stdout
+	cargo llvm-cov clean --workspace && cargo llvm-cov --lib --tests --summary-only
+
+coverage-gate:  ## enforce minimum line coverage (used in CI)
+	cargo llvm-cov clean --workspace && cargo llvm-cov --lib --tests --fail-under-lines $(COVERAGE_MIN)
 
 ci: fmt clippy test verify-spec  ## what CI runs locally
 

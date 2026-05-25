@@ -148,6 +148,20 @@ Built around the eight rules of [agent-cli-design](https://github.com/anthropics
 7. Actionable typed errors.
 8. Noun-verb hierarchy.
 
+## Test coverage
+
+Run `make coverage-summary` for a quick stdout report (line / function / region percentages). Run `make coverage` for a browsable HTML report at `target/llvm-cov/html/`. CI gates non-regression at `COVERAGE_MIN`% (currently 75%) — `make coverage-gate` exits non-zero if any of line / function / region coverage drops below that threshold.
+
+Current baseline: **83.08% lines, 77.49% functions, 79.53% regions**. The design spec target is 80% across all dimensions; function and region coverage are the gap to close.
+
+| Target | What it does |
+|--------|-------------|
+| `make coverage` | HTML report at `target/llvm-cov/html/` |
+| `make coverage-summary` | Prints line/function/region % to stdout |
+| `make coverage-gate` | Exits 1 if any coverage dimension < `COVERAGE_MIN` (default 75) |
+
+Override the gate locally: `make coverage-gate COVERAGE_MIN=77`.
+
 ## License
 
 GPL-3.0 — same as the source project [it-tools](https://github.com/CorentinTh/it-tools).
