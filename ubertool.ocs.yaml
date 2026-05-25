@@ -28,6 +28,10 @@ commands:
       - name: out
         summary: Write encoded output to file
         type: string
+      - name: batch
+        summary: Read newline-delimited inputs from stdin; emit JSONL on stdout
+        type: boolean
+        default: false
       - name: json
         summary: Output result as JSON on stdout
         type: boolean
@@ -52,6 +56,10 @@ commands:
       - name: out
         summary: Write decoded bytes to file
         type: string
+      - name: batch
+        summary: Read newline-delimited inputs from stdin; emit JSONL on stdout
+        type: boolean
+        default: false
       - name: json
         summary: Output result as JSON on stdout
         type: boolean
@@ -177,6 +185,10 @@ commands:
       - name: in
         summary: Read input from file
         type: string
+      - name: batch
+        summary: Read newline-delimited inputs from stdin; emit JSONL on stdout
+        type: boolean
+        default: false
       - name: json
         summary: Output result as JSON on stdout
         type: boolean
@@ -198,6 +210,10 @@ commands:
       - name: in
         summary: Read input from file
         type: string
+      - name: batch
+        summary: Read newline-delimited inputs from stdin; emit JSONL on stdout
+        type: boolean
+        default: false
       - name: json
         summary: Output result as JSON on stdout
         type: boolean
@@ -219,6 +235,10 @@ commands:
       - name: in
         summary: Read input from file
         type: string
+      - name: batch
+        summary: Read newline-delimited inputs from stdin; emit JSONL on stdout
+        type: boolean
+        default: false
       - name: json
         summary: Output result as JSON on stdout
         type: boolean
@@ -240,6 +260,10 @@ commands:
       - name: in
         summary: Read input from file
         type: string
+      - name: batch
+        summary: Read newline-delimited inputs from stdin; emit JSONL on stdout
+        type: boolean
+        default: false
       - name: json
         summary: Output result as JSON on stdout
         type: boolean
@@ -261,6 +285,10 @@ commands:
       - name: in
         summary: Read input from file
         type: string
+      - name: batch
+        summary: Read newline-delimited inputs from stdin; emit JSONL on stdout
+        type: boolean
+        default: false
       - name: json
         summary: Output result as JSON on stdout
         type: boolean
@@ -282,6 +310,10 @@ commands:
       - name: in
         summary: Read input from file
         type: string
+      - name: batch
+        summary: Read newline-delimited inputs from stdin; emit JSONL on stdout
+        type: boolean
+        default: false
       - name: json
         summary: Output result as JSON on stdout
         type: boolean
@@ -303,6 +335,10 @@ commands:
       - name: in
         summary: Read input from file
         type: string
+      - name: batch
+        summary: Read newline-delimited inputs from stdin; emit JSONL on stdout
+        type: boolean
+        default: false
       - name: json
         summary: Output result as JSON on stdout
         type: boolean
@@ -324,6 +360,10 @@ commands:
       - name: in
         summary: Read input from file
         type: string
+      - name: batch
+        summary: Read newline-delimited inputs from stdin; emit JSONL on stdout
+        type: boolean
+        default: false
       - name: json
         summary: Output result as JSON on stdout
         type: boolean
@@ -353,6 +393,10 @@ commands:
         summary: HMAC secret key (required)
         type: string
         required: true
+      - name: batch
+        summary: Read newline-delimited inputs from stdin; emit JSONL on stdout
+        type: boolean
+        default: false
       - name: json
         summary: Output result as JSON on stdout
         type: boolean
@@ -378,6 +422,10 @@ commands:
         summary: HMAC secret key (required)
         type: string
         required: true
+      - name: batch
+        summary: Read newline-delimited inputs from stdin; emit JSONL on stdout
+        type: boolean
+        default: false
       - name: json
         summary: Output result as JSON on stdout
         type: boolean
@@ -403,6 +451,10 @@ commands:
         summary: HMAC secret key (required)
         type: string
         required: true
+      - name: batch
+        summary: Read newline-delimited inputs from stdin; emit JSONL on stdout
+        type: boolean
+        default: false
       - name: json
         summary: Output result as JSON on stdout
         type: boolean
@@ -428,6 +480,10 @@ commands:
         summary: HMAC secret key (required)
         type: string
         required: true
+      - name: batch
+        summary: Read newline-delimited inputs from stdin; emit JSONL on stdout
+        type: boolean
+        default: false
       - name: json
         summary: Output result as JSON on stdout
         type: boolean
@@ -453,6 +509,10 @@ commands:
         summary: HMAC secret key (required)
         type: string
         required: true
+      - name: batch
+        summary: Read newline-delimited inputs from stdin; emit JSONL on stdout
+        type: boolean
+        default: false
       - name: json
         summary: Output result as JSON on stdout
         type: boolean
@@ -478,6 +538,10 @@ commands:
         summary: HMAC secret key (required)
         type: string
         required: true
+      - name: batch
+        summary: Read newline-delimited inputs from stdin; emit JSONL on stdout
+        type: boolean
+        default: false
       - name: json
         summary: Output result as JSON on stdout
         type: boolean
@@ -503,6 +567,10 @@ commands:
         summary: HMAC secret key (required)
         type: string
         required: true
+      - name: batch
+        summary: Read newline-delimited inputs from stdin; emit JSONL on stdout
+        type: boolean
+        default: false
       - name: json
         summary: Output result as JSON on stdout
         type: boolean
@@ -528,6 +596,10 @@ commands:
         summary: HMAC secret key (required)
         type: string
         required: true
+      - name: batch
+        summary: Read newline-delimited inputs from stdin; emit JSONL on stdout
+        type: boolean
+        default: false
       - name: json
         summary: Output result as JSON on stdout
         type: boolean
@@ -553,6 +625,10 @@ commands:
       - name: in
         summary: Read input from file
         type: string
+      - name: batch
+        summary: Read newline-delimited inputs from stdin; emit JSONL on stdout
+        type: boolean
+        default: false
       - name: json
         summary: Output result as JSON on stdout
         type: boolean
@@ -574,6 +650,10 @@ commands:
       - name: in
         summary: Read input from file
         type: string
+      - name: batch
+        summary: Read newline-delimited inputs from stdin; emit JSONL on stdout
+        type: boolean
+        default: false
       - name: json
         summary: Output result as JSON on stdout
         type: boolean
@@ -881,6 +961,10 @@ commands:
       - name: in
         summary: Read input from file
         type: string
+      - name: batch
+        summary: Read newline-delimited inputs from stdin; emit JSONL on stdout
+        type: boolean
+        default: false
       - name: json
         summary: Output result as JSON on stdout
         type: boolean
@@ -902,6 +986,10 @@ commands:
       - name: in
         summary: Read input from file
         type: string
+      - name: batch
+        summary: Read newline-delimited inputs from stdin; emit JSONL on stdout
+        type: boolean
+        default: false
       - name: json
         summary: Output result as JSON on stdout
         type: boolean
@@ -2561,3 +2649,216 @@ commands:
         summary: Output bare value only (pipe-friendly)
         type: boolean
         default: false
+
+  ubertool vault {command} [flags]:
+    group: true
+    summary: Encrypted local secrets store (AES-GCM + Argon2id)
+
+  ubertool vault init [flags]:
+    summary: Initialise a new vault file (AES-256-GCM, Argon2id key derivation)
+    flags:
+      - name: vault-file
+        summary: Path to the vault file
+        type: string
+      - name: force
+        summary: Overwrite an existing vault file
+        type: boolean
+        default: false
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool vault set <name> [value] [flags]:
+    summary: Store a secret in the vault
+    arguments:
+      - name: name
+        summary: Name of the secret to store
+        required: true
+        type: string
+      - name: value
+        summary: Secret value (omit to read from --in or --prompt)
+        required: false
+        type: string
+    flags:
+      - name: vault-file
+        summary: Path to the vault file
+        type: string
+      - name: in
+        summary: Read the secret value from a file
+        type: string
+      - name: prompt
+        summary: Prompt interactively for the secret value (hides input)
+        type: boolean
+        default: false
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool vault get <name> [flags]:
+    summary: Retrieve a secret from the vault
+    arguments:
+      - name: name
+        summary: Name of the secret to retrieve
+        required: true
+        type: string
+    flags:
+      - name: vault-file
+        summary: Path to the vault file
+        type: string
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool vault list [flags]:
+    summary: List all secret names in the vault
+    flags:
+      - name: vault-file
+        summary: Path to the vault file
+        type: string
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool vault delete <name> [flags]:
+    summary: Remove a secret from the vault
+    arguments:
+      - name: name
+        summary: Name of the secret to delete
+        required: true
+        type: string
+    flags:
+      - name: vault-file
+        summary: Path to the vault file
+        type: string
+      - name: yes
+        summary: Skip confirmation prompt
+        type: boolean
+        default: false
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool vault export [flags]:
+    summary: Export all secrets from the vault as plaintext JSON
+    flags:
+      - name: vault-file
+        summary: Path to the vault file
+        type: string
+      - name: out
+        summary: Write export to a file instead of stdout
+        type: string
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool vault import <file> [flags]:
+    summary: Import secrets into the vault from a JSON file
+    arguments:
+      - name: file
+        summary: Path to the JSON file containing secrets to import
+        required: true
+        type: string
+    flags:
+      - name: vault-file
+        summary: Path to the vault file
+        type: string
+      - name: merge
+        summary: Merge imported secrets with existing ones (default behaviour)
+        type: boolean
+        default: false
+      - name: replace
+        summary: Replace existing secrets that share the same name
+        type: boolean
+        default: false
+      - name: clear
+        summary: Delete all existing secrets before importing
+        type: boolean
+        default: false
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool vault unlock [flags]:
+    summary: Unlock the vault and cache the master key for a TTL period
+    flags:
+      - name: vault-file
+        summary: Path to the vault file
+        type: string
+      - name: ttl
+        summary: Session cache TTL in minutes
+        type: integer
+        default: "15"
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool vault lock [flags]:
+    summary: Evict the cached master key from the session cache
+    flags:
+      - name: vault-file
+        summary: Path to the vault file
+        type: string
+      - name: json
+        summary: Output result as JSON on stdout
+        type: boolean
+        default: false
+      - name: quiet
+        aliases: [q]
+        summary: Output bare value only (pipe-friendly)
+        type: boolean
+        default: false
+
+  ubertool schema [flags]:
+    summary: Emit the full ubertool command surface as JSON
+    flags:
+      - name: noun
+        summary: Emit only the commands for this noun (e.g. hash)
+        type: string

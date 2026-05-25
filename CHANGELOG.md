@@ -5,6 +5,49 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.0] - 2026-05-25
+
+Agent-experience + hardening release.
+
+### Added
+
+- **`vault`** — encrypted local secrets store. 9 verbs (`init`, `set`, `get`,
+  `list`, `delete`, `export`, `import`, `unlock`, `lock`). AES-256-GCM payload
+  with Argon2id key derivation; vault file defaults to
+  `~/.config/ubertool/vault.enc`. Master password unlock chain: OS keyring
+  (macOS Keychain / Linux Secret Service / Windows Credential Manager) →
+  session cache → `UBERTOOL_VAULT_PASSWORD` env var → interactive TTY prompt.
+  Standalone tool — use `--secret "$(ubertool vault get my-key)"` to feed
+  secrets into other commands.
+- **`schema [--noun <name>]`** — emits the full ubertool command surface as
+  JSON in a single call, so an agent can introspect all 56 nouns / 104 verbs
+  without walking dozens of `--help` pages.
+- **`--batch` JSONL mode** on `hash`, `hmac`, `base64 encode`/`decode`,
+  `url encode`/`decode`, `html encode`/`decode`. Reads newline-delimited input
+  from stdin, emits one JSON object per line. Closes the "Batch operations
+  exist for bulk work" gap on the agent-cli-design fitness checklist.
+
+### Fixed
+
+- **xml**: `parse_xml_to_value` no longer panics on a stray closing tag
+  (e.g. raw `</root>` input). Surfaced by cargo-fuzz; now returns
+  `invalid_xml` cleanly.
+
+### Test infrastructure
+
+- **proptest round-trip property tests** — 9 invariants (base64 / url / html
+  encode-decode, text to/from binary, text to/from unicode, json minify
+  idempotence, integer-base round-trip, roman round-trip). 64 generated cases
+  per property.
+- **cargo-fuzz** — `fuzz/` workspace with 5 parser targets (json, yaml, toml,
+  xml, csv). `make fuzz-smoke` runs each for 30 s.
+- **Coverage gate** — `cargo-llvm-cov` Makefile targets and a CI job that
+  fails the build if line / function / region coverage drops below
+  `COVERAGE_MIN` (default 75; current baseline 83% lines, 77% functions, 80%
+  regions).
+
+[0.4.0]: https://github.com/mieitza/ubertool/releases/tag/v0.4.0
+
 ## [0.3.0] - 2026-05-20
 
 Feature-gap release — fills four scope-downs from earlier milestones.
@@ -129,6 +172,7 @@ First tagged release. **55 nouns, 102 leaf commands.**
 - Every data-returning command supports `--json`, `--quiet`, `--in`, and stdin pipe.
 - Eight rules from the agent-cli-design skill enforced by the fitness checklist test.
 
+[0.4.0]: https://github.com/mieitza/ubertool/releases/tag/v0.4.0
 [0.3.0]: https://github.com/mieitza/ubertool/releases/tag/v0.3.0
 [0.2.0]: https://github.com/mieitza/ubertool/releases/tag/v0.2.0
 [0.1.0]: https://github.com/mieitza/ubertool/releases/tag/v0.1.0
