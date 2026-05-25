@@ -71,6 +71,7 @@ pub fn run() -> ProcExitCode {
         cli::Noun::Completions(a) => commands::completions::run(a, &out),
         cli::Noun::Schema(a) => commands::schema::run(a, &out),
         cli::Noun::SelfCmd(a) => commands::self_cmd::dispatch(a, &out),
+        cli::Noun::Vault(a) => commands::vault::dispatch(a, &out),
     };
 
     match result {

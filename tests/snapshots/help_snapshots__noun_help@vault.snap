@@ -1,0 +1,47 @@
+---
+source: tests/help_snapshots.rs
+expression: out
+---
+Encrypted local secrets store.
+
+Secrets are stored in a single AES-256-GCM encrypted file (default:
+~/.config/ubertool/vault.enc). Override with --vault-file or
+UBERTOOL_VAULT_FILE.
+
+Password resolution: session cache → OS keyring → UBERTOOL_VAULT_PASSWORD
+env → interactive prompt.
+
+Usage pattern: --secret "$(ubertool vault get my-key)"
+
+Usage: ubertool vault [OPTIONS] <COMMAND>
+
+Commands:
+  init    Create a new empty vault
+  set     Create or update a secret
+  get     Retrieve a secret value
+  list    List secret names (values are never included)
+  delete  Delete a secret (requires --yes in non-interactive contexts)
+  export  Export the full decrypted vault as JSON
+  import  Import secrets from a JSON file (from `vault export`)
+  unlock  Authenticate and cache the password for a session
+  lock    Delete the session cache (idempotent)
+  help    Print this message or the help of the given subcommand(s)
+
+Options:
+      --json
+          Output as JSON to stdout. Human messages still go to stderr
+
+      --vault-file <PATH>
+          Path to the vault file (overrides UBERTOOL_VAULT_FILE and default)
+
+  -q, --quiet
+          Bare values only (pipe-friendly)
+
+  -v, --verbose
+          Verbose progress to stderr
+
+  -h, --help
+          Print help (see a summary with '-h')
+
+  -V, --version
+          Print version

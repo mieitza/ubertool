@@ -36,19 +36,13 @@ pub fn run(args: UpdateArgs, out: &Out) -> Result<(), CliError> {
             .repo_name("ubertool")
             .build()
             .map_err(|e| {
-                CliError::new(
-                    ErrorCode::IoError,
-                    format!("could not query releases: {e}"),
-                )
-                .retriable()
+                CliError::new(ErrorCode::IoError, format!("could not query releases: {e}"))
+                    .retriable()
             })?
             .fetch()
             .map_err(|e| {
-                CliError::new(
-                    ErrorCode::IoError,
-                    format!("could not fetch releases: {e}"),
-                )
-                .retriable()
+                CliError::new(ErrorCode::IoError, format!("could not fetch releases: {e}"))
+                    .retriable()
             })?;
         let latest = releases
             .first()
@@ -71,11 +65,8 @@ pub fn run(args: UpdateArgs, out: &Out) -> Result<(), CliError> {
             .no_confirm(true)
             .build()
             .map_err(|e| {
-                CliError::new(
-                    ErrorCode::IoError,
-                    format!("self_update build failed: {e}"),
-                )
-                .retriable()
+                CliError::new(ErrorCode::IoError, format!("self_update build failed: {e}"))
+                    .retriable()
             })?
             .update()
             .map_err(|e| {

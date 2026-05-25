@@ -61,6 +61,7 @@ const NOUNS: &[&str] = &[
     "completions",
     "schema",
     "self",
+    "vault",
 ];
 
 fn run_help(noun: &str) -> String {

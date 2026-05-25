@@ -185,4 +185,16 @@ pub enum Noun {
     /// Show version / update the binary in place.
     #[command(name = "self")]
     SelfCmd(crate::commands::self_cmd::SelfArgs),
+    /// Encrypted local secrets store (AES-256-GCM + Argon2id).
+    #[command(long_about = "Encrypted local secrets store.\n\
+                      \n\
+                      Secrets are stored in a single AES-256-GCM encrypted file (default:\n\
+                      ~/.config/ubertool/vault.enc). Override with --vault-file or\n\
+                      UBERTOOL_VAULT_FILE.\n\
+                      \n\
+                      Password resolution: session cache → OS keyring → UBERTOOL_VAULT_PASSWORD\n\
+                      env → interactive prompt.\n\
+                      \n\
+                      Usage pattern: --secret \"$(ubertool vault get my-key)\"")]
+    Vault(crate::commands::vault::VaultArgs),
 }

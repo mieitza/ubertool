@@ -79,6 +79,7 @@ Commands:
   completions      Generate shell completion script (bash, zsh, fish, powershell, elvish)
   schema           Emit the full ubertool command surface as JSON (agent introspection)
   self             Show version / update the binary in place
+  vault            Encrypted local secrets store (AES-256-GCM + Argon2id)
   help             Print this message or the help of the given subcommand(s)
 
 Options:

@@ -18,7 +18,10 @@ pub struct SchemaArgs {
 
 pub fn run(args: SchemaArgs, _out: &Out) -> Result<(), CliError> {
     let mut spec: serde_json::Value = serde_yaml::from_str(SPEC_YAML).map_err(|e| {
-        CliError::new(ErrorCode::Internal, format!("bundled spec is not valid YAML: {e}"))
+        CliError::new(
+            ErrorCode::Internal,
+            format!("bundled spec is not valid YAML: {e}"),
+        )
     })?;
 
     if let Some(noun) = &args.noun {
@@ -26,7 +29,10 @@ pub fn run(args: SchemaArgs, _out: &Out) -> Result<(), CliError> {
     }
 
     let json = serde_json::to_string_pretty(&spec).map_err(|e| {
-        CliError::new(ErrorCode::Internal, format!("schema serialization failed: {e}"))
+        CliError::new(
+            ErrorCode::Internal,
+            format!("schema serialization failed: {e}"),
+        )
     })?;
     println!("{json}");
     Ok(())

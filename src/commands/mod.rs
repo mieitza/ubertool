@@ -53,5 +53,6 @@ pub mod ulid;
 pub mod url;
 pub mod user_agent;
 pub mod uuid;
+pub mod vault;
 pub mod xml;
 pub mod yaml;

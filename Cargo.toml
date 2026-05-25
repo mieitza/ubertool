@@ -92,6 +92,11 @@ figlet-rs = "0.1"
 
 flate2 = "1"
 
+# Vault
+keyring = "3"
+rpassword = "7"
+dirs = "5"
+
 # PDF signature cryptographic verification (PKCS#7/CMS)
 cms = "0.2"
 x509-cert = "0.2"

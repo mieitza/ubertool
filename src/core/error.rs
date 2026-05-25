@@ -47,6 +47,10 @@ pub enum ErrorCode {
     InvalidUrl,
     Internal,
     BatchPartialFailure,
+    VaultNotFound,
+    VaultFileMissing,
+    VaultExists,
+    VaultCorrupt,
 }
 
 impl ErrorCode {
@@ -60,7 +64,9 @@ impl ErrorCode {
             | InvalidCodepoint | InvalidPdf | InvalidDockerRun | InvalidIp | InvalidMac
             | InvalidMath | InvalidDate | InvalidCron | InvalidChmod | InvalidCipher
             | InvalidUrl | BatchPartialFailure => ExitCode::Invalid,
-            FileNotFound | PermissionDenied | IoError => ExitCode::Io,
+            FileNotFound | PermissionDenied | IoError | VaultFileMissing => ExitCode::Io,
+            VaultNotFound | VaultCorrupt => ExitCode::Invalid,
+            VaultExists => ExitCode::Usage,
             SignatureMismatch | DecryptFailed | PdfSignatureInvalid => ExitCode::Crypto,
             AlgoNotSupported => ExitCode::Unsupported,
             Internal => ExitCode::Generic,
@@ -108,6 +114,10 @@ impl ErrorCode {
             InvalidUrl => "invalid_url",
             Internal => "internal",
             BatchPartialFailure => "batch_partial_failure",
+            VaultNotFound => "vault_not_found",
+            VaultFileMissing => "vault_file_missing",
+            VaultExists => "vault_exists",
+            VaultCorrupt => "vault_corrupt",
         }
     }
 }
@@ -199,6 +209,10 @@ mod tests {
         assert_eq!(ErrorCode::Internal.exit(), ExitCode::Generic);
         assert_eq!(ErrorCode::BinaryToTtyRefused.exit(), ExitCode::Usage);
         assert_eq!(ErrorCode::BatchPartialFailure.exit(), ExitCode::Invalid);
+        assert_eq!(ErrorCode::VaultNotFound.exit(), ExitCode::Invalid);
+        assert_eq!(ErrorCode::VaultFileMissing.exit(), ExitCode::Io);
+        assert_eq!(ErrorCode::VaultExists.exit(), ExitCode::Usage);
+        assert_eq!(ErrorCode::VaultCorrupt.exit(), ExitCode::Invalid);
     }
 
     #[test]
@@ -279,6 +293,10 @@ mod tests {
             ErrorCode::InvalidUrl,
             ErrorCode::Internal,
             ErrorCode::BatchPartialFailure,
+            ErrorCode::VaultNotFound,
+            ErrorCode::VaultFileMissing,
+            ErrorCode::VaultExists,
+            ErrorCode::VaultCorrupt,
         ];
         for code in cases {
             let v = serde_json::to_value(code).unwrap();
