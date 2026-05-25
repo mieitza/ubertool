@@ -164,7 +164,7 @@ ubertool vault get MY_API_KEY        # retrieve it
 ubertool hmac sha256 "payload" --key "$(ubertool vault get MY_API_KEY)"
 ```
 
-Password is resolved from: session cache → OS keyring → `UBERTOOL_VAULT_PASSWORD` env → interactive prompt. For headless/CI flows, set `UBERTOOL_VAULT_PASSWORD`. For interactive sessions, run `ubertool vault unlock --ttl 30` once. See [`docs/claude-skill/SKILL.md`](./docs/claude-skill/SKILL.md) for the full agent-friendly usage guide.
+Password is resolved from: OS keyring → session cache → `UBERTOOL_VAULT_PASSWORD` env → interactive prompt. For headless/CI flows, set `UBERTOOL_VAULT_PASSWORD`. For interactive sessions, run `ubertool vault unlock --ttl 30` once. See [`docs/claude-skill/SKILL.md`](./docs/claude-skill/SKILL.md) for the full agent-friendly usage guide.
 
 ## Design
 

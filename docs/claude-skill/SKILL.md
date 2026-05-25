@@ -81,7 +81,7 @@ ubertool vault list                          # list names only (values never pri
 ubertool hmac sha256 "payload" --key "$(ubertool vault get MY_API_KEY)"
 ```
 
-Password unlock chain (checked in order): **session cache → OS keyring → `UBERTOOL_VAULT_PASSWORD` env → interactive TTY prompt**.
+Password unlock chain (checked in order): **OS keyring → session cache → `UBERTOOL_VAULT_PASSWORD` env → interactive TTY prompt**. The keyring is the persistent "I trust this machine" assertion the user made at `vault init`; the session cache is a short-lived fallback for headless / no-keyring environments.
 
 Agent-friendly patterns:
 
@@ -226,7 +226,8 @@ ubertool vault unlock --ttl 30                 # cache password for 30 min
 ubertool hmac sha256 "data" --key "$(ubertool vault get MY_API_KEY)"
 
 # Schema introspection (agent: use this instead of walking --help pages)
-ubertool schema --json | jq '.commands | keys'        # all command signatures
+ubertool schema --json | jq '.commands | keys'        # all command signatures (incl. groups + leaves)
+ubertool schema --json | jq '[.commands | to_entries[] | select(.value.group != true) | .key]'  # leaf commands only (114)
 ubertool schema --noun hash                            # narrow to one noun
 
 # Self lifecycle

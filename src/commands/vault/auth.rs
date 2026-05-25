@@ -2,11 +2,17 @@
 //!
 //! Precedence (highest to lowest):
 //!   1. Explicit password (e.g. from --password-from-stdin, already obtained by caller).
-//!   2. Live session cache (`vault unlock` writes this).
-//!   3. OS keyring (skipped if UBERTOOL_VAULT_NO_KEYRING=1).
+//!   2. OS keyring (skipped if UBERTOOL_VAULT_NO_KEYRING=1).
+//!   3. Live session cache (`vault unlock` writes this).
 //!   4. Env var UBERTOOL_VAULT_PASSWORD.
 //!   5. Interactive TTY prompt via rpassword.
 //!   6. Fail with a clear error.
+//!
+//! Keyring is checked before the session cache: the keyring is the persistent
+//! "I trust this machine" assertion the user made at vault-init time, while
+//! the session cache is a short-lived convenience for headless / no-keyring
+//! environments. Trying the keyring first means the session cache is only
+//! consulted when the keyring is unavailable or explicitly disabled.
 
 use std::path::Path;
 
@@ -23,16 +29,16 @@ pub fn resolve_password(
         return Ok(p);
     }
 
-    // 2. Live session cache.
-    if let Some(p) = super::session::read_unexpired()? {
-        return Ok(p);
-    }
-
-    // 3. OS keyring (skip in tests/CI via UBERTOOL_VAULT_NO_KEYRING=1).
+    // 2. OS keyring (skip in tests/CI via UBERTOOL_VAULT_NO_KEYRING=1).
     if std::env::var("UBERTOOL_VAULT_NO_KEYRING").as_deref() != Ok("1") {
         if let Ok(p) = keyring_read(_vault_file) {
             return Ok(p);
         }
+    }
+
+    // 3. Live session cache.
+    if let Some(p) = super::session::read_unexpired()? {
+        return Ok(p);
     }
 
     // 4. Env var.

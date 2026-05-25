@@ -6,8 +6,8 @@
 //! Encryption: AES-256-GCM with Argon2id key derivation.
 //!
 //! Password resolution order:
-//!   1. Live session cache (`vault unlock` stores this).
-//!   2. OS keyring (skip with UBERTOOL_VAULT_NO_KEYRING=1 for testing/CI).
+//!   1. OS keyring (skip with UBERTOOL_VAULT_NO_KEYRING=1 for testing/CI).
+//!   2. Live session cache (`vault unlock` stores this).
 //!   3. UBERTOOL_VAULT_PASSWORD environment variable.
 //!   4. Interactive TTY prompt.
 //!
@@ -43,8 +43,8 @@ pub mod unlock;
                   UBERTOOL_VAULT_FILE.\n\
                   \n\
                   Password resolution order:\n\
-                  1. Live session cache (written by `vault unlock`)\n\
-                  2. OS keyring (skip with UBERTOOL_VAULT_NO_KEYRING=1)\n\
+                  1. OS keyring (skip with UBERTOOL_VAULT_NO_KEYRING=1)\n\
+                  2. Live session cache (written by `vault unlock`)\n\
                   3. UBERTOOL_VAULT_PASSWORD environment variable\n\
                   4. Interactive TTY prompt\n\
                   \n\

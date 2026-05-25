@@ -5,6 +5,34 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.1] - 2026-05-25
+
+Patch release — vault unlock chain order corrected to match the locked design.
+
+### Fixed
+
+- **`vault`**: password resolution now checks the OS keyring **before** the
+  session cache (was: session cache → keyring). The keyring is the persistent
+  "I trust this machine" assertion made at `vault init`; the session cache is
+  a short-lived fallback for headless / no-keyring environments. Order
+  matters because in interactive use the keyring is the user's intended
+  primary unlock path; checking the session cache first masked it whenever
+  `vault unlock` had been run more recently than the daemon could supply via
+  keyring. Functional behavior is unchanged for any environment that uses
+  only one of the two (CI with no keyring, or a workstation that never runs
+  `vault unlock`).
+
+### Documentation
+
+- `vault --help`, README, and `docs/claude-skill/SKILL.md` updated to match
+  the corrected chain order.
+- Skill now includes a `jq` snippet for filtering `ubertool schema` output to
+  leaf commands only (the raw `.commands | keys` list also contains group
+  placeholders like `ubertool hash {command} [flags]`; the leaf-only count
+  is 114).
+
+[0.4.1]: https://github.com/mieitza/ubertool/releases/tag/v0.4.1
+
 ## [0.4.0] - 2026-05-25
 
 Agent-experience + hardening release.
