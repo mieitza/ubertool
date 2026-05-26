@@ -25,6 +25,7 @@ pub enum Verb {
                             ubertool base64 encode \"hello\"\n  \
                             echo -n hello | ubertool base64 encode\n  \
                             ubertool base64 encode \"hello\" --json\n  \
+                            ubertool base64 encode --in ./file.bin --out encoded.b64\n  \
                             printf 'alice\\nbob\\n' | ubertool base64 encode --batch"
     )]
     Encode(EncodeArgs),
@@ -36,6 +37,7 @@ pub enum Verb {
                             Examples:\n  \
                             ubertool base64 decode aGVsbG8=\n  \
                             ubertool base64 decode aGVsbG8= --json\n  \
+                            ubertool base64 decode --in ./encoded.b64 --out decoded.bin\n  \
                             printf 'aGVsbG8=\\nd29ybGQ=\\n' | ubertool base64 decode --batch\n\
                             \n\
                             Exit codes specific to this command:\n  \

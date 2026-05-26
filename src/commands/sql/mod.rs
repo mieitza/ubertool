@@ -21,7 +21,7 @@ pub struct SqlArgs {
 pub enum Verb {
     /// Pretty-print SQL with consistent indentation.
     #[command(
-        long_about = "Pretty-print SQL.\n\nExamples:\n  ubertool sql format 'SELECT * FROM users WHERE id=1'\n  ubertool sql format 'select 1' --uppercase --json"
+        long_about = "Pretty-print SQL.\n\nExamples:\n  ubertool sql format 'SELECT * FROM users WHERE id=1'\n  ubertool sql format 'select 1' --uppercase --json\n  ubertool sql format --in ./query.sql --indent 4"
     )]
     Format(FormatArgs),
 }

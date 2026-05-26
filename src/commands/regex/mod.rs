@@ -24,7 +24,7 @@ pub enum Verb {
     Test(TestArgs),
     /// Generate a string matching a pattern.
     #[command(
-        long_about = "Generate a string that matches a regex pattern.\n\nLimitations: lookaround, backreferences, and anchors are not supported.\n\nExamples:\n  ubertool regex generate '\\d{3}-\\d{4}'\n  ubertool regex generate '[A-Z]{2,4}'"
+        long_about = "Generate a string that matches a regex pattern.\n\nLimitations: lookaround, backreferences, and anchors are not supported.\n\nExamples:\n  ubertool regex generate '\\d{3}-\\d{4}'\n  ubertool regex generate '[A-Z]{2,4}'\n  ubertool regex generate '\\d{3}-\\d{4}' --json"
     )]
     Generate(GenerateArgs),
     /// Print the bundled regex cheat sheet (Markdown).

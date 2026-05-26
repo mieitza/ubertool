@@ -23,7 +23,7 @@ pub enum Verb {
     Encode(encode::EncodeArgs),
     /// Decode an HTTP Basic Authorization header value into user/pass.
     #[command(
-        long_about = "Decode an HTTP Basic Authorization header value into user/pass. The leading \"Basic \" prefix is optional.\n\nExamples:\n  ubertool basic-auth decode \"Basic dXNlcjpwYXNz\"\n  ubertool basic-auth decode dXNlcjpwYXNz --json\n\nExit codes specific to this command:\n  3   invalid base64, or decoded value has no `:` separator"
+        long_about = "Decode an HTTP Basic Authorization header value into user/pass. The leading \"Basic \" prefix is optional.\n\nExamples:\n  ubertool basic-auth decode \"Basic dXNlcjpwYXNz\"\n  ubertool basic-auth decode dXNlcjpwYXNz --json\n  ubertool basic-auth decode --in ./header.txt\n\nExit codes specific to this command:\n  3   invalid base64, or decoded value has no `:` separator"
     )]
     Decode(decode::DecodeArgs),
 }

@@ -20,7 +20,7 @@ pub struct SlugifyArgs {
 pub enum Verb {
     /// Generate a URL-safe slug.
     #[command(
-        long_about = "Generate a URL-safe slug from text. Unicode is transliterated to ASCII, non-alphanumeric characters become hyphens, runs of hyphens collapse.\n\nExamples:\n  ubertool slugify generate \"Hello, World!\"\n  echo -n \"Café Résumé\" | ubertool slugify generate --json"
+        long_about = "Generate a URL-safe slug from text. Unicode is transliterated to ASCII, non-alphanumeric characters become hyphens, runs of hyphens collapse.\n\nExamples:\n  ubertool slugify generate \"Hello, World!\"\n  echo -n \"Café Résumé\" | ubertool slugify generate --json\n  ubertool slugify generate --in ./title.txt"
     )]
     Generate(GenerateArgs),
 }

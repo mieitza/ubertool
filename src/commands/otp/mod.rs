@@ -23,7 +23,7 @@ pub enum Verb {
     Generate(generate::GenerateArgs),
     /// Validate a TOTP code against the current time window.
     #[command(
-        long_about = "Validate a TOTP code against the current time window. Allows ±1 step skew by default.\n\nExamples:\n  ubertool otp validate 123456 --secret JBSWY3DPEHPK3PXP\n\nExit codes:\n  5   code does not match within the allowed window (signature_mismatch)"
+        long_about = "Validate a TOTP code against the current time window. Allows ±1 step skew by default.\n\nExamples:\n  ubertool otp validate 123456 --secret JBSWY3DPEHPK3PXP\n  ubertool otp validate 12345678 --secret JBSWY3DPEHPK3PXP --digits 8 --period 60 --json\n\nExit codes:\n  5   code does not match within the allowed window (signature_mismatch)"
     )]
     Validate(validate::ValidateArgs),
 }

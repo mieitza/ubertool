@@ -30,17 +30,17 @@ pub enum Verb {
     /// Convert JSON to TOML.
     #[command(
         name = "to-toml",
-        long_about = "Convert JSON to TOML.\n\nTOML does not support null values; nulls fail with exit 3 (invalid_toml).\n\nExamples:\n  ubertool json to-toml '{\"a\":1}'\n  ubertool json to-toml --in ./data.json\n\nExit codes specific to this command:\n  3   invalid JSON, or value type not representable in TOML"
+        long_about = "Convert JSON to TOML.\n\nTOML does not support null values; nulls fail with exit 3 (invalid_toml).\n\nExamples:\n  ubertool json to-toml '{\"a\":1}'\n  ubertool json to-toml --in ./data.json\n  ubertool json to-toml --in ./data.json --json\n\nExit codes specific to this command:\n  3   invalid JSON, or value type not representable in TOML"
     )]
     ToToml(RunArgs),
     /// Minify JSON (strip whitespace).
     #[command(
-        long_about = "Minify JSON (strip insignificant whitespace).\n\nExamples:\n  ubertool json minify '{ \"a\": 1 }'\n  cat data.json | ubertool json minify"
+        long_about = "Minify JSON (strip insignificant whitespace).\n\nExamples:\n  ubertool json minify '{ \"a\": 1 }'\n  cat data.json | ubertool json minify\n  ubertool json minify --in ./data.json --json"
     )]
     Minify(RunArgs),
     /// Prettify JSON with indentation.
     #[command(
-        long_about = "Prettify JSON with indentation.\n\nExamples:\n  ubertool json prettify '{\"a\":1}'\n  ubertool json prettify '{\"a\":1}' --indent 4"
+        long_about = "Prettify JSON with indentation.\n\nExamples:\n  ubertool json prettify '{\"a\":1}'\n  ubertool json prettify '{\"a\":1}' --indent 4\n  ubertool json prettify --in ./data.json --indent 2 --json"
     )]
     Prettify(PrettifyArgs),
 }

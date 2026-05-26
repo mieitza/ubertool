@@ -23,17 +23,17 @@ pub struct HmacArgs {
 pub enum HmacVerb {
     #[command(
         name = "md5",
-        long_about = "Compute HMAC-MD5 (legacy / not collision-resistant).\n\nExamples:\n  ubertool hmac md5 \"msg\" --key \"secret\"\n  printf 'alice\\nbob\\n' | ubertool hmac md5 --key \"secret\" --batch"
+        long_about = "Compute HMAC-MD5 (legacy / not collision-resistant).\n\nExamples:\n  ubertool hmac md5 \"msg\" --key \"secret\"\n  ubertool hmac md5 --in ./file --key \"secret\" --json\n  printf 'alice\\nbob\\n' | ubertool hmac md5 --key \"secret\" --batch"
     )]
     Md5(HmacRunArgs),
     #[command(
         name = "sha1",
-        long_about = "Compute HMAC-SHA1 (legacy).\n\nExamples:\n  ubertool hmac sha1 \"msg\" --key \"secret\"\n  printf 'alice\\nbob\\n' | ubertool hmac sha1 --key \"secret\" --batch"
+        long_about = "Compute HMAC-SHA1 (legacy).\n\nExamples:\n  ubertool hmac sha1 \"msg\" --key \"secret\"\n  ubertool hmac sha1 --in ./file --key \"secret\" --json\n  printf 'alice\\nbob\\n' | ubertool hmac sha1 --key \"secret\" --batch"
     )]
     Sha1(HmacRunArgs),
     #[command(
         name = "sha224",
-        long_about = "Compute HMAC-SHA224.\n\nExamples:\n  ubertool hmac sha224 \"msg\" --key \"secret\"\n  printf 'alice\\nbob\\n' | ubertool hmac sha224 --key \"secret\" --batch"
+        long_about = "Compute HMAC-SHA224.\n\nExamples:\n  ubertool hmac sha224 \"msg\" --key \"secret\"\n  ubertool hmac sha224 --in ./file --key \"secret\" --json\n  printf 'alice\\nbob\\n' | ubertool hmac sha224 --key \"secret\" --batch"
     )]
     Sha224(HmacRunArgs),
     #[command(
@@ -43,22 +43,22 @@ pub enum HmacVerb {
     Sha256(HmacRunArgs),
     #[command(
         name = "sha384",
-        long_about = "Compute HMAC-SHA384.\n\nExamples:\n  ubertool hmac sha384 \"msg\" --key \"secret\"\n  printf 'alice\\nbob\\n' | ubertool hmac sha384 --key \"secret\" --batch"
+        long_about = "Compute HMAC-SHA384.\n\nExamples:\n  ubertool hmac sha384 \"msg\" --key \"secret\"\n  ubertool hmac sha384 --in ./file --key \"secret\" --json\n  printf 'alice\\nbob\\n' | ubertool hmac sha384 --key \"secret\" --batch"
     )]
     Sha384(HmacRunArgs),
     #[command(
         name = "sha512",
-        long_about = "Compute HMAC-SHA512.\n\nExamples:\n  ubertool hmac sha512 \"msg\" --key \"secret\"\n  printf 'alice\\nbob\\n' | ubertool hmac sha512 --key \"secret\" --batch"
+        long_about = "Compute HMAC-SHA512.\n\nExamples:\n  ubertool hmac sha512 \"msg\" --key \"secret\"\n  ubertool hmac sha512 --in ./file --key \"secret\" --json\n  printf 'alice\\nbob\\n' | ubertool hmac sha512 --key \"secret\" --batch"
     )]
     Sha512(HmacRunArgs),
     #[command(
         name = "sha3-256",
-        long_about = "Compute HMAC-SHA3-256.\n\nExamples:\n  ubertool hmac sha3-256 \"msg\" --key \"secret\"\n  printf 'alice\\nbob\\n' | ubertool hmac sha3-256 --key \"secret\" --batch"
+        long_about = "Compute HMAC-SHA3-256.\n\nExamples:\n  ubertool hmac sha3-256 \"msg\" --key \"secret\"\n  ubertool hmac sha3-256 --in ./file --key \"secret\" --json\n  printf 'alice\\nbob\\n' | ubertool hmac sha3-256 --key \"secret\" --batch"
     )]
     Sha3_256(HmacRunArgs),
     #[command(
         name = "sha3-512",
-        long_about = "Compute HMAC-SHA3-512.\n\nExamples:\n  ubertool hmac sha3-512 \"msg\" --key \"secret\"\n  printf 'alice\\nbob\\n' | ubertool hmac sha3-512 --key \"secret\" --batch"
+        long_about = "Compute HMAC-SHA3-512.\n\nExamples:\n  ubertool hmac sha3-512 \"msg\" --key \"secret\"\n  ubertool hmac sha3-512 --in ./file --key \"secret\" --json\n  printf 'alice\\nbob\\n' | ubertool hmac sha3-512 --key \"secret\" --batch"
     )]
     Sha3_512(HmacRunArgs),
 }

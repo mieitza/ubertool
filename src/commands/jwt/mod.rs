@@ -18,12 +18,12 @@ pub struct JwtArgs {
 pub enum Verb {
     /// Decode a JWT without verifying its signature.
     #[command(
-        long_about = "Decode a JWT without verifying its signature — useful for inspection.\n\nExamples:\n  ubertool jwt decode \"eyJhbGc...\"\n  ubertool jwt decode \"eyJhbGc...\" --json\n\nExit codes specific to this command:\n  3   malformed JWT (invalid_jwt)"
+        long_about = "Decode a JWT without verifying its signature — useful for inspection.\n\nExamples:\n  ubertool jwt decode \"eyJhbGc...\"\n  ubertool jwt decode \"eyJhbGc...\" --json\n  ubertool jwt decode --in ./token.txt\n\nExit codes specific to this command:\n  3   malformed JWT (invalid_jwt)"
     )]
     Decode(decode::DecodeArgs),
     /// Verify a JWT signature (HS256/384/512 or RS256/384/512 or ES256/384).
     #[command(
-        long_about = "Verify a JWT signature.\n\nSymmetric (HS*): requires --secret.\nAsymmetric (RS*/ES*): requires --key-file (path to a PEM public key).\n\nExamples:\n  ubertool jwt verify \"eyJhbGc...\" --secret \"my-secret\"\n  ubertool jwt verify \"eyJhbGc...\" --secret \"my-secret\" --algo hs512 --json\n  ubertool jwt verify \"eyJhbGc...\" --algo rs256 --key-file /path/to/pub.pem\n  ubertool jwt verify \"eyJhbGc...\" --algo es256 --key-file /path/to/ec_pub.pem --json\n\nExit codes specific to this command:\n  3   malformed JWT (invalid_jwt)\n  5   signature mismatch / wrong key (signature_mismatch)\n  2   missing required flag for the chosen algorithm (usage_error)"
+        long_about = "Verify a JWT signature.\n\nSymmetric (HS*): requires --secret.\nAsymmetric (RS*/ES*): requires --key-file (path to a PEM public key).\n\nExamples:\n  ubertool jwt verify \"eyJhbGc...\" --secret \"my-secret\"\n  ubertool jwt verify \"eyJhbGc...\" --secret \"my-secret\" --algo hs512 --json\n  ubertool jwt verify \"eyJhbGc...\" --algo rs256 --key-file /path/to/pub.pem\n  ubertool jwt verify \"eyJhbGc...\" --algo es256 --key-file /path/to/ec_pub.pem --json\n  ubertool jwt verify --in ./token.txt --secret \"my-secret\" --validate-exp\n\nExit codes specific to this command:\n  3   malformed JWT (invalid_jwt)\n  5   signature mismatch / wrong key (signature_mismatch)\n  2   missing required flag for the chosen algorithm (usage_error)"
     )]
     Verify(verify::VerifyArgs),
 }

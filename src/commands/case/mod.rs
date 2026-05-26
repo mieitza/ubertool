@@ -21,7 +21,7 @@ pub struct CaseArgs {
 pub enum Verb {
     /// Convert a string between case styles.
     #[command(
-        long_about = "Convert a string between case styles.\n\nExamples:\n  ubertool case convert \"hello world\" --style snake\n  ubertool case convert \"helloWorld\" --style kebab\n  ubertool case convert \"my var\" --style screaming-snake --json"
+        long_about = "Convert a string between case styles.\n\nExamples:\n  ubertool case convert \"hello world\" --style snake\n  ubertool case convert \"helloWorld\" --style kebab\n  ubertool case convert \"my var\" --style screaming-snake --json\n  ubertool case convert --in ./text.txt --style camel"
     )]
     Convert(ConvertArgs),
 }

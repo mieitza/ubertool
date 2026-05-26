@@ -20,7 +20,7 @@ pub struct PasswordArgs {
 pub enum Verb {
     /// Score a password's strength (zxcvbn).
     #[command(
-        long_about = "Score a password's strength using zxcvbn.\n\nReturns a score 0-4 (very-weak..very-strong), a log10 estimate of guesses required, and feedback strings. The password itself is never echoed in output.\n\nExamples:\n  ubertool password score \"P@ssw0rd!\"\n  echo -n \"P@ssw0rd!\" | ubertool password score --json"
+        long_about = "Score a password's strength using zxcvbn.\n\nReturns a score 0-4 (very-weak..very-strong), a log10 estimate of guesses required, and feedback strings. The password itself is never echoed in output.\n\nExamples:\n  ubertool password score \"P@ssw0rd!\"\n  echo -n \"P@ssw0rd!\" | ubertool password score --json\n  ubertool password score --in ./pw.txt"
     )]
     Score(ScoreArgs),
 }

@@ -22,12 +22,12 @@ pub struct Ipv4Args {
 pub enum Verb {
     /// Parse an IPv4 address and emit its representations.
     #[command(
-        long_about = "Parse an IPv4 address and emit decimal/hex/binary forms, plus private/loopback/multicast classification.\n\nExamples:\n  ubertool ipv4 parse 192.168.1.1\n  ubertool ipv4 parse 8.8.8.8 --json\n\nExit codes:\n  3   invalid IPv4 address (invalid_ip)"
+        long_about = "Parse an IPv4 address and emit decimal/hex/binary forms, plus private/loopback/multicast classification.\n\nExamples:\n  ubertool ipv4 parse 192.168.1.1\n  ubertool ipv4 parse 8.8.8.8 --json\n  ubertool ipv4 parse --in ./ip.txt\n\nExit codes:\n  3   invalid IPv4 address (invalid_ip)"
     )]
     Parse(RunArgs),
     /// Compute subnet info for a CIDR block.
     #[command(
-        long_about = "Compute subnet info for a CIDR block.\n\nExamples:\n  ubertool ipv4 subnet 10.0.0.0/24\n\nExit codes:\n  3   invalid CIDR (invalid_ip)"
+        long_about = "Compute subnet info for a CIDR block.\n\nExamples:\n  ubertool ipv4 subnet 10.0.0.0/24\n  ubertool ipv4 subnet 192.168.0.0/16 --json\n\nExit codes:\n  3   invalid CIDR (invalid_ip)"
     )]
     Subnet(RunArgs),
     /// Expand a CIDR block into a list of addresses (capped by --max).
@@ -39,7 +39,7 @@ pub enum Verb {
     /// Convert IPv4 to IPv4-mapped IPv6 form (::ffff:a.b.c.d).
     #[command(
         name = "to-ipv6",
-        long_about = "Convert IPv4 to IPv4-mapped IPv6 (::ffff:a.b.c.d) and compatible form.\n\nExamples:\n  ubertool ipv4 to-ipv6 192.168.1.1"
+        long_about = "Convert IPv4 to IPv4-mapped IPv6 (::ffff:a.b.c.d) and compatible form.\n\nExamples:\n  ubertool ipv4 to-ipv6 192.168.1.1\n  ubertool ipv4 to-ipv6 10.0.0.1 --json"
     )]
     ToIpv6(RunArgs),
 }

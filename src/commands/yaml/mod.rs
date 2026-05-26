@@ -27,7 +27,7 @@ pub enum Verb {
     /// Convert YAML to TOML.
     #[command(
         name = "to-toml",
-        long_about = "Convert YAML to TOML via JSON value interchange.\n\nExamples:\n  ubertool yaml to-toml 'k: v'\n\nExit codes specific to this command:\n  3   invalid YAML, or value type not representable in TOML"
+        long_about = "Convert YAML to TOML via JSON value interchange.\n\nExamples:\n  ubertool yaml to-toml 'k: v'\n  ubertool yaml to-toml --in ./config.yaml --json\n\nExit codes specific to this command:\n  3   invalid YAML, or value type not representable in TOML"
     )]
     ToToml(RunArgs),
 }

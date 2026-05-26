@@ -23,7 +23,7 @@ pub enum Verb {
     Encrypt(encrypt::EncryptArgs),
     /// Decrypt input produced by `cipher encrypt`.
     #[command(
-        long_about = "Decrypt input previously produced by `cipher encrypt`.\n\nThe algo and KDF are auto-detected from the self-describing format.\n\nExamples:\n  ubertool cipher decrypt 'aes-gcm$argon2$...' --password 'pw'\n\nExit codes:\n  3   malformed cipher format (invalid_cipher)\n  5   authentication tag failed — wrong password or tampered ciphertext (decrypt_failed)"
+        long_about = "Decrypt input previously produced by `cipher encrypt`.\n\nThe algo and KDF are auto-detected from the self-describing format.\n\nExamples:\n  ubertool cipher decrypt 'aes-gcm$argon2$...' --password 'pw'\n  ubertool cipher decrypt 'chacha20-poly1305$argon2$...' --password 'pw' --json\n\nExit codes:\n  3   malformed cipher format (invalid_cipher)\n  5   authentication tag failed — wrong password or tampered ciphertext (decrypt_failed)"
     )]
     Decrypt(decrypt::DecryptArgs),
 }

@@ -20,7 +20,7 @@ pub struct ListArgs {
 pub enum Verb {
     /// Convert a list between separator styles, optionally trimming/deduping/sorting.
     #[command(
-        long_about = "Convert a list between separator styles.\n\nSeparators: comma, newline, space, tab, semicolon, pipe.\n\nExamples:\n  ubertool list convert 'a,b,c' --from comma --to newline\n  ubertool list convert ' a , b , a ' --from comma --to comma --trim --dedupe --sort"
+        long_about = "Convert a list between separator styles.\n\nSeparators: comma, newline, space, tab, semicolon, pipe.\n\nExamples:\n  ubertool list convert 'a,b,c' --from comma --to newline\n  ubertool list convert ' a , b , a ' --from comma --to comma --trim --dedupe --sort\n  ubertool list convert --in ./list.txt --from newline --to pipe --json"
     )]
     Convert(ConvertArgs),
 }

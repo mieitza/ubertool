@@ -21,7 +21,7 @@ pub enum Verb {
     /// Convert CSV to JSON (header row becomes object keys).
     #[command(
         name = "to-json",
-        long_about = "Convert CSV to JSON. The first row is treated as the header — its values become object keys for every subsequent row.\n\nExamples:\n  ubertool csv to-json 'name,age\\nalice,30'\n  ubertool csv to-json --in ./data.csv --delimiter ';'\n\nExit codes specific to this command:\n  2   usage error (e.g., multi-char delimiter)\n  3   malformed CSV (invalid_csv)"
+        long_about = "Convert CSV to JSON. The first row is treated as the header — its values become object keys for every subsequent row.\n\nExamples:\n  ubertool csv to-json 'name,age\\nalice,30'\n  ubertool csv to-json --in ./data.csv --delimiter ';'\n  ubertool csv to-json --in ./data.csv --json\n\nExit codes specific to this command:\n  2   usage error (e.g., multi-char delimiter)\n  3   malformed CSV (invalid_csv)"
     )]
     ToJson(ToJsonArgs),
 }

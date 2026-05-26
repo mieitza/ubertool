@@ -27,7 +27,7 @@ pub enum Verb {
     /// Convert TOML to YAML.
     #[command(
         name = "to-yaml",
-        long_about = "Convert TOML to YAML.\n\nExamples:\n  ubertool toml to-yaml 'k = \"v\"'"
+        long_about = "Convert TOML to YAML.\n\nExamples:\n  ubertool toml to-yaml 'k = \"v\"'\n  ubertool toml to-yaml --in ./Cargo.toml --json"
     )]
     ToYaml(RunArgs),
 }

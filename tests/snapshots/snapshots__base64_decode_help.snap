@@ -7,6 +7,7 @@ Decode base64 input (standard alphabet, with padding).
 Examples:
   ubertool base64 decode aGVsbG8=
   ubertool base64 decode aGVsbG8= --json
+  ubertool base64 decode --in ./encoded.b64 --out decoded.bin
   printf 'aGVsbG8=\nd29ybGQ=\n' | ubertool base64 decode --batch
 
 Exit codes specific to this command:

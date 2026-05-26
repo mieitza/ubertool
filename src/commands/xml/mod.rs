@@ -26,7 +26,7 @@ pub enum Verb {
     ToJson(RunArgs),
     /// Pretty-print XML with indentation.
     #[command(
-        long_about = "Pretty-print XML with two-space indentation.\n\nExamples:\n  ubertool xml format '<r><a>1</a></r>'\n\nExit codes specific to this command:\n  3   invalid XML (invalid_xml)"
+        long_about = "Pretty-print XML with two-space indentation.\n\nExamples:\n  ubertool xml format '<r><a>1</a></r>'\n  ubertool xml format --in ./data.xml --json\n\nExit codes specific to this command:\n  3   invalid XML (invalid_xml)"
     )]
     Format(RunArgs),
 }

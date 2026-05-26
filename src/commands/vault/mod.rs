@@ -72,6 +72,11 @@ pub enum Verb {
                       password in the OS keyring (best-effort — if keyring fails, a warning\n\
                       is printed but the vault is still created).\n\
                       \n\
+                      Examples:\n  \
+                      ubertool vault init\n  \
+                      ubertool vault init --force\n  \
+                      ubertool vault init --vault-file /tmp/test.enc\n\
+                      \n\
                       Exit codes: 2 if vault already exists without --force; 4 on I/O failure.")]
     Init(init::InitArgs),
     /// Create or update a secret.
@@ -81,6 +86,12 @@ pub enum Verb {
                       interactive prompt (when stdin is a TTY or --prompt is given).\n\
                       \n\
                       The value is never echoed in command output.\n\
+                      \n\
+                      Examples:\n  \
+                      ubertool vault set api-key MYTOKEN123\n  \
+                      ubertool vault set db-password --prompt\n  \
+                      ubertool vault set cert --in ./cert.pem\n  \
+                      echo -n 'secret' | ubertool vault set my-secret\n\
                       \n\
                       Exit codes: 2 (no value in non-prompt context); 4 (I/O); 5 (wrong password).")]
     Set(set::SetArgs),
@@ -92,6 +103,10 @@ pub enum Verb {
                       \n\
                       The value is NEVER emitted on stderr or in error JSON.\n\
                       \n\
+                      Examples:\n  \
+                      ubertool vault get api-key\n  \
+                      ubertool vault get api-key --json\n\
+                      \n\
                       Exit codes: 3 (secret not found); 5 (wrong password).")]
     Get(get::GetArgs),
     /// List secret names (values are never included).
@@ -101,6 +116,10 @@ pub enum Verb {
                       Text mode: one name per line.\n\
                       JSON mode: {\"secrets\": [{\"name\": ..., \"created_at\": ..., \"updated_at\": ...}]}\n\
                       \n\
+                      Examples:\n  \
+                      ubertool vault list\n  \
+                      ubertool vault list --json\n\
+                      \n\
                       Exit codes: 5 (wrong password).")]
     List(list::ListArgs),
     /// Delete a secret (requires --yes in non-interactive contexts).
@@ -108,6 +127,11 @@ pub enum Verb {
                       \n\
                       Requires --yes in non-interactive (non-TTY) contexts. Without --yes on\n\
                       a TTY, prompts for confirmation.\n\
+                      \n\
+                      Examples:\n  \
+                      ubertool vault delete api-key\n  \
+                      ubertool vault delete api-key --yes\n  \
+                      ubertool vault delete api-key --yes --json\n\
                       \n\
                       Exit codes: 2 (no --yes on non-TTY); 3 (not found); 5 (wrong password).")]
     Delete(delete::DeleteArgs),
@@ -120,6 +144,10 @@ pub enum Verb {
                       \n\
                       Output format matches the `vault import` input format.\n\
                       \n\
+                      Examples:\n  \
+                      ubertool vault export --out ./backup.json\n  \
+                      ubertool vault export > backup.json\n\
+                      \n\
                       Exit codes: 2 (TTY output refused); 5 (wrong password).")]
     Export(export::ExportArgs),
     /// Import secrets from a JSON file (from `vault export`).
@@ -129,6 +157,11 @@ pub enum Verb {
                       Default (--merge): add to existing vault; skip name collisions.\n\
                       --replace: overwrite existing entries on collision.\n\
                       --clear: wipe vault before import (requires --yes).\n\
+                      \n\
+                      Examples:\n  \
+                      ubertool vault import ./backup.json\n  \
+                      ubertool vault import ./backup.json --replace\n  \
+                      ubertool vault import ./backup.json --clear --yes --json\n\
                       \n\
                       Exit codes: 3 (malformed import JSON); 5 (wrong password)."
     )]
@@ -145,6 +178,10 @@ pub enum Verb {
                       - $XDG_RUNTIME_DIR/ubertool-vault.session (Linux)\n\
                       - $TMPDIR/ubertool-vault-<uid>.session (macOS / fallback)\n\
                       \n\
+                      Examples:\n  \
+                      ubertool vault unlock\n  \
+                      ubertool vault unlock --ttl 60 --json\n\
+                      \n\
                       Exit codes: 5 (wrong password); 4 (cannot write session file)."
     )]
     Unlock(unlock::UnlockArgs),
@@ -153,6 +190,10 @@ pub enum Verb {
                       \n\
                       After locking, subsequent vault commands will require re-authentication.\n\
                       Idempotent — locking an already-locked vault returns success.\n\
+                      \n\
+                      Examples:\n  \
+                      ubertool vault lock\n  \
+                      ubertool vault lock --json\n\
                       \n\
                       Exit codes: 0 always (unless I/O error on session file).")]
     Lock(lock::LockArgs),

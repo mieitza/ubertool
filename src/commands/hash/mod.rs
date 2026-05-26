@@ -22,17 +22,17 @@ pub struct HashArgs {
 pub enum HashVerb {
     #[command(
         name = "md5",
-        long_about = "Compute MD5 hash (legacy / not collision-resistant).\n\nExamples:\n  ubertool hash md5 \"hello\"\n  ubertool hash md5 --in ./file.bin\n  echo -n hello | ubertool hash md5\n  printf 'alice\\nbob\\n' | ubertool hash md5 --batch"
+        long_about = "Compute MD5 hash (legacy / not collision-resistant).\n\nExamples:\n  ubertool hash md5 \"hello\"\n  ubertool hash md5 --in ./file.bin\n  ubertool hash md5 \"hello\" --json\n  echo -n hello | ubertool hash md5\n  printf 'alice\\nbob\\n' | ubertool hash md5 --batch"
     )]
     Md5(HashRunArgs),
     #[command(
         name = "sha1",
-        long_about = "Compute SHA-1 hash (legacy / not collision-resistant).\n\nExamples:\n  ubertool hash sha1 \"hello\"\n  ubertool hash sha1 --in ./file.bin\n  printf 'alice\\nbob\\n' | ubertool hash sha1 --batch"
+        long_about = "Compute SHA-1 hash (legacy / not collision-resistant).\n\nExamples:\n  ubertool hash sha1 \"hello\"\n  ubertool hash sha1 --in ./file.bin\n  ubertool hash sha1 \"hello\" --json\n  printf 'alice\\nbob\\n' | ubertool hash sha1 --batch"
     )]
     Sha1(HashRunArgs),
     #[command(
         name = "sha224",
-        long_about = "Compute SHA-224 hash.\n\nExamples:\n  ubertool hash sha224 \"hello\"\n  printf 'alice\\nbob\\n' | ubertool hash sha224 --batch"
+        long_about = "Compute SHA-224 hash.\n\nExamples:\n  ubertool hash sha224 \"hello\"\n  ubertool hash sha224 --in ./file.bin --json\n  printf 'alice\\nbob\\n' | ubertool hash sha224 --batch"
     )]
     Sha224(HashRunArgs),
     #[command(
@@ -42,22 +42,22 @@ pub enum HashVerb {
     Sha256(HashRunArgs),
     #[command(
         name = "sha384",
-        long_about = "Compute SHA-384 hash.\n\nExamples:\n  ubertool hash sha384 \"hello\"\n  printf 'alice\\nbob\\n' | ubertool hash sha384 --batch"
+        long_about = "Compute SHA-384 hash.\n\nExamples:\n  ubertool hash sha384 \"hello\"\n  ubertool hash sha384 --in ./file.bin --json\n  printf 'alice\\nbob\\n' | ubertool hash sha384 --batch"
     )]
     Sha384(HashRunArgs),
     #[command(
         name = "sha512",
-        long_about = "Compute SHA-512 hash.\n\nExamples:\n  ubertool hash sha512 \"hello\"\n  printf 'alice\\nbob\\n' | ubertool hash sha512 --batch"
+        long_about = "Compute SHA-512 hash.\n\nExamples:\n  ubertool hash sha512 \"hello\"\n  ubertool hash sha512 --in ./file.bin --json\n  printf 'alice\\nbob\\n' | ubertool hash sha512 --batch"
     )]
     Sha512(HashRunArgs),
     #[command(
         name = "sha3-256",
-        long_about = "Compute SHA3-256 hash (Keccak).\n\nExamples:\n  ubertool hash sha3-256 \"hello\"\n  printf 'alice\\nbob\\n' | ubertool hash sha3-256 --batch"
+        long_about = "Compute SHA3-256 hash (Keccak).\n\nExamples:\n  ubertool hash sha3-256 \"hello\"\n  ubertool hash sha3-256 --in ./file.bin --json\n  printf 'alice\\nbob\\n' | ubertool hash sha3-256 --batch"
     )]
     Sha3_256(HashRunArgs),
     #[command(
         name = "sha3-512",
-        long_about = "Compute SHA3-512 hash (Keccak).\n\nExamples:\n  ubertool hash sha3-512 \"hello\"\n  printf 'alice\\nbob\\n' | ubertool hash sha3-512 --batch"
+        long_about = "Compute SHA3-512 hash (Keccak).\n\nExamples:\n  ubertool hash sha3-512 \"hello\"\n  ubertool hash sha3-512 --in ./file.bin --json\n  printf 'alice\\nbob\\n' | ubertool hash sha3-512 --batch"
     )]
     Sha3_512(HashRunArgs),
 }

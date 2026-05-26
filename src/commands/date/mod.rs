@@ -18,7 +18,7 @@ pub struct DateArgs {
 pub enum Verb {
     /// Convert between date/time formats.
     #[command(
-        long_about = "Convert between unix timestamp, ISO 8601, and RFC 2822 representations of a moment in time.\n\nExamples:\n  ubertool date convert 1700000000 --from unix\n  ubertool date convert '2023-11-14T22:13:20Z' --from iso8601 --json\n  ubertool date convert 1700000000 --from unix --tz America/New_York\n\nExit codes:\n  3   invalid date/time input (invalid_date)"
+        long_about = "Convert between unix timestamp, ISO 8601, and RFC 2822 representations of a moment in time.\n\nExamples:\n  ubertool date convert 1700000000 --from unix\n  ubertool date convert '2023-11-14T22:13:20Z' --from iso8601 --json\n  ubertool date convert 1700000000 --from unix --tz America/New_York\n  ubertool date convert 'Tue, 14 Nov 2023 22:13:20 +0000' --from rfc2822 --json\n\nExit codes:\n  3   invalid date/time input (invalid_date)"
     )]
     Convert(ConvertArgs),
 }

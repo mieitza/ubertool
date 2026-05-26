@@ -8,6 +8,7 @@ Examples:
   ubertool base64 encode "hello"
   echo -n hello | ubertool base64 encode
   ubertool base64 encode "hello" --json
+  ubertool base64 encode --in ./file.bin --out encoded.b64
   printf 'alice\nbob\n' | ubertool base64 encode --batch
 
 Usage: ubertool base64 encode [OPTIONS] [INPUT]
